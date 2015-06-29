@@ -1,0 +1,88 @@
+<div ng-class="getBackClass()" style="width:100%;height:100%;">
+<div class="bgColor"> </div>
+<div class="push-wrap" id="homepage" ng-show="ready">
+    <div ng-show="ready" class="bcktrans" flex layout-fill>
+            <div ng-show="ready">
+            	<div id="gameRender" ng-style="gameBodyStyle()" game-body game="game325" data="data" playerId="playerId" type="gameType"></div>
+            </div>
+            <!--div class='sidebutton-bar'>
+                <md-button class="md-fab sidebutton exitgame" aria-label="Exit" style="position:fixed;" ng-click="exitGame()">
+                    <img class='app-icon' src="android_asset/www/assets/img/ic_close_24px_teal.svg" style="width: 24px; height: 24px;">
+                </md-button>
+                <md-button class="md-fab sidebutton showscore" aria-label="Scores" style="position:fixed;" ng-click="toggleScores()">
+                    <img class='app-icon' src="android_asset/www/assets/img/scoreicon.svg" style="width: 24px; height: 24px;">
+                </md-button>
+                <md-button ng-if="gameType == 'LIVE'" class="md-fab sidebutton chat" aria-label="Chat" style="position:fixed;" ng-click="toggleRight()">
+                    <img class='app-icon' src="android_asset/www/assets/img/ic_chat_24px.svg" style="width: 24px; height: 24px;">
+                </md-button>
+            </div-->
+    </div>
+    <div ng-show="gameType == 'LIVE'">
+        <md-sidenav class="md-sidenav-right md-whiteframe-z2" component-id="right"  flex ng-show="ready" layout="vertical" layout-fill style="max-height:100%!important; background-color: #f6f6f6;">
+        <md-toolbar class="chat-head">
+                <div class="md-toolbar-tools" flex layout="horizontal" layout-fill>
+                    <h3 flex="90">Chat</h3>
+                    <md-button class="md-fab md-fab-top-right md-primary" aria-label="Close chat" ng-click="closeRight()" style="color:#009688; fill:#009688; background-color:#009688;">
+                        <img class='app-icon' src="/android_asset/www/assets/img/ic_arrow_back_24px.svg" style="width: 24px; height: 24px;">
+                    </md-button>
+                </div>
+        </md-toolbar>
+          <md-content class="md-padding chat-container" flex layout="vertical" layout-align="end center" style="padding-bottom: 0px;">
+            <md-content flex class="chat-hist">
+                <md-list class='chat-box'>
+                </md-list>
+                <!-- <div id="bottomscroll"></div> -->
+            </md-content>
+            <div layout="horizontal" class="chatsend" style="z-index:99">
+                <md-text-float ng-model="chatMsg" ng-enter="sendChat()" style="min-width:340px; margin-bottom:0px!important; margin-left=-8px; padding-bottom=0"> 
+                </md-text-float>
+                <md-button ng-click = "sendChat()" aria-label="sendChat" class="sendchatbutton">
+                    <img class='app-icon' src="/android_asset/www/assets/img/ic_send_24px.svg" style="width: 24px; height: 24px;">
+                </md-button>
+            </div>
+        </md-content>
+    </md-sidenav>
+    </div>
+</div>
+<div ng-if="waiting && gameType == 'LIVE'" class="waiting">
+    <div flex layout="column" layout-align="center center" style="flex-direction: column;">
+    <div>
+        <profile-info ng-repeat="player in connectedPlayers" class="center" content="player" style="float:left; padding:40px;"></profile-info>
+    </div>
+        <h2>
+        {{PlayersToJoinMsg}}
+        </h2>
+        <div ng-if="gameRoom == 'PRIVATE'" style="z-index:9;">
+            <h2>share roomID "{{ gameId }}" with your friends you want to join</h2>
+        </div>
+        <div class="waiting-loader">
+            <div class="cardDiv anime1"></div>
+            <div class="cardDiv anime2"></div>
+            <div class="cardDiv anime3"></div>
+            <div class="cardDiv anime4"></div>
+        </div>
+        <!--md-progress-circular mode="indeterminate" class="game-waiting-progress"></md-progress-circular-->
+    </div>
+    </div>
+</div>
+<!--script type="text/javascript">
+    $(".md-sidenav-backdrop").on("click", function(e){
+        console.log('backdrop clicked');
+        setTimeout(function() {
+            if(!$(".md-sidenav-right").hasClass("md-closed")){
+                $(".md-sidenav-right").addClass("md-closed");
+                $(".md-sidenav-backdrop").remove();
+                console.log('backdrop removed manually');
+            }
+        }, 200);
+    });
+</script-->
+<script type="text/javascript">
+$(document).ready(function (e) {
+    $(document).on('click','.md-sidenav-backdrop', function (e) {
+        $(".md-sidenav-backdrop").remove();
+        $('.md-sidenav-right').addClass('md-closed');
+        $('.content').removeClass('push-left');
+    })
+})
+</script>

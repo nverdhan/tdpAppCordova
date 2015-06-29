@@ -1,0 +1,1 @@
+var apiPrefix = window.location.origin+'/api/';

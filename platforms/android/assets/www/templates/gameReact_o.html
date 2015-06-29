@@ -1,0 +1,122 @@
+<div class='bckimg'> </div>
+<div class="push-wrap" id="homepage" ng-show="ready">
+    <div ng-show="ready" class="bcktrans" flex layout-fill>
+            <div ng-show="ready">
+            	<div id="gameRender" game-body game="game325" data="data" playerId="playerId" type="gameType"></div>
+                <div class="bottom-player-diabled" style="position:absolute;bottom:0;width:100%;height:100%;"></div>
+            </div>
+            <div class='sidebutton-bar'>
+                <span class="md-fab sidebutton exitgame" aria-label="Exit" style="position:fixed;" ng-click="exitGame()">
+                    <md-icon md-svg-icon="assets/img/ic_close_24px_teal.svg" style="width: 24px; height: 24px;">
+                    </md-icon>
+                </span>
+                <span class="md-fab sidebutton showscore" aria-label="Scores" style="position:fixed;" ng-click="toggleScores()">
+                    <md-icon md-svg-icon="assets/img/scoreicon.svg" style="width: 24px; height: 24px;">
+                    </md-icon>
+                </span>
+                <span ng-if="gameType == 'LIVE'" class="md-fab sidebutton chat" aria-label="Chat" style="position:fixed;" ng-click="toggleRight()">
+                    <md-icon md-svg-icon="assets/img/ic_chat_24px.svg" style="width: 24px; height: 24px;">
+                    </md-icon>
+                </span>
+                <!-- <div class="ball selfprofile sidebutton" ng-style="getProfilePic(0);" ng-class="{'player-active':arrPlayers[0].id == activePlayerId}"></div> -->
+            </div>
+    </div>
+    <div ng-show="gameType == 'LIVE'">
+        <md-sidenav class="md-sidenav-right md-whiteframe-z2" component-id="right"  flex ng-show="ready" layout="vertical" layout-fill style="max-height:100%!important; background-color: #f6f6f6;">
+        <md-toolbar class="chat-head">
+                <div class="md-toolbar-tools" flex layout="horizontal" layout-fill>
+                    <h3 flex="90">Chat</h3>
+                    <md-button class="md-fab md-fab-top-right md-primary" aria-label="Scores" ng-click="closeRight()">
+                        <md-icon md-svg-icon="assets/img/ic_arrow_back_24px.svg" style="width: 24px; height: 24px;"></md-icon>
+                    </md-button>
+                </div>
+        </md-toolbar>
+          <md-content class="md-padding chat-container">
+            <md-content flex class="chat-hist">
+                <md-list class='chat-box'>
+                </md-list>
+                <!-- <div id="bottomscroll"></div> -->
+            </md-content>
+            <div layout="horizontal" class="chatsend" style="z-index:99">
+                <md-input-container class="chat-input">
+                    <input type="text" flex ng-model="chatMsg" ng-enter="sendChat()" style="min-width:340px; margin-bottom:0px!important; margin-left:-8px;"/>
+                  </md-input-container>
+                <md-button ng-click = "sendChat()" aria-label="sendChat" class="sendchatbutton">
+                    <md-icon md-svg-icon="assets/img/ic_send_24px.svg" style="width: 24px; height: 24px;">
+                    </md-icon>
+                </md-button>
+            </div>
+        </md-content>
+    </md-sidenav>
+    </div>
+</div>
+<div ng-if="waiting && gameType == 'LIVE'" class="waiting">
+    <div layout="column" layout-align="center center">
+    <div>
+        <profile-info ng-repeat="player in connectedPlayers" class="center" content="player" style="float:left; padding:40px;"></profile-info>
+    </div>
+        <h2>
+        {{PlayersToJoinMsg}}
+        </h2>
+        <div ng-if="gameRoom == 'PRIVATE'" style="z-index:9;">
+            <h2>share roomID "{{ gameId }}" with your friends you want to join</h2>
+        </div>
+        <div class="waiting-loader">
+            <div class="cardDiv anime1"></div>
+            <div class="cardDiv anime2"></div>
+            <div class="cardDiv anime3"></div>
+            <div class="cardDiv anime4"></div>
+        </div>
+        <!--md-progress-circular mode="indeterminate" class="game-waiting-progress"></md-progress-circular-->
+    </div>
+    
+</div>
+<!--script type="text/javascript">
+    $(".md-sidenav-backdrop").on("click", function(e){
+        console.log('backdrop clicked');
+        setTimeout(function() {
+            if(!$(".md-sidenav-right").hasClass("md-closed")){
+                $(".md-sidenav-right").addClass("md-closed");
+                $(".md-sidenav-backdrop").remove();
+                console.log('backdrop removed manually');
+            }
+        }, 200);
+    });
+</script-->
+<!--script type="text/javascript">
+$(document).ready(function (e) {
+    $(document).on('click','.md-sidenav-backdrop', function (e) {
+        $(".md-sidenav-backdrop").remove();
+        $('.md-sidenav-right').addClass('md-closed');
+        $('.content').removeClass('push-left');
+    })
+})
+var clickEvent = (function () {
+    if('ontouchstart' in document.documentElement === true){
+        return 'touchstart';
+    }else{
+        return 'click'
+    }
+})();
+var propStopped = function( event ) {
+  if ( event.isPropagationStopped() ) {
+    console.log('Stopped');
+  } else {
+    console.log('Still Propagating :-/');
+  }
+  if( event.isDefaultPrevented()){
+    console.log('default prevented');
+  }else{
+    console.log('Not Prevented :-/');
+  }
+}
+$('.bottom-player-diabled').on('click touchstart touchmove touchcancel touchend', function (e) {
+    console.log('touched/clicked');
+    e.stopPropagation();
+    e.preventDefault();
+    // e.bubbles = false;
+    propStopped(e);
+    // console.log(e.bubbles);
+    return false;
+});
+</script-->

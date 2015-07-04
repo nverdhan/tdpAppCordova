@@ -78,7 +78,36 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
       }, 100);
     }
     $scope.loginWIthFB = function () {
-      window.location.href = "http://teendopaanch.in/auth/facebook"
+      //window.location.href = "http://teendopaanch.in/auth/facebook"
+      FacebookInAppBrowser.login({
+          send: function() {
+              console.log('login opened');
+          },
+          success: function(access_token) {
+              console.log('done, access token: ' + access_token);
+          },
+          denied: function() {
+              console.log('user denied');
+          },
+          timeout: function(){
+              console.log('a timeout has occurred, probably a bad internet connection');
+          },
+          complete: function(access_token) {
+              console.log('window closed');
+              if(access_token) {
+                  console.log(access_token);
+              } else {
+                  console.log('no access token');
+              }
+          },
+          userInfo: function(userInfo) {
+              if(userInfo) {
+                  console.log(JSON.stringify(userInfo));
+              } else {
+                  console.log('no user info');
+              }
+          }
+      });
     }
     $scope.toggleRoomOptions = function () {
         if($scope.joinGameRoomId.length == 0){

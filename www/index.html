@@ -18,6 +18,7 @@
 	    <link rel="stylesheet" type="text/css" href="css/cover.css">
 	    <link rel="stylesheet" type="text/css" href="css/cards/cards.css" media="screen" />
 	    <link rel="stylesheet" type="text/css" href="css/gameStyle.css">
+	    <script type="text/javascript" src="js/phonegap.facebook.inappbrowser.js"></script>
 	</head>
     <body ng-cloak>
         <div id="container">
@@ -112,6 +113,11 @@
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
         $(document).ready(function(){
+        	//Facebook
+        	FacebookInAppBrowser.settings.appId = '1437787196521831';
+			FacebookInAppBrowser.settings.redirectUrl = 'http://teendopaanch.in';
+			FacebookInAppBrowser.settings.permissions = 'email';
+
            var totalImages = $("img").length;
            var iLoaded = 0;
            $("img").each(function (){

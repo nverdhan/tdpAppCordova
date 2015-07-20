@@ -203,9 +203,7 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
     $scope.$on('HIDE_SETTINGS', $scope.hideOverlay);
 }]);
 game325.run( ['$rootScope', '$state', 'AUTH_EVENTS', 'AuthService', 'Session', '$location', function ($rootScope, $state, AUTH_EVENTS, AuthService, Session, $location){
-    //$rootScope.$on('$stateChangeStart', ['event', 'next', 'toState', 'toParams', 'fromState', 'fromParams', function (event, next, toState, toParams, fromState, fromParams){
     $rootScope.$on('$stateChangeStart', function (event, next, toState, toParams, fromState, fromParams){
-        // ngProgress.start();
         var authorizedRoles = next.data.authorizedRoles;
         var requiresAuth = next.data.requiresAuth;
         var a = AuthService.isAuthenticated();
@@ -213,20 +211,7 @@ game325.run( ['$rootScope', '$state', 'AUTH_EVENTS', 'AuthService', 'Session', '
             $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
             event.preventDefault;
         }
-        // if(!AuthService.isAuthorized(authorizedRoles)){
-        //     if(AuthService.isAuthenticated()){
-        //         $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-        //     }
-        // }
     });
-    // $rootScope.$on('$stateChangeSuccess', 
-    //     function(event, toState, toParams, fromState, fromParams){
-    //         var pageUrl = $location.path();
-    //         ga('send', 'pageview', pageUrl);
-    //         ngProgress.complete();
-    //     });
-}]);
-
 game325.config(['$httpProvider', function ($httpProvider){
     $httpProvider.interceptors.push(['$injector', function ($injector){
         return $injector.get('AuthInterceptor');
@@ -401,15 +386,6 @@ game325.directive('profileInfo', ['$compile', function ($compile){
 game325.directive('profileInfoHorz', ['$compile', function ($compile){
   var x = function(content){
     var content = content.content;
-    // console.log(content);
-    // if(content.type == 'local'){
-    //     content.backgroundPosition = 45*content.image+'px 0px';
-    //     content.image = 'android_asset/img/assets/img/avatars.png';
-    // }else if(content.type == 'fb'){
-    //     content.image = content.image;
-    //     content.backgroundPosition = '50% 50%';
-    //     // $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-    // }
     var y = '<a class="href-custom" href="/"><div ng-controller="registerCtrl" class="ball center" style="background-image:url('+content.image+'); background-position : '+ content.backgroundPosition+'; margin: 0 auto;">'+
           '<h4 class="cover-player-name">'+content.name+'</a><i class="fa fa-sign-out signout-icon" style="color:#009688" ng-click="logOut()"></i></h4></div>';
       return y;
@@ -443,9 +419,6 @@ game325.service('joinPrivateRoomService', ['$http', function ($http){
         }
     }
 }]);
-// game325.controller('crateController', ['$http', '$scope', 'cratePrivateRoomService', function ($http, $scope, cratePrivateRoomService) {
-    
-// }]);
 $(function() {
     $('.toggle-nav').click(function() {
         $('body').toggleClass('show-nav');
@@ -457,14 +430,11 @@ $(document).keyup(function(e) {
         $('body').toggleClass('show-nav');
     }
 });
-
 game325.controller('loginController',['$rootScope', '$location', '$scope', '$http','$window', function($rootScope, $location ,$scope, $http,$window){
     $scope.twitterAuth = function(){
         $window.location.href = "http://teendopaanch.in/auth/twitter"
     }
     $scope.facebookAuth = function(){
-        // $window.location.href = "http://teendopaanch.in/auth/facebook"
-        console.log('hhh');
         FacebookInAppBrowser.login({
           send: function() {
               console.log('login opened');

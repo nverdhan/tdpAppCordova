@@ -1,0 +1,132 @@
+<style type="text/css">
+	.home-logo{
+		text-align: center;
+		width: 300px;
+		position: relative;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+	}
+	.logoCards .card{
+		position: relative;
+		left: 0px;
+	}
+	.logoCards .three{
+		transform : translate(-20px,0px);
+		transform: rotate(-30deg);
+		left: -40px;
+		top: 12px
+	}
+	.logoCards .five{
+		transform : translate(20px,0px);
+		transform: rotate(30deg);
+		left: 40px;
+		top: 12px
+	}
+	.logoCards .five:after{
+		
+	}
+	.logoCards h1{
+		margin: 0;
+	}
+	.color-light{
+		color: #eee;
+	}
+	.redcol{
+		border: 1px solid #ddd !important;
+		background: transparent !important;
+	}
+</style>
+<div ng-controller="registerCtrl">
+<div>
+	<h1></h1>
+</div>
+	<div class="home-logo">
+		<div class="logoCards playingCards simpleCards">
+			<a class="card three" style="width:50px;height:64px;">
+				<h1>3</h1>
+			</a>
+			<a class="card two" style="width:50px;height:64px;">
+				<h1>2</h1>
+			</a>
+			<a class="card five" style="width:50px;height:64px;">
+				<h1>5</h1>
+			</a>
+		</div>
+		<div style="display:inline-block;">
+			<h1 class="color-light" style="padding-left:120px;">3.2.5.bridge</h1>
+		</div>
+	</div>
+	
+	<div class="login-center">
+		<div ng-if="loginFB && !showLoggedInProfile" class="center" flex ng-click ='facebookAuth()' >
+		<h3 class="marg-12 color-light">Create Private Room and Invite your friends</h3>
+				<md-button class="redcol home-elem md-raised" aria-label="randomGameStart">
+					<div flex layout="horizontal" layout-align="center center">
+						<div style="margin-right:15px;">
+							<i class="fa fa-facebook fa-2x white-label"></i>
+						</div>
+						<div>
+							<h3 class="marg-12 white-label">Login with Facebook</h3>
+						</div>
+		      		</div>
+		      	</md-button>
+		</div>
+		<div ng-if="showLoggedInProfile">
+			Logged in
+		</div>
+		<div ng-if="loginAnon && !showLoggedInProfile" flex>
+			<div class="center" style="max-width:289px;">
+					<md-content md-theme="docs-dark" layout="row" layout-sm="column" style="font-size:1.2em; color:white;">
+						<md-text-float class="username" label="Enter your name" flex ng-model="user.name"> </md-text-float>
+					</md-content>
+					<div style="width:100%; overflow:hidden; padding-top:12px; padding-bottom:12px;">
+						<div class="imageRow" ng-style="getImageRowWidth();" ng-swipe-left="shiftLeft()" ng-swipe-right="shiftRight()">
+							<div class="avatar-img" ng-repeat="avatar in avatars" ng-style="getAvatar($index)" ng-click="selectAvatar($index)" ng-class="{true : 'selected-avatar'}[user.image == $index]"></div>
+						</div>		
+					</div>
+			   
+				<div class="clear"></div>
+			</div>
+		</div>
+		<md-divider></md-divider>
+		<div ng-if="loginFB && !showLoggedInProfile" flex>
+			<div>
+			  	<div  class="center" ng-if="loginFB">
+					<md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="startGame()">
+						<div flex layout="horizontal" layout-align="center center">
+						<div style="margin-right:15px;"><i class="fa fa-random fa-2x white-label"></i> </div>
+						<div><h3 class="marg-12 white-label">Play as Anonymous</h2> </div>
+			      		</div>
+			      	</md-button>
+				</div>
+			</div>
+		</div>
+		<div ng-if="loginAnon && !showLoggedInProfile" class="center">
+			<md-button class="redcol home-elem md-raised" aria-label="randomGameStart"  ng-click="register()">
+				<div flex layout="horizontal" layout-align="center center">
+					<div style="margin-right:15px;">
+						<i class="fa fa-caret-right fa-2x white-label"></i>
+					</div>
+					<div>
+						<h4 class="marg-12 white-label">Next</h4>
+					</div>
+	      		</div>
+	      	</md-button>
+	      	<md-button class="back-button-1" aria-label="goBack" ng-click = "backToLoginHome()">
+                <img class='app-icon' src="android_asset/www/assets/img/ic_arrow_back_24px.svg" style="width: 24px; height: 24px;">
+    		</md-button>
+		</div>
+		<div ng-if="showLoggedInProfile" class="center">
+			<profile-info content="user"></profile-info>
+			<div ng-click="logOut()" class="center">
+				<md-button class="redcol home-elem md-raised" aria-label="randomGameStart">
+					<div flex layout="horizontal" layout-align="center center">
+					<div style="margin-right:15px;"><i class="fa fa-random fa-2x"></i> </div>
+					<div><h3>Log Out</h3> </div>
+		      		</div>
+		      	</md-button>
+	      	</div>
+		</div>
+	</div>
+</div>

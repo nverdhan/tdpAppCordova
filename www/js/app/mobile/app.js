@@ -198,7 +198,6 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
         $scope.OverlayVisible = true;
     }
     $scope.hideOverlay = function(){
-        console.log(222);
        $scope.OverlayVisible = false;
     }
     $scope.$on('HIDE_SETTINGS', $scope.hideOverlay);

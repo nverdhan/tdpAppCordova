@@ -17,7 +17,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
     $scope.user = Session;
     $scope.gameRound = 0;
     if(!Session.name){
-        $state.go('home');
+        $state.go('cover');
     }
     $(window).resize(function(){
           $scope.reactRender()
@@ -428,7 +428,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
         });
         socket.on('INVALID', function (data){
             alert('Invalid Room');
-            $state.go('home');
+            $state.go('cover');
         });
         socket.on('DISCONNECTED', function (data){
             for (var i = $scope.game325.players.length - 1; i >= 0; i--) {
@@ -443,7 +443,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
             $scope.game325 = data.data;
         });
         socket.on('NO_PLAYER_LEFT', function (data) {
-            $state.go('home');
+            $state.go('cover');
         })
         socket.on('msgRecieved', function (data){
             if(data.player.user){
@@ -483,7 +483,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
             $(".chat-hist").scrollTop($(".chat-hist")[0].scrollHeight);
         });
         socket.on('PlayerLeft', function (data){
-            $state.go('home');
+            $state.go('cover');
         });
     }else{
         //BOTS PLAY MODE

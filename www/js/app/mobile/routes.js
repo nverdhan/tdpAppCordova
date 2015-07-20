@@ -5,7 +5,7 @@ game325.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', fun
         // console.log(window.mobileAndTabletcheck());
         $stateProvider
         .state('mobileBrowser', {
-            url: '/',
+            url: '/home',
             templateUrl : 'android_asset/www/templates/mobileBrowser.html',
             data : {
                         requiresAuth : false

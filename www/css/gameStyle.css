@@ -469,7 +469,7 @@ bottom: 0px;
     width: 100%;
     height: 100%;
     top: 0;
-    background: rgba(3,3,3,0.95);
+    /*background: rgba(3,3,3,0.95);*/
     opacity: 1;
     z-index: 999;
 }
@@ -639,7 +639,7 @@ div.clear {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba(255,255,255,0.95);
+  /*background: rgba(255,255,255,0.95);*/
   opacity: 1;
   z-index: 999;
   overflow: auto;
@@ -654,7 +654,7 @@ div.clear {
 }
 .href-custom{
   text-decoration: none;
-  color: #aaaaaa;
+  color: white;
 }
 .msg-error{
   color : red;
@@ -893,10 +893,14 @@ div.profile h1{
 	width: 400px;
 }
 
-.redcol{
+/*.redcol{
 	background-color: #009688!important;
 	text-transform: none;
 	color: #fff;
+}*/
+.redcol{
+        border: 1px solid #ddd !important;
+        background: transparent !important;
 }
 .bluecol{
 	background-color: rgba(122,206,224,1)!important;
@@ -1440,6 +1444,7 @@ md-progress-circular.game-waiting-progress.md-default-theme .md-inset{
 }
 .username >input{
     width: 100%;
+    color: white;
 }
 .md-dialog-container{
     z-index: 10001;
@@ -2744,7 +2749,6 @@ md-dialog md-content{
             position: absolute;
             height: 100%;
             width: 100%;
-            background: yellow;
         }
 /*Card Back 2*/
 .cardBack2 {
@@ -2838,5 +2842,17 @@ md-dialog md-content{
     background: -o-radial-gradient(center, circle cover, #795fa1 00%, #000 120%);
     background: radial-gradient(center, circle cover, #795fa1 00%, #000 120%);
 }
-
+.mob-opt-wrap{
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: column nowrap;
+    -webkit-flex-flow: column nowrap;
+    align-items: center;
+    -webkit-align-items: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+.mob-opt{
+    padding: 10px;
+}
         

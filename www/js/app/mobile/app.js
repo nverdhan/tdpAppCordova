@@ -164,14 +164,14 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
         localStorage.setItem('userId','anon');
         AuthService.logout().then(function(res){
             if($state.current.data.requiresAuth && (!$scope.currentUser.id)){
-                $state.go('home');
+                $state.go('cover');
             }
             $scope.showLoginDialog = true;
         })
     }
     $scope.OverlayVisible = false;
     $scope.loginRequired = function(){
-        console.log(credentials);
+        $rootScope.loggedIn = false;
         $scope.OverlayVisible = true;
     }
     $scope.exitLogin = function(){
@@ -184,6 +184,7 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
     //  
     // }
     $scope.showLogin = function(){      
+        console.log('show login called');
         $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
         $scope.OverlayVisible = true;
     }
@@ -198,7 +199,7 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
         $scope.OverlayVisible = true;
     }
     $scope.hideOverlay = function(){
-        console.log(222);
+        // console.log(222);
        $scope.OverlayVisible = false;
     }
     $scope.$on('HIDE_SETTINGS', $scope.hideOverlay);
@@ -325,7 +326,7 @@ game325.directive('showScores', ['$compile', function($compile){
     var a = function(content){
         var content = content.content;
         if(content.type == 'local' || content.type == 'bot' || content.type == 'you'){
-                content.userPic = 'android_asset/img/assets/img/avatars.png';
+                content.userPic = 'android_asset/www/assets/img/avatars.png';
                 content.backgroundPosition = 45*content.image+'px 0px';
             }else{
                 content.userPic = content.image;
@@ -375,7 +376,7 @@ game325.directive('profileInfo', ['$compile', function ($compile){
     var content = content.content;
     if(content.type == 'local'){
         content.backgroundPosition = 45*content.image+'px 0px';
-        content.image = '/android_asset/img/assets/img/avatars.png';
+        content.image = '/android_asset/www/assets/img/avatars.png';
     }else if(content.type == 'fb'){
         content.image = content.image;
         content.backgroundPosition = '50% 50%';
@@ -412,7 +413,7 @@ game325.directive('profileInfoHorz', ['$compile', function ($compile){
     //     // $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
     // }
     var y = '<a class="href-custom" href="/"><div ng-controller="registerCtrl" class="ball center" style="background-image:url('+content.image+'); background-position : '+ content.backgroundPosition+'; margin: 0 auto;">'+
-          '<h4 class="cover-player-name">'+content.name+'</a><i class="fa fa-sign-out signout-icon" style="color:#009688" ng-click="logOut()"></i></h4></div>';
+          '<h4 class="cover-player-name">'+content.name+'</a><i class="fa fa-sign-out signout-icon" style="color:white" ng-click="logOut()"></i></h4></div>';
       return y;
   }
   var linker = function(scope, element, attrs){
@@ -499,7 +500,7 @@ game325.controller('loginController',['$rootScope', '$location', '$scope', '$htt
 
 
     $scope.homepage = function(){
-        $location.path('home');
+        $location.path('/');
     };
 }]);
 game325.directive('loginDialog', ['AUTH_EVENTS', function (AUTH_EVENTS) {
@@ -587,7 +588,8 @@ game325.controller('settingsCtrl',['$rootScope','$scope','AUTH_EVENTS','$state',
         $scope.activeColor = color;
     }
     $scope.backToLoginHome = function () {
-        $state.go('home');
+        $state.go('cover');
+
     }
     $scope.sampleCards  =   [{
                                 suit : 'S',
@@ -629,7 +631,8 @@ game325.controller('settingsCtrl',['$rootScope','$scope','AUTH_EVENTS','$state',
         }
     }
     $scope.backToLoginHome = function () {
-        $state.go('home');
+        $state.go('cover');
+        $rootScope.$broadcast('HIDE_SETTINGS');
     }
     $scope.activeSettingsTab = 'backgroundTab';
     $scope.changeTab = function (tab) {
@@ -706,7 +709,7 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
     $scope.loginAnon = false;
     $scope.user = {
         type : 'local',
-        name : 'NV',
+        name : '',
         image : null
     }
     if(Session.name){
@@ -787,7 +790,7 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
             error: errorHandler});
     };
     $scope.homepage = function(){
-        $location.path('home');
+        $location.path('/');
     };
     $scope.selectAvatar = function(index){
         $scope.showUserImageError = false;
@@ -835,7 +838,7 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
             Session.create($scope.user.name, $scope.user.image, 'local');
             // document.location.href = 'file:///android_asset/www/index.html';
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-            $state.go('home');
+            $state.go('cover');
         }
     }
     $scope.enterName = function(){
@@ -847,23 +850,19 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
         if(Session.type == 'fb'){
             AuthService.logout().then(function(res){
                 Session.destroy();
-                // $cookieStore.put('userId', 'anon');
                 localStorage.setItem('userId','anon');
-                // $cookieStore.put('showLoggedInOptions', false);
                 localStorage.setItem('showLoggedInOptions', false);
-                $window.location.href = '/';
                 if($state.current.data.requiresAuth && (!$scope.currentUser.id)){
-                    $state.go('home');
+                    $state.go('cover');
                 }
                 $scope.showLoginDialog = true;
             })
         }else{
             Session.destroy();
-            // $cookieStore.put('userId', 'anon');
             localStorage.setItem('userId','anon');
-            // $cookieStore.put('showLoggedInOptions', false);
             localStorage.setItem('showLoggedInOptions', false);
-            $state.go('home');
+            $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+            $state.go('cover');
         }
         
     }

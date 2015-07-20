@@ -15,8 +15,6 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
     $scope.showCreateGame = false;
     $scope.showJoinGame = false;
     $scope.roomText = 'Create Private Room';
-    // $scope.showLoggedInOptions = $cookieStore.get('showLoggedInOptions');
-    $scope.showLoggedInOptions = localStorage.getItem('showLoggedInOptions');
     if($state.current.name == 'start'){
         $scope.showStartGame = true;
     }
@@ -28,11 +26,17 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
     }
     $scope.loading = false;
     $scope.showMultiplayerOptions = false;
-    $scope.multiplayerOptions = function (){
+    $scope.toggleMultiplayerOptions = function (){
+      if(Session.name && Session.type != 'local'){
+          localStorage.setItem('showLoggedInOptions', true);
+        }else{
+          localStorage.setItem('showLoggedInOptions', false);
+        }
+      $scope.showLoggedInOptions = localStorage.getItem('showLoggedInOptions');
       if($scope.showMultiplayerOptions == false){
-        $scope.showMultiplayerOptions = true;
-      }else{
-        $scope.showMultiplayerOptions = false;
+          $scope.showMultiplayerOptions = true;
+        }else{
+          $scope.showMultiplayerOptions = false;
       }
     }
     AuthService.get().then(function (data) {
@@ -79,35 +83,36 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
     }
     $scope.loginWIthFB = function () {
       //window.location.href = "http://teendopaanch.in/auth/facebook"
-      FacebookInAppBrowser.login({
-          send: function() {
-              console.log('login opened');
-          },
-          success: function(access_token) {
-              console.log('done, access token: ' + access_token);
-          },
-          denied: function() {
-              console.log('user denied');
-          },
-          timeout: function(){
-              console.log('a timeout has occurred, probably a bad internet connection');
-          },
-          complete: function(access_token) {
-              console.log('window closed');
-              if(access_token) {
-                  console.log(access_token);
-              } else {
-                  console.log('no access token');
-              }
-          },
-          userInfo: function(userInfo) {
-              if(userInfo) {
-                  console.log(JSON.stringify(userInfo));
-              } else {
-                  console.log('no user info');
-              }
-          }
-      });
+      // FacebookInAppBrowser.login({
+      //     send: function() {
+      //         console.log('login opened');
+      //     },
+      //     success: function(access_token) {
+      //         console.log('done, access token: ' + access_token);
+      //     },
+      //     denied: function() {
+      //         console.log('user denied');
+      //     },
+      //     timeout: function(){
+      //         console.log('a timeout has occurred, probably a bad internet connection');
+      //     },
+      //     complete: function(access_token) {
+      //         console.log('window closed');
+      //         if(access_token) {
+      //             console.log(access_token);
+      //         } else {
+      //             console.log('no access token');
+      //         }
+      //     },
+      //     userInfo: function(userInfo) {
+      //         if(userInfo) {
+      //             console.log(JSON.stringify(userInfo));
+      //         } else {
+      //             console.log('no user info');
+      //         }
+      //     }
+      // });
+      console.log('Login with fb')
     }
     $scope.toggleRoomOptions = function () {
         if($scope.joinGameRoomId.length == 0){
@@ -145,23 +150,27 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
         });
       }
     }
-    $scope.loggedIn = false;
+    $scope.loggedIn = $rootScope.loggedIn;
     $scope.profile = {
         name : '',
         image : '',
         backgroundPosition : ''
     }
-    if(Session.name){
-      $scope.profile.name = Session.name;
-      $scope.loggedIn = true;
+    $scope.checkLogin = function(){
+      if(Session.name){
+        $scope.profile.name = Session.name;
+        $rootScope.loggedIn = true;
+      }
+      if(Session.type == 'local'){
+        $scope.profile.image = 'android_asset/www/assets/img/avatars.png';
+        $scope.profile.backgroundPosition = 45*Session.image+'px 0px';
+      }else{
+        $scope.profile.image = Session.image;
+        $scope.profile.backgroundPosition = '50% 50%';
+      }  
+      $scope.loggedIn = $rootScope.loggedIn;
     }
-    if(Session.type == 'local'){
-      $scope.profile.image = 'android_asset/www/assets/img/avatars.png';
-      $scope.profile.backgroundPosition = 45*Session.image+'px 0px';
-    }else{
-      $scope.profile.image = Session.image;
-      $scope.profile.backgroundPosition = '50% 50%';
-    }
+    $scope.checkLogin();
     $scope.showProfile = function(){
       // var id = $cookieStore.get('userId');
       var id = localStorage.getItem('userId');
@@ -170,6 +179,7 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
         $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
       }
     }
+    $scope.$on(AUTH_EVENTS.loginSuccess, $scope.checkLogin);
 }]);
 
 game325.controller('errDialogController',['$rootScope', '$scope', '$mdDialog', '$state', function($rootScope, $scope, $mdDialog, $state){
@@ -178,7 +188,7 @@ game325.controller('errDialogController',['$rootScope', '$scope', '$mdDialog', '
     };
     $scope.goToHome = function(){
       $mdDialog.hide();
-      $state.go('home');
+      $state.go('cover');
     }
     $scope.loadGame = function(){
       $rootScope.$broadcast('LOAD_GAME');
@@ -274,7 +284,7 @@ game325.controller('coverController', ['$rootScope', '$http', '$scope', '$state'
     // $scope.showLoggedInOptions = $cookieStore.get('showLoggedInOptions');
     $scope.showLoggedInOptions = localStorage.getItem('showLoggedInOptions');
     setTimeout(function(){
-      $state.go('home');
+      $state.go('cover');
     },800)
     
   }

@@ -11,6 +11,18 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
     // $scope.showLoggedInOptions = false;
     $scope.pageClass = 'page-home';
     $scope.joinGameRoomId = '';
+    $scope.deactivateMultiplayer = function(){
+      $scope.multiplayerBtnMsg = 'Internet required to Play Multiplayer';
+      $scope.showMultiplayerOptions = false;
+    }
+    $scope.activateMultiplayer = function(){
+      $scope.multiplayerBtnMsg = 'Play Multiplayer';
+    }
+    if($rootScope.currentConnStatus == 'online'){
+      $scope.activateMultiplayer();
+    }else{
+      $scope.deactivateMultiplayer();
+    }
     $scope.showStartGame = false;
     $scope.showCreateGame = false;
     $scope.showJoinGame = false;
@@ -33,10 +45,14 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
           localStorage.setItem('showLoggedInOptions', false);
         }
       $scope.showLoggedInOptions = localStorage.getItem('showLoggedInOptions');
-      if($scope.showMultiplayerOptions == false){
+      if($rootScope.currentConnStatus == 'online'){
+        if($scope.showMultiplayerOptions == false){
           $scope.showMultiplayerOptions = true;
         }else{
           $scope.showMultiplayerOptions = false;
+        }
+      }else{
+        errService.showErrSimple('Connect to internet to play multiplayer.');
       }
     }
     AuthService.get().then(function (data) {
@@ -179,10 +195,23 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
         $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
       }
     }
+    $scope.toastPosition = {
+        bottom: false,
+        top: true,
+        left: false,
+        right: true
+    };
+    $scope.getToastPosition = function() {
+      return Object.keys($scope.toastPosition)
+        .filter(function(pos) { return $scope.toastPosition[pos]; })
+        .join(' ');
+    };
     $scope.$on(AUTH_EVENTS.loginSuccess, $scope.checkLogin);
+    $scope.$on('DEVICE_OFFLINE', $scope.deactivateMultiplayer);
+    $scope.$on('DEVICE_ONLINE', $scope.activateMultiplayer);
 }]);
 
-game325.controller('errDialogController',['$rootScope', '$scope', '$mdDialog', '$state', function($rootScope, $scope, $mdDialog, $state){
+game325.controller('errDialogController',['$rootScope', '$scope', '$mdDialog', '$state', '$mdToast', function($rootScope, $scope, $mdDialog, $state, $mdToast){
     $scope.closeDialog = function(){
         $mdDialog.hide();
     };

@@ -5,7 +5,7 @@ game325.factory('gameService', ['$http', function($http){
         }
     }
 }]);
-game325.factory('errService',['$mdDialog', function($mdDialog){
+game325.factory('errService',['$mdDialog', '$mdToast', function($mdDialog, $mdToast){
 	return {
 		showErrSimple : function(errmsg) {
 	         $mdDialog.show({
@@ -22,6 +22,14 @@ game325.factory('errService',['$mdDialog', function($mdDialog){
 	            '</md-content></md-dialog>',
 	            controller: 'errDialogController'
 	        });
+	    },
+	    showToast: function(toastmsg, toastcolor) {
+	    	$mdToast.show({
+	    		template:
+	    			'<md-toast style="background-color:'+toastcolor+';">'+
+	    			toastmsg+
+	    			'</md-toast>'
+	    	})
 	    }
 
 	}

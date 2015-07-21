@@ -2899,6 +2899,7 @@ Request.prototype.create = function(){
       };
       xhr.onerror = function(){
         self.onError(xhr.responseText);
+        // naisheel removed above comment
       };
     } else {
       xhr.onreadystatechange = function(){
@@ -2916,7 +2917,8 @@ Request.prototype.create = function(){
     }
 
     debug('xhr data %s', this.data);
-    xhr.send(this.data);
+    // xhr.send(this.data);
+    // naisheel commented
   } catch (e) {
     // Need to defer since .create() is called directly fhrom the constructor
     // and thus the 'error' event can only be only bound *after* this exception

@@ -32,10 +32,6 @@
 	.color-light{
 		color: #eee;
 	}
-	.redcol{
-		border: 1px solid #ddd !important;
-		background: transparent !important;
-	}
 </style>
 <div ng-controller="registerCtrl">
 <div>
@@ -67,7 +63,7 @@
 							<i class="fa fa-facebook fa-2x white-label"></i>
 						</div>
 						<div>
-							<h3 class="marg-12 white-label">Login with Facebook</h3>
+							<h3 class="marg-12 white-label">{{fbLoginBtnMsg}}</h3>
 						</div>
 		      		</div>
 		      	</md-button>

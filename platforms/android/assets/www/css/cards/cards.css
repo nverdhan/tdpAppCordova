@@ -772,30 +772,25 @@
 /* page specific animations ------------------------ */
 
 /* home -------------------------- */
-.page-home.ng-leave, .page-home.ng-hide, .overlay.ng-hide, .hidemultiplayeropt.ng-hide {
-    -webkit-animation:slideOutLeft 0.5s both ease-in;
-    -moz-animation:slideOutLeft 0.5s both ease-in;
-    animation:slideOutLeft 0.5s both ease-in;  
-}
-.showmultiplayer.ng-hide{
-    animation-delay: 0s;
-    -webkit-animation-delay: 0s;
-    -moz-animation-delay: 0s;
+.page-home.ng-leave, .page-home.ng-hide, .overlay.ng-hide {
+    -webkit-animation:slideOutLeft 0.5s both ease-in 0s;
+    -moz-animation:slideOutLeft 0.5s both ease-in 0s;
+    animation:slideOutLeft 0.5s both ease-in 0s;  
 }
 .page-home.ng-enter         {  
-    -webkit-animation:scaleUp 0.5s both ease-in;
-    -moz-animation:scaleUp 0.5s both ease-in;
-    animation:scaleUp 0.5s both ease-in;    
+    -webkit-animation:slideInRight 0.5s both ease-in 0.2s;
+    -moz-animation:slideInRight 0.5s both ease-in 0.2s;
+    animation:slideInRight 0.5s both ease-in 0.2s;  
 }
 .page-game.ng-leave {
-    -webkit-animation:scaleDown 0.5s both ease-in;
-    -moz-animation:scaleDown 0.5s both ease-in;
-    animation:scaleDown 0.5s both ease-in;
+    -webkit-animation:scaleDown 0.2s both ease-in;
+    -moz-animation:scaleDown 0.2s both ease-in;
+    animation:scaleDown 0.2s both ease-in;
 }
 .page-game.ng-enter         {  
-    -webkit-animation:scaleUp 0.5s both ease-in;
-    -moz-animation:scaleUp 0.5s both ease-in;
-    animation:scaleUp 0.5s both ease-in;    
+    -webkit-animation:scaleUp 0.2s both ease-in;
+    -moz-animation:scaleUp 0.2s both ease-in;
+    animation:scaleUp 0.2s both ease-in;    
 }
 
 /* about ------------------------ */
@@ -804,15 +799,25 @@
     -moz-animation:slideOutLeft 0.5s both ease-in;
     animation:slideOutLeft 0.5s both ease-in;   
 }
-.page-about.ng-enter, .page-home, .overlay,.showmultiplayeropt, .hidemultiplayeropt{  
+.page-about.ng-enter, .page-home, .overlay{  
     -webkit-animation:slideInRight 0.5s both ease-in;
     -moz-animation:slideInRight 0.5s both ease-in;
     animation:slideInRight 0.5s both ease-in;    
 }
-.showmultiplayeropt, .hidemultiplayeropt{
-    animation-delay: 0.5s;
-    -webkit-animation-delay: 0.5s;
-    -moz-animation-delay: 0.5s;
+.hidemultiplayeropt.ng-hide-remove.ng-hide-remove-active{
+    -webkit-animation:slideInRight 0.5s both ease-in 0.1s;
+    -moz-animation:slideInRight 0.5s both ease-in 0.1s;
+    animation:slideInRight 0.5s both ease-in 0.1s;  
+}
+.hidemultiplayeropt.ng-hide-add.ng-hide-add-active{
+    -webkit-animation:slideOutLeft 0.5s both ease-in 0s;
+    -moz-animation:slideOutLeft 0.5s both ease-in 0s;
+    animation:slideOutLeft 0.5s both ease-in 0s;   
+}
+.showmultiplayeropt.ng-hide-remove.ng-hide-remove-active{
+    -webkit-animation:slideInRight 0.5s both ease-in 0.5s;
+    -moz-animation:slideInRight 0.5s both ease-in 0.5s;
+    animation:slideInRight 0.5s both ease-in 0.5s;     
 }
 /* cover ---------------------- */
 .page-cover.ng-leave{

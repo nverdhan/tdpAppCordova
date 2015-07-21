@@ -900,7 +900,8 @@ div.profile h1{
 }*/
 .redcol{
         border: 1px solid #ddd !important;
-        background: transparent !important;
+        /*background: transparent !important;*/
+        background-color: #272727 !important;
 }
 .bluecol{
 	background-color: rgba(122,206,224,1)!important;
@@ -2853,6 +2854,6 @@ md-dialog md-content{
     -webkit-justify-content: center;
 }
 .mob-opt{
-    padding: 10px;
+    padding: 3px;
 }
         

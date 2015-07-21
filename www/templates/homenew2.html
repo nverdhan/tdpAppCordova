@@ -6,7 +6,6 @@
     <div class="profile-info" ng-if="loggedIn" style="color:white">
       <h3>Welcome</h3>
       <profile-info-horz content="profile">
-        <!-- <i class="fa fa-sign-out"></i> -->
       </profile-info-horz>
     </div>
     <div class="profile-info" ng-if="!loggedIn" ng-controller="registerCtrl" ng-click="showLogin()">
@@ -36,10 +35,22 @@
             <i class="fa fa-users white-label"></i>
           </div>
           <div>
-            <h3 class="marg-12 white-label">Play Multiplayer</h3>
+            <h3 class="marg-12 white-label">{{multiplayerBtnMsg}}</h3>
           </div>
         </div>
       </md-button>
+    </div>
+    <div class="mob-opt" style="margin-top:5px;">
+      <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="showSettings()" style="color:white;">
+        <i class="fa fa-gear fa-2x" title="Settings"></i>
+        <span>Settings</span>
+      </a>
+    </div>
+    <div class="mob-opt">
+      <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="logOut()" ng-controller="registerCtrl" style="color:white;">
+        <i class="fa fa-sign-out fa-2x" style="color:white"></i>
+        <span>Logout</span>
+      </a>
     </div>
   </div>
   <div ng-show="showMultiplayerOptions" class='mob-opt-wrap showmultiplayeropt'>
@@ -74,11 +85,22 @@
         {{roomText}}
       </md-button>
     </div>
+    <div class="mob-opt" style="margin-top:5px;">
+      <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="showSettings()" style="color:white;">
+        <i class="fa fa-gear fa-2x" title="Settings"></i>
+        <span>Settings</span>
+      </a>
+    </div>
+    <div class="mob-opt">
+      <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="logOut()" ng-controller="registerCtrl" style="color:white;">
+        <i class="fa fa-sign-out fa-2x" style="color:white"></i>
+        <span>Logout</span>
+      </a>
+    </div>
   </div>
-  <a class="nav-icon href-custom settings-tab mob-opt" target="_blank" href="javascript:void(0);" ng-click="showSettings()" style="color:white;">
-      <i class="fa fa-gear fa-2x" title="Settings"></i>
-      <span>Settings</span>
-    </a>
+  <div>
+    
+  </div>
 </div>
 
 <style type="text/css">

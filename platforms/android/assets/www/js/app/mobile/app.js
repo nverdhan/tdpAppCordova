@@ -61,7 +61,7 @@ game325.factory('delayService', ['$q', '$timeout', function ($q, $timeout){
     _fact.asyncTask = _asyncTask;
     return _fact;
 }])
-game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'AuthService', 'Session', '$cookieStore','$mdDialog','AUTH_EVENTS', function ($rootScope, $scope, $http, $state, AuthService, Session, $cookieStore, $mdDialog, AUTH_EVENTS){
+game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'AuthService', 'Session', '$cookieStore','$mdDialog','AUTH_EVENTS','errService','$mdToast', function ($rootScope, $scope, $http, $state, AuthService, Session, $cookieStore, $mdDialog, AUTH_EVENTS, errService, $mdToast){
     // Game should work only in Landscape Mode
     angular.element('.ifPortrait').append(
             "<div>"+
@@ -116,6 +116,36 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
     }
     $scope.showOrientationMsg();
 
+    //Internet Connectivity Cordova
+    if(navigator.connection.type == 'Connection.NONE'){
+        $rootScope.currentConnStatus = 'offline';    
+    }else{
+        $rootScope.currentConnStatus = 'online';
+    }
+    document.addEventListener("offline", onOffline, false);
+    document.addEventListener("online", onOnline, false);
+    $scope.handleNetworkConnection = function(statusnow){
+        if($rootScope.currentConnStatus != statusnow){
+            $rootScope.currentConnStatus = statusnow;
+            if(statusnow == 'online'){
+                errService.showToast('Connected to internet','green');
+                $rootScope.$broadcast('DEVICE_ONLINE');
+            }else if(statusnow == 'offline'){
+                errService.showToast('No internet connection','red');
+                $rootScope.$broadcast('DEVICE_OFFLINE');
+            }else{
+                console.log('weird');   
+            }
+        }else{
+            // console.log('repeated status');
+        }
+    }
+    function onOffline(){
+        $scope.handleNetworkConnection('offline');
+    }
+    function onOnline(){
+        $scope.handleNetworkConnection('online');
+    }
     $scope.title = 'GameApp';
     var credentials = {
         //id : $cookieStore.get('userId')
@@ -203,6 +233,7 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
        $scope.OverlayVisible = false;
     }
     $scope.$on('HIDE_SETTINGS', $scope.hideOverlay);
+    
 }]);
 game325.run( ['$rootScope', '$state', 'AUTH_EVENTS', 'AuthService', 'Session', '$location', function ($rootScope, $state, AUTH_EVENTS, AuthService, Session, $location){
     //$rootScope.$on('$stateChangeStart', ['event', 'next', 'toState', 'toParams', 'fromState', 'fromParams', function (event, next, toState, toParams, fromState, fromParams){
@@ -413,7 +444,7 @@ game325.directive('profileInfoHorz', ['$compile', function ($compile){
     //     // $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
     // }
     var y = '<a class="href-custom" href="/"><div ng-controller="registerCtrl" class="ball center" style="background-image:url('+content.image+'); background-position : '+ content.backgroundPosition+'; margin: 0 auto;">'+
-          '<h4 class="cover-player-name">'+content.name+'</a><i class="fa fa-sign-out signout-icon" style="color:white" ng-click="logOut()"></i></h4></div>';
+          '<h4 class="cover-player-name">'+content.name+'</a></h4></div>';
       return y;
   }
   var linker = function(scope, element, attrs){
@@ -707,6 +738,17 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
     $scope.showLoggedInProfile = false;
     $scope.loginFB = true;
     $scope.loginAnon = false;
+    $scope.deactivateFBLogin = function(){
+        $scope.fbLoginBtnMsg = 'Connect to internet for FB Login';
+    }
+    $scope.activateFBLogin = function(){
+        $scope.fbLoginBtnMsg = 'Login with Facebook';
+    }
+    if($rootScope.currentConnStatus == 'online'){
+        $scope.activateFBLogin();
+    }else{
+        $scope.deactivateFBLogin();
+    }
     $scope.user = {
         type : 'local',
         name : '',
@@ -866,6 +908,10 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
         }
         
     }
+    $scope.$on('DEVICE_OFFLINE', $scope.deactivateFBLogin);
+    $scope.$on('DEVICE_ONLINE', $scope.activateFBLogin);
 }]);
+
+
 
 

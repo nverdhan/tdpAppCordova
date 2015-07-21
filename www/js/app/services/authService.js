@@ -22,12 +22,6 @@ game325.factory('AuthService', ['$http','$rootScope', 'Session','$window','$cook
     }
     authService.logout = function(){
     	return $http.post(apiPrefix+'logout');
-    				// .then(function (res){
-    				// 	if (res.data.status == true) {
-    				// 		Session.destroy();
-    				// 	};
-    				// 	return res;
-    				// })
     }
     authService.getCredentials = function (credentials){
     	return $http.post(apiPrefix + '/auth', credentials)
@@ -38,17 +32,33 @@ game325.factory('AuthService', ['$http','$rootScope', 'Session','$window','$cook
     				})
     }
     authService.isAuthenticated = function(){
-    	// console.log($cookieStore.get('userId'));
-    	// if($cookieStore.get('userId') != 'anon'){
-        if(localStorage.getItem('userId') != 'anon'){    
+    	if(localStorage.getItem('userId') != 'anon'){    
     		return true;
     	}else{
     		return false;
     	}
     }
    	authService.get  =  function(){
-            return $http.post(apiPrefix + 'auth');
+        return $http.post(apiPrefix + 'auth');
+    }
+    authService.getUserInfo = function (argument) {
+        var a = localStorage.getItem('userInfo');
+        if(a){
+            return JSON.parse(a);
         }
+        return null;
+    }
+    authService.localRegister = function (user) {
+        var a = JSON.stringify(user);
+        localStorage.setItem(a);
+        Session.create(user.id, user.name, user.img);
+        return true;
+    }
+    authService.localLogout = function () {
+        localStorage.removeItem('userInfo');
+        Session.destroy();
+        return true;
+    }
     return authService;
 }]);
 game325.service('Session', function (){

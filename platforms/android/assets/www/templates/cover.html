@@ -1,0 +1,221 @@
+<div class="bgblack"></div>
+<div class="daddy-container preload">
+<div class ='cover-toolbar md-whiteframe-z1'> 
+  <div class='cover-player item-ripple'>
+        <div class="profile-info" ng-if="loggedIn">
+          <profile-info-horz content="profile">
+          <i class="fa fa-sign-out"></i>
+          </profile-info-horz>
+
+        </div>
+        <!--div>ankit</div-->
+        <div class="profile-info" ng-if="!loggedIn" ng-controller="registerCtrl" ng-click="showLogin()">
+          <i class="fa fa-user fa-2x"></i>
+          <span  class="h4" style="width: -moz-max-content; padding:8px;">Log in</span>
+          <div class="clearfix"></div>
+        </div>
+
+  </div>
+  <div class="cover-social">
+    
+  </div>
+  <div class="about-info">
+    <a class="nav-icon href-custom" target="_blank" href="https://www.facebook.com/325game">
+      <i class="fa fa-facebook-square fa-2x" title="Facebook"></i>
+    </a>
+    <a class="nav-icon href-custom" href="/info"><i class="fa fa-info fa-2x" title="About Us"></i></a>
+  </div>
+</div>
+<h1 class='heading-msg'>
+	<!-- One stop solution for all your card game needs. -->
+  Play the classic Indian card games
+</h1>
+<div class='showcase-panels-container has-shadow'>
+  <ul>
+    <li class='panel2 showcase-panel'>
+    	<div class="game-logo" ng-style="getGameLogo('game-7')"></div>
+    	<div class="game-name">
+    		Satti Center
+    	</div>
+    	<div class="game-msg">
+    		Coming Soon!
+    	</div>
+    </li>
+    <li class='panel1 showcase-panel'>
+      <div class="game-logo" ng-style="getGameLogo('game-29')"></div>
+      <div class="game-name">
+    		Twenty nine
+    	</div>
+    	<div class="game-msg">
+    		Coming Soon!
+    	</div>
+    </li>
+    <li class='panel3 showcase-panel' ng-click="start325Game()">
+    	<div class="game-logo" ng-style="getGameLogo('game-325')"></div>
+    	<div class="game-name">
+    		Teen Do Paanch
+    	</div>
+    	<div class="game-msg">
+    		Click to start playing!
+    	</div>
+      <i class="fa fa-chevron-up game-start"></i>
+    </li>
+    <li class='panel4 showcase-panel'>
+    	<div class="game-logo" ng-style="getGameLogo('game-10pakad')"></div>
+    	<div class="game-name">
+    		Dehla Pakad
+    	</div>
+    	<div class="game-msg">
+    		Coming Soon!
+    	</div>
+    </li>
+    <li class='panel5 showcase-panel'>
+    	<div class="game-logo" ng-style="getGameLogo('game-hearts')"></div>
+    	<div class="game-name">
+    		Hearts
+    	</div>
+    	<div class="game-msg">
+    		Coming Soon!
+    	</div>
+    </li>
+  </ul>
+</div>
+<!-- <div class='cover-whitespace'>
+	
+</div> -->
+<div class='app-msg' style="text-align:center;">
+    <img style="height:50px;" src="assets/img/app_coming_soon.png">
+    <!-- Will be available soon on Google Play and App Store. -->
+</div>
+<!--div class='wide window-container'>
+	 <md-button class="back-button" aria-label="goBack">
+                <md-icon icon="assets/img/ic_arrow_back_24px.svg" style="width: 24px; height: 24px;">
+                </md-icon>
+    </md-button>
+		<div flex layout="vertical" class="leaderboard item">
+			<div flex class="item-body">
+				<div class='bottombar-logo' ng-style="getGameLogo('leaderboard')"></div>
+				<div class="bottombar-name">Leaderboard</div>
+        <div class = "dummydetailsfornow">
+          
+        </div>
+			</div>
+		</div>
+		<div flex layout="vertical" class="aboutus item">
+			<div flex class="item-body">
+				<div class='bottombar-logo' ng-style="getGameLogo('aboutus')"></div>
+				<div class="bottombar-name">About Us</div>
+			</div>
+		</div>
+		<div flex layout="vertical" class="game-on-demand item">
+			<div flex class="item-body">
+				<div class='bottombar-logo' ng-style="getGameLogo('game-on-demand')"></div>
+				<div class="bottombar-name">Game on demand</div>
+			</div>
+		</div>
+</div--> 
+
+<div class='game-325-home'>
+    <md-button class="back-button-game" aria-label="goBack">
+                <md-icon icon="assets/img/ic_arrow_back_24px.svg" style="width: 24px; height: 24px;">
+                </md-icon>
+    </md-button>
+</div>
+</div>
+
+<script type="text/javascript">
+	  $( document ).ready(function(){
+	  	if($(".daddy-container").hasClass('preload')){	
+	  		setTimeout(function() {
+      			$(".daddy-container").removeClass("preload");
+  				  $(".daddy-container").addClass("win-loaded");
+			   }, 10);
+  	   }
+		  var ink, d, x, y;
+		  $(".item-ripple").mouseup(function(e){
+		    if($(this).find(".item-ink").length === 0){
+		        $(this).prepend("<span class='item-ink'></span>");
+		    }
+		    
+		    ink = $(this).find(".item-ink");
+		    ink.removeClass("ripple-animate");
+		     
+		    if(!ink.height() && !ink.width()){
+		        d = Math.max($(this).outerWidth(), $(this).outerHeight());
+		        ink.css({height: d, width: d});
+		    }
+		     
+		    x = e.pageX - $(this).offset().left - ink.width()/2;
+		    y = e.pageY - $(this).offset().top - ink.height()/2;
+		     
+		    ink.css({top: y+'px', left: x+'px'}).addClass("ripple-animate");
+
+		  });
+		//   $(".item").click(function(e){
+		//   	if(!$(this).hasClass("expanded")){
+		//     	$(this).addClass("expanded");	
+		//     	$(this.parentNode).addClass("selectiondone");
+		//     	$(this.parentNode.parentNode).addClass("footerselected");
+		//     }
+		// });
+       $(".panel3").click(function(e){
+         if(!$(this.parentNode.parentNode.parentNode).hasClass("gameselected")){
+           $(this.parentNode.parentNode.parentNode).addClass("gameselected");
+         }
+       });
+       $(".back-button-game").click(function(e){
+           $(this.parentNode.parentNode).removeClass("gameselected");
+       });
+		//   $('.back-button').click(function(e){
+		//   		$(this.parentNode).removeClass("selectiondone");
+		//   		$(this.parentNode.parentNode).removeClass("footerselected");
+		//   		$('.expanded').removeClass('expanded');
+		//   });
+  });
+jQuery(document).ready(function($) {
+  // Adjust 
+/*  $('.showcase-panels-container').each(function() {
+    var zIndex = 1;
+    $(this).find('> ul > li').each(function() {
+      $(this).css('zIndex', zIndex++);
+    });
+  });*/
+  // Fix panel widths to span 100%
+  /*
+  $('.showcase-panels-container').each(function() {
+    var $panels = $(this).find('> ul > li');
+    var panelWidth = Math.round( ( 100 / $panels.length ) * 100 ) / 100;
+    
+    var lastWidth = panelWidth;
+    while ( panelWidth * ($panels.length - 1) + lastWidth < 100 ) {
+      lastWidth += .01;
+    }
+    while ( panelWidth * ($panels.length - 1) + lastWidth > 100 ) {
+      lastWidth -= .01;
+    }
+    
+    $panels.css('width', panelWidth + '%')
+    .eq(-1).css('width', lastWidth + '%');
+  });
+  */
+  
+  $('.showcase-panels-container > ul > li').hover(
+    function() {
+      $(this).parents('.showcase-panels-container').attr('data-hover', $(this).index());
+      $(this).addClass('hovered');
+      var $this = $(this);
+      $(this).siblings().each(function() {
+        if ($(this).index() < $this.index()) {
+          $(this).addClass('right-was-hovered');
+        } else if ($(this).index() > $this.index()) {
+          $(this).addClass('left-was-hovered');
+        }
+      });
+    },
+    function() {
+      $(this).parents('.showcase-panels-container').removeAttr('data-hover')
+      .find('> ul > li').removeClass('hovered right-was-hovered left-was-hovered');
+    }
+  );
+});
+</script>

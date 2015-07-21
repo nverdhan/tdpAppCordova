@@ -1,0 +1,130 @@
+<div style="text-align: center; vertical-align:middle;">
+  <md-button class="back-button-1 md-default-theme" aria-label="goBack" ng-click="toggleMultiplayerOptions()" tabindex="-1" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);" ng-show="showMultiplayerOptions"><button class="md-button-inner">
+                <img class="app-icon" src="android_asset/www/assets/img/ic_arrow_back_24px.svg" style="width: 24px; height: 24px;">
+  </button></md-button>
+  <div>
+    <div class="profile-info" ng-if="loggedIn" style="color:white">
+      <h3>Welcome</h3>
+      <profile-info-horz content="profile">
+      </profile-info-horz>
+    </div>
+    <div class="profile-info" ng-if="!loggedIn" ng-controller="registerCtrl" ng-click="showLogin()">
+      <i class="fa fa-user fa-2x fleft"></i>
+      <div class="fleft" style="width: -moz-max-content;">Log in</div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div ng-show="!showMultiplayerOptions" class='mob-opt-wrap hidemultiplayeropt'>
+    <div class="mob-opt">
+      <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="startGame('bots')">
+        <div flex layout="horizontal" layout-align="center center">
+          <div style="margin-right:15px;">
+            <i class="fa fa-caret-right fa-2x white-label"></i>
+          </div>
+          <div>
+            <h3 class="marg-12 white-label">Play with Bots</h3>
+          </div>
+        </div>
+      </md-button>
+    </div>
+    <div class="mob-opt">
+      <h3 style="color:white;">Active internet connection required for multiplayer</h3>
+      <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="toggleMultiplayerOptions()">
+        <div flex layout="horizontal" layout-align="center center">
+          <div style="margin-right:15px;">
+            <i class="fa fa-users white-label"></i>
+          </div>
+          <div>
+            <h3 class="marg-12 white-label">{{multiplayerBtnMsg}}</h3>
+          </div>
+        </div>
+      </md-button>
+    </div>
+    <div class="mob-opt" style="margin-top:5px;">
+      <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="showSettings()" style="color:white;">
+        <i class="fa fa-gear fa-2x" title="Settings"></i>
+        <span>Settings</span>
+      </a>
+    </div>
+    <div class="mob-opt">
+      <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="logOut()" ng-controller="registerCtrl" style="color:white;">
+        <i class="fa fa-sign-out fa-2x" style="color:white"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </div>
+  <div ng-show="showMultiplayerOptions" class='mob-opt-wrap showmultiplayeropt'>
+    <div class="mob-opt">
+      <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="startGame('multiplayer')">
+        <div flex layout="horizontal" layout-align="center center">
+          <div style="margin-right:15px;">
+            <i class="fa fa-users white-label"></i>
+          </div>
+          <div>
+            <h3 class="marg-12 white-label">Random Multiplayer</h3>
+          </div>
+        </div>
+      </md-button>
+    </div>
+    <div ng-show="showLoggedInOptions" class="mob-opt">
+      <h3 style="color:white;">Create Private rooms and Invite your friends</h3>
+      <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="loginWIthFB()">
+      <div flex layout="horizontal" layout-align="center center">
+        <div style="margin-right:15px;">
+          <i class="fa fa-facebook white-label"></i>
+        </div>
+        <div>
+          <h3 class="marg-12 white-label">Login with Facebook</h3>
+        </div>
+      </div>
+    </md-button>
+    </div>
+    <div ng-show="!showLoggedInOptions" class="mob-opt">
+      <md-text-float label="Enter Room ID" flex ng-model="joinGameRoomId" ng-enter="toggleRoomOptions()" class="join-room-input"> </md-text-float>
+      <md-button class="bluecoldark md-raised home-button" ng-click="joinGame()" aria-label="privateGameJoin">
+        {{roomText}}
+      </md-button>
+    </div>
+    <div class="mob-opt" style="margin-top:5px;">
+      <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="showSettings()" style="color:white;">
+        <i class="fa fa-gear fa-2x" title="Settings"></i>
+        <span>Settings</span>
+      </a>
+    </div>
+    <div class="mob-opt">
+      <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="logOut()" ng-controller="registerCtrl" style="color:white;">
+        <i class="fa fa-sign-out fa-2x" style="color:white"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </div>
+  <div>
+    
+  </div>
+</div>
+
+<style type="text/css">
+.profile-info{
+  position: relative;
+  text-align: center;
+  left: -30px;
+}
+.profile-info h3{
+  display: inline-block;
+  margin-right: 12px;
+}
+profile-info-horz{
+  display: inline-block;
+  vertical-align: middle;
+}
+.profile-info:after{
+  clear: both;
+}
+.settings-tab span{
+  padding-left: 8px;
+  bottom: 5px;
+  position: relative;
+  font-size: 20px;
+  font-weight: 600;
+}
+</style>

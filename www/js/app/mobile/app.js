@@ -158,20 +158,33 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
         var user = JSON.parse(credentials.id);
         Session.create(user.name, user.image, user.type);
     }
-    AuthService.getUserInfo(credentials).then(function(res){
-        if(res.status == 200 && res.data.user){
-            var user = {
-                name : res.data.user.name,
-                image : res.data.user.image,
-                type : res.data.user.type
+    var authUserInfo = AuthService.getUserInfo();
+    if(authUserInfo){
+        var user = {
+                name : authUserInfo.name,
+                image : authUserInfo.image,
+                type : 'fb'
             }
-            Session.create(user.name, user.image, user.type);
-            $scope.currentUser = res.user;
-        }else if(res.status == 'error'){
-            $scope.currentUser = null
-            Session.destroy();
-        }
-    });
+        Session.create(user.name, user.image, user.type);
+        $scope.currentUser = res.user;
+    }else{
+        $scope.currentUser = null
+        Session.destroy();
+    }
+    // AuthService.getUserInfo(credentials).then(function(res){
+    //     if(res.status == 200 && res.data.user){
+    //         var user = {
+    //             name : res.data.user.name,
+    //             image : res.data.user.image,
+    //             type : res.data.user.type
+    //         }
+    //         Session.create(user.name, user.image, user.type);
+    //         $scope.currentUser = res.user;
+    //     }else if(res.status == 'error'){
+    //         $scope.currentUser = null
+    //         Session.destroy();
+    //     }
+    // });
     $scope.setCurrentUser = function (user){
         $scope.currentUser = user;
         // if($cookieStore.get('userId') == 'anon'){

@@ -234,9 +234,10 @@ game325.run( ['$rootScope', '$state', 'AUTH_EVENTS', 'AuthService', 'Session', '
         var a = AuthService.isAuthenticated();
         if(requiresAuth == true && a == false){
             $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-            event.preventDefault;
+            event.preventDefault();
         }
     });
+}]);
 game325.config(['$httpProvider', function ($httpProvider){
     $httpProvider.interceptors.push(['$injector', function ($injector){
         return $injector.get('AuthInterceptor');
@@ -694,7 +695,7 @@ game325.controller('settingsCtrl',['$rootScope','$scope','AUTH_EVENTS','$state',
         return className;
     }
 }])
-game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$window', 'AUTH_EVENTS','Session', 'errService', '$timeout', '$state', function ($rootScope, $scope, $cookieStore, $window, AUTH_EVENTS, Session, errService, $timeout, $state){
+game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$window', 'AUTH_EVENTS','Session', 'errService', '$timeout', '$state', 'AuthService', function ($rootScope, $scope, $cookieStore, $window, AUTH_EVENTS, Session, errService, $timeout, $state, AuthService){
     // var id = $cookieStore.get('userId');
     $scope.pageClass = 'page-login';
     $scope.showLoggedInProfile = false;

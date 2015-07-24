@@ -39,10 +39,11 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
     $scope.loading = false;
     $scope.showMultiplayerOptions = false;
     $scope.toggleMultiplayerOptions = function (){
-      if(Session.name && Session.type != 'local'){
-          localStorage.setItem('showLoggedInOptions', true);
-        }else{
+      console.log(Session); 
+      if(Session.type == 'local'){
           localStorage.setItem('showLoggedInOptions', false);
+        }else if(Session.type == 'fb'){
+          localStorage.setItem('showLoggedInOptions', true);
         }
       $scope.showLoggedInOptions = localStorage.getItem('showLoggedInOptions');
       if($rootScope.currentConnStatus == 'online'){
@@ -192,6 +193,7 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
       var id = localStorage.getItem('userId');
       id = JSON.parse(id);
       if(id.type == 'local'){
+        console.log('from start controller');
         $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
       }
     }

@@ -50,7 +50,7 @@ game325.factory('AuthService', ['$http','$rootScope', 'Session','$window','$cook
     }
     authService.localRegister = function (user) {
         var a = JSON.stringify(user);
-        localStorage.setItem(a);
+        localStorage.setItem('userInfo',a);
         Session.create(user.id, user.name, user.img);
         return true;
     }

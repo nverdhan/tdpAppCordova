@@ -66,7 +66,7 @@
         </div>
       </md-button>
     </div>
-    <div ng-show="showLoggedInOptions" class="mob-opt">
+    <div ng-show="!showLoggedInOptions" class="mob-opt">
       <h3 style="color:white;">Create Private rooms and Invite your friends</h3>
       <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="loginWIthFB()">
       <div flex layout="horizontal" layout-align="center center">
@@ -79,7 +79,7 @@
       </div>
     </md-button>
     </div>
-    <div ng-show="!showLoggedInOptions" class="mob-opt">
+    <div ng-show="showLoggedInOptions" class="mob-opt">
       <md-text-float label="Enter Room ID" flex ng-model="joinGameRoomId" ng-enter="toggleRoomOptions()" class="join-room-input"> </md-text-float>
       <md-button class="bluecoldark md-raised home-button" ng-click="joinGame()" aria-label="privateGameJoin">
         {{roomText}}

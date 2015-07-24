@@ -154,24 +154,23 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
         //$cookieStore.put('userId','anon');
         localStorage.setItem('userId','anon');
     }
+    var authUserInfo = AuthService.getUserInfo();
     if(credentials.id && credentials.id != 'anon'){
         var user = JSON.parse(credentials.id);
         Session.create(user.name, user.image, user.type);
-    }
-    var authUserInfo = AuthService.getUserInfo();
-    if(authUserInfo){
+    }else if(authUserInfo){
         var user = {
                 name : authUserInfo.name,
                 image : authUserInfo.image,
                 type : 'fb'
             }
         Session.create(user.name, user.image, user.type);
-        $scope.currentUser = res.user;
+        $scope.currentUser = user;
     }else{
         $scope.currentUser = null
         Session.destroy();
     }
-    // AuthService.getUserInfo(credentials).then(function(res){
+    // AuthService.get(credentials).then(function(res){
     //     if(res.status == 200 && res.data.user){
     //         var user = {
     //             name : res.data.user.name,
@@ -247,7 +246,7 @@ game325.run( ['$rootScope', '$state', 'AUTH_EVENTS', 'AuthService', 'Session', '
         var a = AuthService.isAuthenticated();
         if(requiresAuth == true && a == false){
             $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-            event.preventDefault();
+            event.preventDefault;
         }
     });
 }]);
@@ -761,7 +760,7 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
     $scope.avatars = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
     $scope.selectedimage = null;
     $scope.selectedImageRowIndex = 0;
-    if(Session.image){
+    if(Session.image && Session.type != 'fb'){
         var x = Session.image+1;
         for (var i = 1; i <=4; i++) {
             if(x>=i*1 && x<=i*4){
@@ -805,7 +804,9 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
                     image : 'http://graph.facebook.com/' + data.id + '/picture?type=small'
                 }
                 AuthService.localRegister(user);
-                angular.bootstrap(document, ['game325']);
+                // angular.bootstrap(document, ['game325']);
+                // $state.go('cover');
+                document.location.href = 'file:///android_asset/www/index.html'
             },
             error: errorHandler});
     };
@@ -858,7 +859,8 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
             Session.create($scope.user.name, $scope.user.image, 'local');
             // document.location.href = 'file:///android_asset/www/index.html';
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-            $state.go('cover');
+            // $state.go('cover');
+            document.location.href = 'file:///android_asset/www/index.html'
         }
     }
     $scope.enterName = function(){
@@ -868,21 +870,32 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
     }
     $scope.logOut = function(){
         if(Session.type == 'fb'){
-            AuthService.logout().then(function(res){
-                Session.destroy();
-                localStorage.setItem('userId','anon');
-                localStorage.setItem('showLoggedInOptions', false);
-                if($state.current.data.requiresAuth && (!$scope.currentUser.id)){
-                    $state.go('cover');
-                }
-                $scope.showLoginDialog = true;
-            })
+            // AuthService.logout().then(function(res){
+            //     Session.destroy();
+            //     localStorage.setItem('userId','anon');
+            //     localStorage.setItem('showLoggedInOptions', false);
+            //     if($state.current.data.requiresAuth && (!$scope.currentUser.id)){
+            //         $state.go('cover');
+            //     }
+            //     $scope.showLoginDialog = true;
+            // })
+            AuthService.localLogout();
+            Session.destroy();
+            localStorage.setItem('userId','anon');
+            localStorage.setItem('showLoggedInOptions', false);
+            if($state.current.data.requiresAuth && (!$scope.currentUser.id)){
+                $state.go('cover');
+                console.log('abc');
+                document.location.href = 'file:///android_asset/www/index.html'
+            }
+            $scope.showLoginDialog = true;
         }else{
             Session.destroy();
             localStorage.setItem('userId','anon');
             localStorage.setItem('showLoggedInOptions', false);
             $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
             $state.go('cover');
+            document.location.href = 'file:///android_asset/www/index.html'
         }
         
     }

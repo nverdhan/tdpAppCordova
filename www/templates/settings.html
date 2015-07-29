@@ -4,30 +4,32 @@
         <img class='app-icon' src="android_asset/www/assets/img/ic_arrow_back_24px.svg" style="width: 24px; height: 24px;">
 	</md-button>
 		<div class="settingsBlock">
-			<table class="settingsTable">
+			<table class="settingsTable" cellpadding="0" cellspacing="0">
 				<thead>
-					<!-- <th colspan="12"><h3 class="marg-12"><i class="fa fa-gear">&nbsp;</i>Settings</h3></th> -->
+					<tr>
+					<td colspan="12" style="color:white;font-size: 1.4em;">
+						<div>
+							<span><h3 class="marg-12"><i class="fa fa-gear">&nbsp;</i>Settings</h3></span>
+						</div>
+					</td>
+					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="3" class="selected column-td" style="width:140px;color:white;">
-							<div>
-								<span><h3 class="marg-12"><i class="fa fa-gear">&nbsp;</i>Settings</h3></span>
-							</div>
-							<div class="settingsTab" ng-class="{activeSettings:activeSettingsTab == 'backgroundTab'}" ng-click="changeTab('backgroundTab')">
-								<span><h4 style="border-top:1px solid #eee;">Background</h4></span>
-							</div>
-							<div class="settingsTab" ng-class="{activeSettings:activeSettingsTab == 'deckBackTab'}" ng-click="changeTab('deckBackTab')">
-								<span><h4>Deck</h4></span>
-							</div>
-							<!--div class="settingsTab" ng-class="{activeSettings:activeSettingsTab == 'deckFrontTab'}" ng-click="changeTab('deckFrontTab')">
-								<span><h3>Deck Front</h3></span>
-							</div-->
+						<td colspan="3" class="selected column-td" style="width:140px;color:white;height:200px;padding:0;">
+							<ul >
+								<li class="settingsTab" ng-class="{activeSettings:activeSettingsTab == 'backgroundTab'}" ng-click="changeTab('backgroundTab')">
+									<span><h4>Background</h4></span>
+								</li>
+								<li class="settingsTab" ng-class="{activeSettings:activeSettingsTab == 'deckBackTab'}" ng-click="changeTab('deckBackTab')">
+									<span><h4>Deck</h4></span>
+								</li>
+							</ul>
 						</td>
-						<td class="column-td">
+						<td class="column-td" style="background-color:#272727;">
 							<div class="color-list" ng-show="activeSettingsTab == 'backgroundTab'">
-								<div class="color-list-block" ng-repeat="color in bgColors" ng-class="getColorClass(color.color, $index)">
-									<div class="colorBlock" style="background:{{color.color}}" ng-click="selectBackgroundColor(color)"></div>
+								<div class="color-list-block" ng-repeat="color in bgColors" ng-class="getColorClass(color.color, $index)" ng-click="selectBackgroundColor(color)">
+									<div class="colorBlock" style="background:{{color.color}}" ></div>
 									<div class="color-name">
 										{{color.name}}
 									</div>
@@ -45,44 +47,12 @@
 									</div>
 								</div>
 							</div>
-							<!--div ng-show="activeSettingsTab == 'deckFrontTab'">
-								<div>
-									<div class="linear-block" style="height:112px;width:90px;">
-										<span class="check-box">
-											<span ng-class="{checked : front=='cardFront1'}"></span>
-										</span>
-									</div>
-									<div class="selectCards linear-block" style="position:relative;" ng-click="selectFront('cardFront1')">
-										<div class="card playingCards simpleCards" ng-repeat="card in sampleCards" style="left:{{$index*40}}px;">
-											<a class="card frontRotated rank-{{card.rank}} {{card.suit}}" ng-style="getCardCSS()">
-												<span class="rank">{{ getRankForHTML(card) }}</span>
-			                                    <span class="suit" ng-bind-html="'&'+getSuitForHTML(card)+';' | unsafe"></span>
-											</a>
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div>
-									<div class="linear-block" style="height:112px;width:90px;">
-										<span class="check-box">
-											<span ng-class="{checked : front=='cardFront2'}"></span>
-										</span>
-									</div>
-									<div class="selectCards linear-block" style="position:relative;" ng-click="selectFront('cardFront2')">
-										<div class="card playingCards simpleCards" ng-repeat="card in sampleCards" style="left:{{$index*40}}px; padding:0;">
-											<div class="card playingCards simpleCards" ng-style="getCardCSS()" style="padding:0;">
-												<a class="card frontRotated" ng-style="getCardPic(card)"></a>
-											</div>
-										</div>
-									</div>	
-								</div>
-							</div-->
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		<md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="appySettings()">
+		<md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="appySettings()" style="margin-top:10px;">
 			<div flex layout="horizontal" layout-align="center center">
 			<div style="margin-right:15px;"><i class="fa fa-check fa-2x white-label"></i> </div>
 			<div><h3 class="marg-12" class="white-label">Apply</h3> </div>
@@ -92,18 +62,24 @@
 </div>
 <style type="text/css">
 	.settingsBlock{
-		max-width: 600px;
+		max-width: 480px;
 		/*padding: 2em;*/
 		left: 0;
 		right: 0;
 		position: relative;
 		margin: 0 auto;
 	}
-	.column-td{
+	/*.column-td{
 		padding-top: 4em;
-	}
+	}*/
 	.settingsBlock table{
-		height: 240px;
+		width: 480px;
+	}
+	.settingsTab {
+    	height: 100%;
+	}
+	li.settingsTab.activeSettings {
+    	background-color: #272727;
 	}
 	.selected{
 		float: left;
@@ -119,8 +95,13 @@
 	.evenBlock:after{
 		clear: both;
 	}
-	.activeBlock{
-		border: 2px solid #aaa !important;
+	.color-list-block.activeBlock{
+		border: 2px solid #009688;
+		transition: border 0.3s linear;
+	}
+	.activeBlock .color-name.ng-binding {
+    	color: #009688;
+    	transition: color 0.3s linear;
 	}
 	.clearfix::after{
 		clear: both;
@@ -217,5 +198,16 @@
 		border-top: 1px solid #ddd; 
 		border-bottom: 1px solid #ddd;
 		
+	}
+	.column-td ul{
+		margin: 0;
+		list-style-type:none;
+		display: flex;
+		display: -webkit-flex;
+		flex-flow: column nowrap;
+		-webkit-flex-flow: column nowrap;
+	}
+	td.column-td {
+    	width: 340px;
 	}
 </style>

@@ -72,7 +72,7 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
             "Hey, thanks for visiting us! <br><br>"+
             "The game best works best when viewed in landscape mode. <br> Please flip your device/resize your window to proceed."+
             "<br><br>"+
-            "<img style ='margin:0 auto; width: 120px; height: 103px ' src=\"android_asset/www/assets/img/rotate_icon_thumb.png\">"+
+            // "<img style ='margin:0 auto; width: 120px; height: 103px ' src=\"android_asset/www/assets/img/rotate_icon_thumb.png\">"+
             "<a class='nav-icon href-custom' target='_blank' href='https://www.facebook.com/325game' style='color: #3b5998;'>"+
             "<br><br>"+
             "<i class='fa fa-facebook-square fa-2x' title='Facebook'></i>"+
@@ -655,6 +655,7 @@ game325.controller('settingsCtrl',['$rootScope','$scope','AUTH_EVENTS','$state',
         $scope.activeCardBack = cardBack;
     }
     $scope.getCardPic = function(card){
+        console.log('get card pic called');
         if(card === null){
             return {};
         }else{
@@ -668,7 +669,7 @@ game325.controller('settingsCtrl',['$rootScope','$scope','AUTH_EVENTS','$state',
             var posy = '-113.44px';
         var posx = ((card.rank-1)*80*-1);
         var x = {
-                    backgroundImage : 'url(android_asset/www/assets/img/cardpic.jpg)',
+                    // backgroundImage : 'url(android_asset/www/assets/img/cardpic.jpg)',
                     width : gameCSSConstants.cardSize.x,
                     height : gameCSSConstants.cardSize.y,
                     backgroundSize : '1200px',

@@ -1379,8 +1379,7 @@ var PlayedCardsComponent = React.createClass({displayName: "PlayedCardsComponent
                 //         React.createElement("a", {className: backClassName})
                 //     )
                 // )
-                if(globalVars.activeCardFront == 'cardFront1'){
-                    return (
+                return (
                         React.createElement("div", {className: classSet, style: style},
                             React.createElement("a", {className: frontClassName},
                                 React.createElement("span", {className: 'rank'}, cardRank),
@@ -1388,16 +1387,26 @@ var PlayedCardsComponent = React.createClass({displayName: "PlayedCardsComponent
                             ),
                             React.createElement("a", {className: backClassName})
                         )
-                    )
-                }else if(globalVars.activeCardFront == 'cardFront2'){
-                    var cardStyle = getCardPic(card);
-                    return (
-                        React.createElement("div", {key: cardKey, className: "card", style: style}, 
-                            React.createElement("a", {className: frontClassName, style: cardStyle}), 
-                            React.createElement("a", {className: backClassName})
-                        )
-                    )
-                }
+                )
+                // if(globalVars.activeCardFront == 'cardFront1'){
+                //     return (
+                //         React.createElement("div", {className: classSet, style: style},
+                //             React.createElement("a", {className: frontClassName},
+                //                 React.createElement("span", {className: 'rank'}, cardRank),
+                //                 React.createElement("span", {className: 'suit', dangerouslySetInnerHTML : x()})
+                //             ),
+                //             React.createElement("a", {className: backClassName})
+                //         )
+                //     )
+                // }else if(globalVars.activeCardFront == 'cardFront2'){
+                //     var cardStyle = getCardPic(card);
+                //     return (
+                //         React.createElement("div", {key: cardKey, className: "card", style: style}, 
+                //             React.createElement("a", {className: frontClassName, style: cardStyle}), 
+                //             React.createElement("a", {className: backClassName})
+                //         )
+                //     )
+                // }
             }
         });
         return (
@@ -1649,8 +1658,7 @@ var CardComponent = React.createClass({displayName: "CardComponent",
         var rankClassName = 'rank-'+this.props.card.rank+' '+cardSuit;
         frontClassName = frontClassName+' '+rankClassName;
         backClassName+= ' '+globalVars.activeCardBack;
-        if(globalVars.activeCardFront == 'cardFront1'){
-            return (
+        return (
                 React.createElement("div", {className: isActiveClassName, style: style, onClick: this.handleClick.bind(this, this.props.card, this.props.playerId)}, 
                     React.createElement("a", {className: frontClassName},
                         React.createElement("span", {className: 'rank'}, cardRank),
@@ -1658,15 +1666,25 @@ var CardComponent = React.createClass({displayName: "CardComponent",
                     ),
                     React.createElement("a", {className: backClassName})
                 )
-            ) 
-        }else if(globalVars.activeCardFront == 'cardFront2'){
-            return (
-                React.createElement("div", {className: isActiveClassName, style: style, onClick: this.handleClick.bind(this, this.props.card, this.props.playerId)}, 
-                    React.createElement("a", {className: frontClassName, style: cardStyle}), 
-                    React.createElement("a", {className: backClassName})
-                )
             )
-        }
+        // if(globalVars.activeCardFront == 'cardFront1'){
+        //     return (
+        //         React.createElement("div", {className: isActiveClassName, style: style, onClick: this.handleClick.bind(this, this.props.card, this.props.playerId)}, 
+        //             React.createElement("a", {className: frontClassName},
+        //                 React.createElement("span", {className: 'rank'}, cardRank),
+        //                 React.createElement("span", {className: 'suit', dangerouslySetInnerHTML : x()})
+        //             ),
+        //             React.createElement("a", {className: backClassName})
+        //         )
+        //     ) 
+        // }else if(globalVars.activeCardFront == 'cardFront2'){
+        //     return (
+        //         React.createElement("div", {className: isActiveClassName, style: style, onClick: this.handleClick.bind(this, this.props.card, this.props.playerId)}, 
+        //             React.createElement("a", {className: frontClassName, style: cardStyle}), 
+        //             React.createElement("a", {className: backClassName})
+        //         )
+        //     )
+        // }
         
     }
 });

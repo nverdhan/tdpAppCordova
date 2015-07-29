@@ -28,6 +28,7 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
       localStorage.setItem('showLoggedInOptions', true);
     }
     $scope.showLoggedInOptions = localStorage.getItem('showLoggedInOptions');   
+    // Naisheel Change here abc
     $scope.showStartGame = false;
     $scope.showCreateGame = false;
     $scope.showJoinGame = false;
@@ -43,7 +44,7 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
     }
     $scope.loading = false;
     $scope.showMultiplayerOptions = false;
-    console.log($scope.showLoggedInOptions);
+    // console.log($scope.showLoggedInOptions);
     $scope.toggleMultiplayerOptions = function (){   
       if($rootScope.currentConnStatus == 'online'){
         if($scope.showMultiplayerOptions == false){
@@ -54,7 +55,8 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
       }else{
         errService.showErrSimple('Connect to internet to play multiplayer.');
       }
-      console.log($scope.showLoggedInOptions);
+      // console.log($scope.showLoggedInOptions);
+          // Naisheel Change here abc Some problem with showLoggedInOptions, I am not able to figure out!
     }
     AuthService.get().then(function (data) {
         $scope.loggedinuser = data.data.user;

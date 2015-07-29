@@ -192,6 +192,7 @@ var getTrumpStyle = function (trump, trumpSet,  index, state){
     return x;
 }
 var getCardPic = function(card){
+    // console.log('getCardPic called');
 	if(!card){
         return {};
     }
@@ -213,7 +214,7 @@ var getCardPic = function(card){
     	}
         var posx = ((card.rank-1)*80*-1);
         var x = {
-        		backgroundImage : 'url(android_asset/www/assets/img/cardpic.jpg)',
+        		// backgroundImage : 'url(android_asset/www/assets/img/cardpic.jpg)',
                 width : gameCSSConstants.cardSize.x,
                 height : gameCSSConstants.cardSize.y,
                 backgroundSize : 1200,

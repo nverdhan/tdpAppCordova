@@ -2612,6 +2612,8 @@ md-input-group.join-room-input.md-default-theme.md-input-focused input{
 .join-room-input> label{
   transform-origin: center center 0;
   text-align: center;
+  color: white!important;
+  font-size: 1.3em;
 }
 @media (max-width: 800px){
   .heading-msg{
@@ -2855,5 +2857,14 @@ md-dialog md-content{
 }
 .mob-opt{
     /*padding: 3px;*/
+}
+.mob-opt-horz{
+  margin-top: 15px;
+  display: flex;
+  flex-flow: row nowrap;
+  width: 400px;
+  align-items: center;
+  justify-content: space-around;
+}
 }
         

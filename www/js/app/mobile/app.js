@@ -883,18 +883,15 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
             Session.destroy();
             localStorage.setItem('userId','anon');
             localStorage.setItem('showLoggedInOptions', false);
+            // $scope.showLoginDialog = true;
             if($state.current.data.requiresAuth && (!$scope.currentUser.id)){
-                $state.go('cover');
-                console.log('abc');
                 document.location.href = 'file:///android_asset/www/index.html'
             }
-            $scope.showLoginDialog = true;
         }else{
             Session.destroy();
             localStorage.setItem('userId','anon');
             localStorage.setItem('showLoggedInOptions', false);
             $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-            $state.go('cover');
             document.location.href = 'file:///android_asset/www/index.html'
         }
         

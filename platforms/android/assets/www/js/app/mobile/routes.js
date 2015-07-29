@@ -112,5 +112,6 @@ game325.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', fun
         enabled: true,
         requireBase: false
     });
+    // $locationProvider.hashPrefix("");
 
 }]);

@@ -145,6 +145,17 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
     function onOnline(){
         $scope.handleNetworkConnection('online');
     }
+    // Back button behavior
+    function onBackKeyDown(e) {
+        if($state.current.name == 'cover'){
+            alert('set a dialog here for exit app?');
+            navigator.app.exitApp();
+        }else{
+            history.go(-1);
+            navigator.app.backHistory();
+        }
+    }
+    document.addEventListener("backbutton", onBackKeyDown, false);
     $scope.title = 'GameApp';
     var credentials = {
         //id : $cookieStore.get('userId')
@@ -241,6 +252,7 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
 }]);
 game325.run( ['$rootScope', '$state', 'AUTH_EVENTS', 'AuthService', 'Session', '$location', function ($rootScope, $state, AUTH_EVENTS, AuthService, Session, $location){
     $rootScope.$on('$stateChangeStart', function (event, next, toState, toParams, fromState, fromParams){
+        // console.log($state.current.name);
         var authorizedRoles = next.data.authorizedRoles;
         var requiresAuth = next.data.requiresAuth;
         var a = AuthService.isAuthenticated();

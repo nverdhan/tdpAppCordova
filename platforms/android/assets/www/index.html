@@ -19,6 +19,7 @@
 	    <link rel="stylesheet" type="text/css" href="css/cards/cards.css" media="screen" />
 	    <link rel="stylesheet" type="text/css" href="css/gameStyle.css">
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/openfb.js"></script>
 	</head>
     <body ng-cloak>
@@ -137,11 +138,11 @@
             var wxby2 = wx/2;
             var wyby2 = wy/2;
             var canvasBlock = {
-                x : 65
+                x : wx/20
            }
-            if(wx>900){
-                canvasBlock.x = 50;
-            }
+            // if(wx>900){
+            //     canvasBlock.x = 50;
+            // }
             canvasBlock.y = canvasBlock.x/wx*wy;
             var c = document.getElementById("myCanvas");
             c.setAttribute('height',wy);
@@ -158,6 +159,7 @@
                 for (var j = 0; j < wy/canvasBlock.y; j++) {
                     var randX = getRandomInt(10,20);
                     var randY = getRandomInt(5,10);
+                    var size = getRandomInt(20,40);
                     var posX = i*canvasBlock.x+randX;
                     var posY = j*canvasBlock.y+randY;
                     var imgRandom = getRandomInt(0,3);
@@ -166,7 +168,7 @@
                     var rotation = getRandomInt(-10,10);
                     rotation = rotation/10;
                     ctx.rotate(rotation);
-                    ctx.drawImage(image, 0, 0, 50, 50, posX, posY, 20, 20);
+                    ctx.drawImage(image, 0, 0, 50, 50, posX, posY, size, size);
                 }    
             }
         });

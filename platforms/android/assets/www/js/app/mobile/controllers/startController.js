@@ -8,7 +8,6 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
 //            $state.go('start');
 //         }
 //     });
-    // $scope.showLoggedInOptions = false;
     $scope.pageClass = 'page-home';
     $scope.joinGameRoomId = '';
     $scope.deactivateMultiplayer = function(){
@@ -23,6 +22,12 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
     }else{
       $scope.deactivateMultiplayer();
     }
+    if(Session.type == 'local'){
+      localStorage.setItem('showLoggedInOptions', false);
+    }else if(Session.type == 'fb'){
+      localStorage.setItem('showLoggedInOptions', true);
+    }
+    $scope.showLoggedInOptions = localStorage.getItem('showLoggedInOptions');   
     $scope.showStartGame = false;
     $scope.showCreateGame = false;
     $scope.showJoinGame = false;
@@ -38,14 +43,8 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
     }
     $scope.loading = false;
     $scope.showMultiplayerOptions = false;
-    $scope.toggleMultiplayerOptions = function (){
-      console.log(Session); 
-      if(Session.type == 'local'){
-          localStorage.setItem('showLoggedInOptions', false);
-        }else if(Session.type == 'fb'){
-          localStorage.setItem('showLoggedInOptions', true);
-        }
-      $scope.showLoggedInOptions = localStorage.getItem('showLoggedInOptions');
+    console.log($scope.showLoggedInOptions);
+    $scope.toggleMultiplayerOptions = function (){   
       if($rootScope.currentConnStatus == 'online'){
         if($scope.showMultiplayerOptions == false){
           $scope.showMultiplayerOptions = true;
@@ -55,6 +54,7 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
       }else{
         errService.showErrSimple('Connect to internet to play multiplayer.');
       }
+      console.log($scope.showLoggedInOptions);
     }
     AuthService.get().then(function (data) {
         $scope.loggedinuser = data.data.user;
@@ -63,19 +63,19 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
            // socket.emit('joinRoom', {roomId : $scope.gameId});        
        }
     });
-    $scope.changeClass = function(a){
-          if(a == 'game-325'){
-            var req = {};
-            if(Session.name && Session.type != 'local'){
-                console.log(Session);
-                $scope.showLoggedInOptions = true;
-            }else{
-              startGameService.start(req).then(function(res){
-                $state.go('game/:id', {id : res.data.roomId, type : res.data.type});      
-              });
-            }
-          }
-        }
+    // $scope.changeClass = function(a){
+    //       if(a == 'game-325'){
+    //         var req = {};
+    //         if(Session.name && Session.type != 'local'){
+    //             console.log(Session);
+    //             $scope.showLoggedInOptions = true;
+    //         }else{
+    //           startGameService.start(req).then(function(res){
+    //             $state.go('game/:id', {id : res.data.roomId, type : res.data.type});      
+    //           });
+    //         }
+    //       }
+    //     }
     $scope.startGame = function(e){
         if(e == 'bots'){
           $state.go('game325');
@@ -294,7 +294,7 @@ game325.controller('infoController', ['$rootScope', '$http', '$scope', '$state',
 game325.controller('coverController', ['$rootScope', '$http', '$scope', '$state', '$stateParams','AuthService', 'startGameService' ,'gameService', 'socket', '$timeout', 'delayService', '$mdSidenav', '$anchorScroll', '$location', '$mdDialog','$cookieStore','AUTH_EVENTS','Session', 'errService', function ($rootScope, $http, $scope, $state, $stateParams, AuthService, startGameService, gameService, socket, $timeout ,delayService, $mdSidenav, $anchorScroll, $location, $mdDialog, $cookieStore, AUTH_EVENTS, Session, errService){
   $scope.pageClass = 'page-cover';
   $scope.className='';
-  $scope.showLoggedInOptions  = false;
+  // $scope.showLoggedInOptions  = false;
   $scope.showGame325 = false;
 
   $scope.getWinContainerHeight = function(){
@@ -307,13 +307,13 @@ game325.controller('coverController', ['$rootScope', '$http', '$scope', '$state'
     $scope.showGame325 = true; 
     if(Session.name && Session.type != 'local'){
           // $cookieStore.put('showLoggedInOptions', true);
-          localStorage.setItem('showLoggedInOptions', true);
+          // localStorage.setItem('showLoggedInOptions', true);
         }else{
           // $cookieStore.put('showLoggedInOptions', false);
-          localStorage.setItem('showLoggedInOptions', false);
+          // localStorage.setItem('showLoggedInOptions', false);
         }
     // $scope.showLoggedInOptions = $cookieStore.get('showLoggedInOptions');
-    $scope.showLoggedInOptions = localStorage.getItem('showLoggedInOptions');
+    // $scope.showLoggedInOptions = localStorage.getItem('showLoggedInOptions');
     setTimeout(function(){
       $state.go('cover');
     },800)

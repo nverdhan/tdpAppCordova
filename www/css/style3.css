@@ -754,11 +754,10 @@ md-button.md-fab.sidebutton{
   -webkit-transform: translate3d(0, 0, 0);
   /*will-change:transform;*/
 }
-.statistics{
+/*.statistics{
     font-size: 16pt;
     font-weight: 400;
     position: absolute;
-    /*top: 180px;*/
     width: 40px;
     left: 0;
 }
@@ -775,7 +774,7 @@ md-button.md-fab.sidebutton{
 .bottom-player .statistics{
   top: 20px;
   left: 55px;
-}
+}*/
 md-progress-circular.game-waiting-progress.md-default-theme .md-circle .md-mask .md-fill{
   background-color: #009688;
 }

@@ -1207,21 +1207,21 @@ var PlayerInfoComponent = React.createClass({displayName: "PlayerInfoComponent",
                 name = 'You';
                 var className = 'players-profile bottom-player';
                 var divStyle = {
-                    bottom : -25,
+                    bottom : -3,
                 }
                 break;
             case 1:
                 var className = 'left-player';
                 var divStyle = {
                     top : 190,
-                    left : 15,
+                    left : -10,
                 }
                 break;
             case 2:
                 var className = 'right-player';
                 var divStyle = {
                     top : 190,
-                    right : 15,
+                    right : -10,
                 }
                 break;
         }
@@ -1264,7 +1264,7 @@ var PlayerInfoComponent = React.createClass({displayName: "PlayerInfoComponent",
                 React.createElement("div", {className: profileClasses}, 
                     React.createElement("div", {className: playerClass, style: playerStyle}, 
                         React.createElement("div", {className: "name"}, name), 
-                        React.createElement("div", {className: "statistics", style : statStyle}, stats)
+                        React.createElement(StatisticsComponent, {player: this.props.player})
                     ),
                     React.createElement("div", {className : "notif"},
                         React.createElement("div", {className : "bar"},
@@ -1275,6 +1275,86 @@ var PlayerInfoComponent = React.createClass({displayName: "PlayerInfoComponent",
                 )
             )
         )
+    }
+});
+var StatisticsComponent = React.createClass({displayName: "StatisticsComponent",
+    render : function (){
+        var scores = this.props.player.scores[this.props.player.scores.length - 1];
+        var handsMade = scores.handsMade;
+        var handsToMake = scores.handsToMake;
+        var cx = React.addons.classSet;
+        statClasses = cx({
+                        'stat-img' : true,
+                        'fillgreen': true,
+                    });
+        var statClasses =[];
+        if(this.props.player.status == 'disconnected'){
+                var stats = 'disconnected...';
+            }else{
+                var stats = [];
+                if(handsMade < handsToMake){
+                    for (var i = 0; i < handsMade ; i++) {
+                        statClasses.push(cx({
+                                            'stat-img' : true,
+                                            'fillgreen': false, 
+                                            'fillgrey': false, 
+                                            'fillblue': false, 
+                                            'fillred': true, 
+                                        }));
+                    }
+                    for (var i = 0; i < handsToMake-handsMade ; i++) {
+                        statClasses.push(cx({
+                                            'stat-img' : true,
+                                            'fillgreen': false, 
+                                            'fillgrey': true, 
+                                            'fillblue': false, 
+                                            'fillred': false, 
+                                        }));
+                    }
+                    for (var i = 0; i < handsToMake ; i++) {
+                        stats.push(React.createElement("div", {className: statClasses[i]}));
+                    }    
+                }else if(handsMade == handsToMake){
+                    for (var i = 0; i < handsMade ; i++) {
+                        statClasses.push(cx({
+                                            'stat-img' : true,
+                                            'fillgreen': false, 
+                                            'fillgrey': false, 
+                                            'fillblue': true, 
+                                            'fillred': false, 
+                                        }));
+                    }
+                    for (var i = 0; i < handsToMake ; i++) {
+                        stats.push(React.createElement("div", {className: statClasses[i]}));
+                    }   
+                }else if(handsMade > handsToMake){
+                    for (var i = 0; i < handsToMake ; i++) {
+                        statClasses.push(cx({
+                                            'stat-img' : true,
+                                            'fillgreen': false, 
+                                            'fillgrey': false, 
+                                            'fillblue': true, 
+                                            'fillred': false, 
+                                        }));
+                    }
+                    for (var i = 0; i < handsMade-handsToMake ; i++) {
+                        statClasses.push(cx({
+                                            'stat-img' : true,
+                                            'fillgreen': true, 
+                                            'fillgrey': false, 
+                                            'fillblue': false, 
+                                            'fillred': false, 
+                                        }));
+                    }
+                    for (var i = 0; i < handsMade ; i++) {
+                        stats.push(React.createElement("div", {className: statClasses[i]}));
+                    }   
+                }
+                
+            }
+        return (
+                    React.createElement("div", {className: "statistics"}, {stats: stats})
+                )
     }
 });
 var PlayedCardsComponent = React.createClass({displayName: "PlayedCardsComponent",

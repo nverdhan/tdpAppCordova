@@ -2601,19 +2601,21 @@ h3 {
 }
 .join-room-input input{
   width: 100%;
+  color: white;
 }
 md-input-group.join-room-input.md-default-theme.md-input-focused label{
-  color: #009688 !important;
+  color: white !important;
   text-align: center;
 }
 md-input-group.join-room-input.md-default-theme.md-input-focused input{
-  border-color: #009688 !important;
+  border-color: white !important;
 }
 .join-room-input> label{
   transform-origin: center center 0;
   text-align: center;
   color: white!important;
-  font-size: 1.3em;
+  font-size: 1em;
+  color: white;
 }
 @media (max-width: 800px){
   .heading-msg{

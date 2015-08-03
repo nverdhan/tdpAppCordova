@@ -4,10 +4,10 @@
   </button></md-button>
   <div>
     <div class="profile-info" ng-if="loggedIn" style="color:white;">
-      <h3>Welcome</h3>
+      <h3 style="position:relative; top:-14px; left:0;">Welcome</h3>
       
-      <div class="ball center" style="display:inline-block; background-image:url({{profile.image}}); background-position : {{profile.backgroundPosition}}; margin: 0 auto;">
-      <h4 class="cover-player-name">{{profile.name}}</h4></div>
+      <div class="ball center" style="display:inline-block; background-image:url({{profile.image}}); background-position : {{profile.backgroundPosition}}; margin: 0 auto;"></div>
+      <h3 style="position:relative; top:-14px; left:0;">{{profile.name}}</h3>
       <!-- <profile-info-horz content="profile"></profile-info-horz> -->
     </div>
     <div class="profile-info" ng-if="!loggedIn" ng-controller="registerCtrl" ng-click="showLogin()">
@@ -16,7 +16,7 @@
       <div class="clearfix"></div> -->
     </div>
   </div>
-  <div ng-show="!showMultiplayerOptions" class='mob-opt-wrap hidemultiplayeropt'>
+  <div ng-if="!showMultiplayerOptions" class='mob-opt-wrap hidemultiplayeropt'>
     <div class="mob-opt">
       <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="startGame('bots')">
         <div flex layout="horizontal" layout-align="center center">
@@ -30,7 +30,6 @@
       </md-button>
     </div>
     <div class="mob-opt">
-      <h3 style="color:white;">Active internet connection required for multiplayer</h3>
       <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="toggleMultiplayerOptions()">
         <div flex layout="horizontal" layout-align="center center">
           <div style="margin-right:15px;">
@@ -57,7 +56,7 @@
       </div>
     </div>
   </div>
-  <div ng-show="showMultiplayerOptions" class='mob-opt-wrap showmultiplayeropt'>
+  <div ng-if="showMultiplayerOptions" class='mob-opt-wrap showmultiplayeropt'>
     <div class="mob-opt">
       <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="startGame('multiplayer')">
         <div flex layout="horizontal" layout-align="center center">
@@ -70,7 +69,7 @@
         </div>
       </md-button>
     </div>
-    <div ng-hide="showLoggedInOptions" class="mob-opt">
+    <div ng-if="!showLoggedInOptions" class="mob-opt">
       <h3 style="color:white;">Create Private rooms and Invite your friends</h3>
       <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="loginWIthFB()">
       <div flex layout="horizontal" layout-align="center center">
@@ -83,8 +82,9 @@
       </div>
     </md-button>
     </div>
-    <div ng-show="showLoggedInOptions" class="mob-opt" style="width:400px;">
-      <md-text-float label="Enter Room ID" flex ng-model="joinGameRoomId" ng-enter="toggleRoomOptions()" class="join-room-input"> </md-text-float>
+    <div ng-if="showLoggedInOptions" class="mob-opt" style="width:400px;">
+      <md-text-float label="Enter Room ID" flex ng-model="joinGameRoomId" ng-enter="toggleRoomOptions()" style="display: inline-block;
+    margin: 0; padding: 0;" class="join-room-input"> </md-text-float>
       <md-button class="redcol md-raised" ng-click="joinGame()" aria-label="privateGameJoin">
         {{roomText}}
       </md-button>

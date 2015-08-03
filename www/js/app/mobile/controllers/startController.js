@@ -13,12 +13,7 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
     }else{
       $scope.deactivateMultiplayer();
     }
-    if(Session.type == 'local'){
-      localStorage.setItem('showLoggedInOptions', false);
-    }else if(Session.type == 'fb'){
-      localStorage.setItem('showLoggedInOptions', true);
-    }
-    $scope.showLoggedInOptions = localStorage.getItem('showLoggedInOptions');   
+    
     // Naisheel Change here abc
     $scope.showStartGame = false;
     $scope.showCreateGame = false;
@@ -134,7 +129,7 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
         backgroundPosition : ''
     }
     $scope.checkLogin = function(){
-      console.log(Session);
+      // console.log(Session);
       if(Session.name){
         $scope.profile.name = Session.name;
         $rootScope.loggedIn = true;
@@ -142,12 +137,14 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
       if(Session.type == 'local'){
         $scope.profile.image = 'android_asset/www/assets/img/avatars.png';
         $scope.profile.backgroundPosition = 45*Session.image+'px 0px';
+        localStorage.setItem('showLoggedInOptions', false);
       }else{
         $scope.profile.image = Session.image;
         $scope.profile.backgroundPosition = '50% 50%';
+        localStorage.setItem('showLoggedInOptions', true);
       }
       $scope.loggedIn = $rootScope.loggedIn;
-      // $scope.$apply();
+      $scope.showLoggedInOptions = localStorage.getItem('showLoggedInOptions');   
     }
     $scope.deleteProfile = function(){
         $scope.profile.name = null;

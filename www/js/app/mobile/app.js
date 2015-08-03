@@ -861,7 +861,7 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
         if($scope.selectedImageRowIndex < 3){
             $scope.selectedImageRowIndex++;
         }
-        console.log($scope.selectedImageRowIndex);
+        // console.log($scope.selectedImageRowIndex);
     }
     $scope.shiftRight = function () {
         if($scope.selectedImageRowIndex > 0){

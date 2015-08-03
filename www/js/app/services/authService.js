@@ -49,7 +49,7 @@ game325.factory('AuthService', ['$http','$rootScope', 'Session','$window','$cook
         return null;
     }
     authService.localRegister = function (user) {
-        return $http.post(apiPrefix+'fblogin', credentials)
+        return $http.post(apiPrefix+'fblogin', user)
                     .then(function (res){
                         if(res.data.status == 'success'){
                             Session.create(res.data.user.id, res.data.user.name, res.data.user.img);

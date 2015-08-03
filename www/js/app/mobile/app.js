@@ -832,7 +832,7 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
                         console.log(res);
                         $state.go('cover');
                     }
-                }
+                })
                 // angular.bootstrap(document, ['game325']);
                 // $state.go('cover');
                 // document.location.href = 'file:///android_asset/www/index.html'

@@ -830,6 +830,8 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
                 AuthService.localRegister(user).then(function(res){
                     if(res){
                         // console.log(res);
+                        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                        $scope.initLogin();
                         $state.go('cover');
                     }else{
                         $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
@@ -839,10 +841,7 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
                 // $state.go('cover');
                 // document.location.href = 'file:///android_asset/www/index.html'
                 // $scope.$apply($rootScope.$broadcast(AUTH_EVENTS.loginSuccess));
-                $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                // angular.bootstrap();
-                $scope.initLogin();
-                $state.go('cover');
+                
             },
             error: errorHandler});
     };

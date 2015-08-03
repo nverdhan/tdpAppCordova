@@ -134,6 +134,7 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
         backgroundPosition : ''
     }
     $scope.checkLogin = function(){
+      console.log(Session);
       if(Session.name){
         $scope.profile.name = Session.name;
         $rootScope.loggedIn = true;

@@ -2866,5 +2866,10 @@ md-dialog md-content{
   align-items: center;
   justify-content: space-around;
 }
+.sliding-arrows{
+    color : #eee;
+    position: relative;
+    bottom: 48px;
+    margin: 12px;
 }
         

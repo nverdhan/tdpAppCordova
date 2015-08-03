@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- <html ng-app="game325" ng-controller="gameCtrl"> -->
 <html ng-app="game325" ng-controller="gameCtrl">
     <head>
 	    <title>Teen Do Paanch Cards Game</title>
@@ -75,6 +76,8 @@
     <script type="text/javascript" src="js/angular-cookies.min.js"></script>
     <script type="text/javascript" src="js/angular-material.min.js"></script>
     <script type="text/javascript" src="js/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="js/angular-touch.min.js"></script>
+    
     <script type="text/javascript" src="js/socket.min.js"></script>
     <script type="text/javascript" src="js/react/react.min.js"></script>
     <script type="text/javascript" src="js/react/react-with-addons.min.js"></script>
@@ -172,11 +175,8 @@
                 }    
             }
         });
-    </script>
-    <script>
-
-     // Defaults to sessionStorage for storing the Facebook token
-     openFB.init({appId: '1437787196521831'});
+    // Defaults to sessionStorage for storing the Facebook token
+    openFB.init({appId: '1437787196521831'});
 
     //  Uncomment the line below to store the Facebook token in localStorage instead of sessionStorage
     //  openFB.init({appId: 'YOUR_FB_APP_ID', tokenStore: window.localStorage});

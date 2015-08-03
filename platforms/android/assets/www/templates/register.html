@@ -72,14 +72,25 @@
 			Logged in
 		</div>
 		<div ng-if="loginAnon && !showLoggedInProfile" flex>
-			<div class="center" style="max-width:289px;">
+			<div class="center" style="">
 					<md-content md-theme="docs-dark" layout="row" layout-sm="column" style="font-size:1.2em; color:white;">
 						<md-text-float class="username" label="Enter your name" flex ng-model="user.name"> </md-text-float>
 					</md-content>
-					<div style="width:100%; overflow:hidden; padding-top:12px; padding-bottom:12px;">
-						<div class="imageRow" ng-style="getImageRowWidth();" ng-swipe-left="shiftLeft()" ng-swipe-right="shiftRight()">
+					<div>
+					<div class="sliding-arrows" ng-if="selectedImageRowIndex != 3" ng-click="shiftLeft()" style="display:inline-block">
+						<i class="fa fa-angle-double-left fa-2x"></i>
+					</div>
+					<div style="display:inline-block">
+					<div style="max-width:289px; overflow:hidden; padding-top:12px; padding-bottom:12px;">
+						<div class="imageRow" ng-style="getImageRowStyle();" ng-swipe-left="shiftLeft()" ng-swipe-right="shiftRight()">
 							<div class="avatar-img" ng-repeat="avatar in avatars" ng-style="getAvatar($index)" ng-click="selectAvatar($index)" ng-class="{true : 'selected-avatar'}[user.image == $index]"></div>
-						</div>		
+						</div>
+					</div>
+						
+					</div>
+					<div class="sliding-arrows" ng-if="selectedImageRowIndex != 0" ng-click="shiftRight()" style="display:inline-block">
+						<i class="fa fa-angle-double-right fa-2x"></i>
+					</div>
 					</div>
 			   
 				<div class="clear"></div>

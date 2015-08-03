@@ -34,6 +34,10 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         console.log('deviceready fired');
+        angular.element(document).ready(function() {
+            // console.log('angular bootstrapped');
+            //angular.bootstrap(document, ['game325']);
+        });
         navigator.splashscreen.hide();
     },
     // Update DOM on a Received Event

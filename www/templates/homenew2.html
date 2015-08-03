@@ -5,8 +5,10 @@
   <div>
     <div class="profile-info" ng-if="loggedIn" style="color:white">
       <h3>Welcome</h3>
-      <profile-info-horz content="profile">
-      </profile-info-horz>
+      
+      <a class="href-custom" href="/"><div class="ball center" style="display:inline-block; background-image:url({{profile.image}}); background-position : {{profile.backgroundPosition}}; margin: 0 auto;">
+      <h4 class="cover-player-name">{{profile.name}}</h4></div></a>
+      <!-- <profile-info-horz content="profile"></profile-info-horz> -->
     </div>
     <div class="profile-info" ng-if="!loggedIn" ng-controller="registerCtrl" ng-click="showLogin()">
       <i class="fa fa-user fa-2x fleft"></i>

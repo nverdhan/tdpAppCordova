@@ -826,7 +826,13 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
                     name : data.name,
                     image : 'http://graph.facebook.com/' + data.id + '/picture?type=small'
                 }
-                AuthService.localRegister(user);
+                // AuthService.localRegister(user);
+                AuthService.localRegister(user).then(function(res){
+                    if(res){
+                        console.log(res);
+                        $state.go('cover');
+                    }
+                }
                 // angular.bootstrap(document, ['game325']);
                 // $state.go('cover');
                 // document.location.href = 'file:///android_asset/www/index.html'

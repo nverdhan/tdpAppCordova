@@ -829,8 +829,10 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
                 // AuthService.localRegister(user);
                 AuthService.localRegister(user).then(function(res){
                     if(res){
-                        console.log(res);
+                        // console.log(res);
                         $state.go('cover');
+                    }else{
+                        $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
                     }
                 })
                 // angular.bootstrap(document, ['game325']);

@@ -51,13 +51,14 @@ game325.factory('AuthService', ['$http','$rootScope', 'Session','$window','$cook
     authService.localRegister = function (user) {
         return $http.post(apiPrefix+'fblogin', user)
                     .then(function (res){
-                        if(res.data.status == 'success'){
-                            Session.create(res.data.user.id, res.data.user.name, res.data.user.img);
+                        if(res){
+                            //Session.create(res.data.user.id, res.data.user.name, res.data.user.img);
+                        //}
+                            var a = JSON.stringify(user);
+                            localStorage.setItem('userInfo',a);
+                            Session.create(user.name, user.image, 'fb');
+                            return true;
                         }
-                        var a = JSON.stringify(user);
-                        localStorage.setItem(a);
-                        Session.create(user.id, user.name, user.img);
-                        return res.data;
                     });
     }
     authService.localLogout = function () {

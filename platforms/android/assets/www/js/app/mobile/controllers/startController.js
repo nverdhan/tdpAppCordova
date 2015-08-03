@@ -1,13 +1,4 @@
 game325.controller('startController', ['$rootScope', '$http', '$scope', '$state', '$stateParams','AuthService', 'startGameService' ,'gameService', 'socket', '$timeout', 'delayService', '$mdSidenav', '$anchorScroll', '$location', '$mdDialog','$cookieStore','AUTH_EVENTS','Session', 'errService', function ($rootScope, $http, $scope, $state, $stateParams, AuthService, startGameService, gameService, socket, $timeout ,delayService, $mdSidenav, $anchorScroll, $location, $mdDialog, $cookieStore, AUTH_EVENTS, Session, errService){
-//     AuthService.get().then(function(res){
-//        console.log(res);
-//         if(res.data.error == "401"){
-//             $scope.authorized = false;
-//         }else if(res.data.user){
-//          $stateProvider.state('start');
-//            $state.go('start');
-//         }
-//     });
     $scope.pageClass = 'page-home';
     $scope.joinGameRoomId = '';
     $scope.deactivateMultiplayer = function(){
@@ -100,39 +91,6 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
         $state.go('cover');
       }, 100);
     }
-    $scope.loginWIthFB = function () {
-      //window.location.href = "http://teendopaanch.in/auth/facebook"
-      // FacebookInAppBrowser.login({
-      //     send: function() {
-      //         console.log('login opened');
-      //     },
-      //     success: function(access_token) {
-      //         console.log('done, access token: ' + access_token);
-      //     },
-      //     denied: function() {
-      //         console.log('user denied');
-      //     },
-      //     timeout: function(){
-      //         console.log('a timeout has occurred, probably a bad internet connection');
-      //     },
-      //     complete: function(access_token) {
-      //         console.log('window closed');
-      //         if(access_token) {
-      //             console.log(access_token);
-      //         } else {
-      //             console.log('no access token');
-      //         }
-      //     },
-      //     userInfo: function(userInfo) {
-      //         if(userInfo) {
-      //             console.log(JSON.stringify(userInfo));
-      //         } else {
-      //             console.log('no user info');
-      //         }
-      //     }
-      // });
-      console.log('Login with fb')
-    }
     $scope.toggleRoomOptions = function () {
         if($scope.joinGameRoomId.length == 0){
           $scope.roomText = 'Create Private Room';
@@ -186,10 +144,22 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
       }else{
         $scope.profile.image = Session.image;
         $scope.profile.backgroundPosition = '50% 50%';
-      }  
+      }
       $scope.loggedIn = $rootScope.loggedIn;
+      // $scope.$apply();
+    }
+    $scope.deleteProfile = function(){
+        $scope.profile.name = null;
+        $scope.profile.image = null;
+        $scope.profile.backgroundPosition = null;
+        // delete $scope.profile;
+        console.log(88888888);
+        $rootScope.loggedIn = false;
     }
     $scope.checkLogin();
+    $scope.$on(AUTH_EVENTS.loginSuccess, $scope.checkLogin);
+    $scope.$on(AUTH_EVENTS.notAuthenticated, $scope.deleteProfile);
+    
     $scope.showProfile = function(){
       // var id = $cookieStore.get('userId');
       var id = localStorage.getItem('userId');

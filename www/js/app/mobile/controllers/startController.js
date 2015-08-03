@@ -224,6 +224,15 @@ game325.controller('errDialogController',['$rootScope', '$scope', '$mdDialog', '
       $rootScope.$broadcast('NEXT_ROUND');
       $mdDialog.hide();
     }
+    $scope.exitGame = function () {
+      $mdDialog.hide();
+      navigator.app.exitApp();
+    }
+    $scope.cancelExit = function () {
+      $mdDialog.hide();
+      history.go(-1);
+      navigator.app.backHistory();
+    }
 }]);
 game325.controller('infoController', ['$rootScope', '$http', '$scope', '$state', '$stateParams', 'Session', function ($rootScope, $http, $scope, $state, $stateParams, Session) {
   $scope.pageClass = 'page-about';

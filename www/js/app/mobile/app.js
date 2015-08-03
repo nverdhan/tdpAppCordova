@@ -149,11 +149,26 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
     // Back button behavior
     function onBackKeyDown(e) {
         if($state.current.name == 'cover'){
-            alert('set a dialog here for exit app?');
-            navigator.app.exitApp();
-        }else{
-            history.go(-1);
-            navigator.app.backHistory();
+        //     alert('set a dialog here for exit app?');
+        //     navigator.app.exitApp();
+        // }else{
+        //     history.go(-1);
+        //     navigator.app.backHistory();
+        // }
+        var msg = 'Exit Game?'
+        $mdDialog.show({
+              template:
+                '<md-dialog>' +
+                '  <md-content> <h2 class="md-title"> Exit Game? </h2> <p> '+
+                 '  <div class="md-actions">' +
+                 '<md-button ng-click="exitGame()" aria-label="exitGame"> Yes. </md-button>'+
+                 '<md-button ng-click="cancelExit()" aria-label="closeDialog"> No </md-button>'+
+                 '  </div>' +
+                '</md-content></md-dialog>',
+                clickOutsideToClose : false,
+                escapeToClose : false,
+                controller: 'errDialogController'
+            });
         }
     }
     document.addEventListener("backbutton", onBackKeyDown, false);

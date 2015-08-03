@@ -1659,7 +1659,8 @@ var CardComponent = React.createClass({displayName: "CardComponent",
         frontClassName = frontClassName+' '+rankClassName;
         backClassName+= ' '+globalVars.activeCardBack;
         return (
-                React.createElement("div", {className: isActiveClassName, style: style, onClick: this.handleClick.bind(this, this.props.card, this.props.playerId)}, 
+                //React.createElement("div", {className: isActiveClassName, style: style, onClick: this.handleClick.bind(this, this.props.card, this.props.playerId)}, 
+                    React.createElement(Swiper, {className: isActiveClassName, style: style, onSwipeUp: this.handleClick.bind(this, this.props.card, this.props.playerId), onClick: this.handleClick.bind(this, this.props.card, this.props.playerId)},
                     React.createElement("a", {className: frontClassName},
                         React.createElement("span", {className: 'rank'}, cardRank),
                         React.createElement("span", {className: 'suit', dangerouslySetInnerHTML : x()})

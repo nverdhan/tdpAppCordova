@@ -153,7 +153,7 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
         $scope.profile.image = null;
         $scope.profile.backgroundPosition = null;
         // delete $scope.profile;
-        console.log(88888888);
+        // console.log(88888888);
         $rootScope.loggedIn = false;
     }
     $scope.checkLogin();

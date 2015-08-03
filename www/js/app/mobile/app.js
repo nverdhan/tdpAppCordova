@@ -225,7 +225,7 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
         // if($state.current.data.requiresAuth && (!$scope.currentUser.id)){
         //     $state.go('home');
         // }
-        console.log('exit login called');
+        // console.log('exit login called');
         $scope.OverlayVisible = false;
     }
     // $scope.showLogin = function(){
@@ -761,7 +761,7 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
                 $scope.user.backgroundPosition = '50% 50%';
                 
             }
-            console.log(Session);
+            // console.log(Session);
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
         }else{
             $scope.showLoggedInProfile = false;

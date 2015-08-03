@@ -77,8 +77,8 @@
 						<md-text-float class="username" label="Enter your name" flex ng-model="user.name"> </md-text-float>
 					</md-content>
 					<div>
-					<div class="sliding-arrows" ng-if="selectedImageRowIndex != 3" ng-click="shiftLeft()" style="display:inline-block">
-						<i class="fa fa-angle-double-left fa-2x"></i>
+					<div class="sliding-arrows"  ng-click="shiftLeft()" style="display:inline-block">
+						<i class="fa fa-angle-double-left fa-2x" ng-if="selectedImageRowIndex != 3"></i>
 					</div>
 					<div style="display:inline-block">
 					<div style="max-width:289px; overflow:hidden; padding-top:12px; padding-bottom:12px;">
@@ -88,8 +88,8 @@
 					</div>
 						
 					</div>
-					<div class="sliding-arrows" ng-if="selectedImageRowIndex != 0" ng-click="shiftRight()" style="display:inline-block">
-						<i class="fa fa-angle-double-right fa-2x"></i>
+					<div class="sliding-arrows"  ng-click="shiftRight()" style="display:inline-block">
+						<i class="fa fa-angle-double-right fa-2x" ng-if="selectedImageRowIndex != 0"></i>
 					</div>
 					</div>
 			   

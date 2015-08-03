@@ -225,7 +225,7 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
         // if($state.current.data.requiresAuth && (!$scope.currentUser.id)){
         //     $state.go('home');
         // }
-        console.log('exit login called');
+        // console.log('exit login called');
         $scope.OverlayVisible = false;
     }
     // $scope.showLogin = function(){
@@ -761,7 +761,7 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
                 $scope.user.backgroundPosition = '50% 50%';
                 
             }
-            console.log(Session);
+            // console.log(Session);
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
         }else{
             $scope.showLoggedInProfile = false;
@@ -829,18 +829,19 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
                 // AuthService.localRegister(user);
                 AuthService.localRegister(user).then(function(res){
                     if(res){
-                        console.log(res);
+                        // console.log(res);
+                        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                        $scope.initLogin();
                         $state.go('cover');
+                    }else{
+                        $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
                     }
                 })
                 // angular.bootstrap(document, ['game325']);
                 // $state.go('cover');
                 // document.location.href = 'file:///android_asset/www/index.html'
                 // $scope.$apply($rootScope.$broadcast(AUTH_EVENTS.loginSuccess));
-                $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                // angular.bootstrap();
-                $scope.initLogin();
-                $state.go('cover');
+                
             },
             error: errorHandler});
     };

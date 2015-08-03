@@ -3,17 +3,17 @@
                 <img class="app-icon" src="android_asset/www/assets/img/ic_arrow_back_24px.svg" style="width: 24px; height: 24px;">
   </button></md-button>
   <div>
-    <div class="profile-info" ng-if="loggedIn" style="color:white">
+    <div class="profile-info" ng-if="loggedIn" style="color:white;">
       <h3>Welcome</h3>
       
-      <a class="href-custom" href="/"><div class="ball center" style="display:inline-block; background-image:url({{profile.image}}); background-position : {{profile.backgroundPosition}}; margin: 0 auto;">
-      <h4 class="cover-player-name">{{profile.name}}</h4></div></a>
+      <div class="ball center" style="display:inline-block; background-image:url({{profile.image}}); background-position : {{profile.backgroundPosition}}; margin: 0 auto;">
+      <h4 class="cover-player-name">{{profile.name}}</h4></div>
       <!-- <profile-info-horz content="profile"></profile-info-horz> -->
     </div>
     <div class="profile-info" ng-if="!loggedIn" ng-controller="registerCtrl" ng-click="showLogin()">
-      <i class="fa fa-user fa-2x fleft"></i>
+      <!-- <i class="fa fa-user fa-2x fleft"></i>
       <div class="fleft" style="width: -moz-max-content;">Log in</div>
-      <div class="clearfix"></div>
+      <div class="clearfix"></div> -->
     </div>
   </div>
   <div ng-show="!showMultiplayerOptions" class='mob-opt-wrap hidemultiplayeropt'>
@@ -113,7 +113,8 @@
 .profile-info{
   position: relative;
   text-align: center;
-  left: -30px;
+  height: 90px;
+  /*left: -30px;*/
 }
 .profile-info h3{
   display: inline-block;

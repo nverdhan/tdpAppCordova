@@ -2596,12 +2596,14 @@ h3 {
   right: 10px;
 }
 .join-room-input{
-  width: 50%;
+  width: 195px;
   margin: 10px auto;
 }
 .join-room-input input{
   width: 100%;
-  color: white;
+  color: white!important;
+  border-color: white!important;
+  text-align: center;
 }
 md-input-group.join-room-input.md-default-theme.md-input-focused label{
   color: white !important;

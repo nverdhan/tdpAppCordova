@@ -74,7 +74,7 @@
 		<div ng-if="loginAnon && !showLoggedInProfile" flex>
 			<div class="center" style="">
 					<md-content md-theme="docs-dark" layout="row" layout-sm="column" style="font-size:1.2em; color:white;">
-						<md-text-float class="username" label="Enter your name" flex ng-model="user.name"> </md-text-float>
+						<md-text-float class="username" label="Enter your name" flex ng-model="user.name" ng-enter="register()"> </md-text-float>
 					</md-content>
 					<div>
 					<div class="sliding-arrows"  ng-click="shiftLeft()" style="display:inline-block">

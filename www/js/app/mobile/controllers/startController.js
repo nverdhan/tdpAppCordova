@@ -94,6 +94,7 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
         }
     }
     $scope.joinGame = function(){
+        console.log($scope.joinGameRoomId);
         if($scope.joinGameRoomId.length == 0){
           $scope.createGame();
           return false;

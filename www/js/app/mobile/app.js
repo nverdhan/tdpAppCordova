@@ -913,6 +913,7 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
         }
     }
     $scope.logOut = function(){
+        $rootScope.$broadcast('HIDE_SETTINGS');
         if(Session.type == 'fb'){
             // AuthService.logout().then(function(res){
             //     Session.destroy();

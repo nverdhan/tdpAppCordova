@@ -32,6 +32,7 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
     $scope.showMultiplayerOptions = false;
     // console.log($scope.showLoggedInOptions);
     $scope.toggleMultiplayerOptions = function (){   
+      $scope.checkLogin();
       if($rootScope.currentConnStatus == 'online'){
         if($scope.showMultiplayerOptions == false){
           $scope.showMultiplayerOptions = true;
@@ -94,6 +95,7 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
         }
     }
     $scope.joinGame = function(){
+        console.log($scope.joinGameRoomId);
         if($scope.joinGameRoomId.length == 0){
           $scope.createGame();
           return false;
@@ -129,29 +131,27 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
         backgroundPosition : ''
     }
     $scope.checkLogin = function(){
-      // console.log(Session);
       if(Session.name){
         $scope.profile.name = Session.name;
         $rootScope.loggedIn = true;
       }
       if(Session.type == 'local'){
-        $scope.profile.image = 'android_asset/www/assets/img/avatars.png';
-        $scope.profile.backgroundPosition = 45*Session.image+'px 0px';
-        localStorage.setItem('showLoggedInOptions', false);
-      }else{
+          $scope.profile.image = 'android_asset/www/assets/img/avatars.png';
+          $scope.profile.backgroundPosition = 45*Session.image+'px 0px';
+          $scope.showfb = false;
+        }else{
         $scope.profile.image = Session.image;
         $scope.profile.backgroundPosition = '50% 50%';
-        localStorage.setItem('showLoggedInOptions', true);
+        $scope.showfb = true;
+        // localStorage.setItem('showLoggedInOptions', true);
       }
       $scope.loggedIn = $rootScope.loggedIn;
-      $scope.showLoggedInOptions = localStorage.getItem('showLoggedInOptions');   
+      $scope.showLoggedInOptions = localStorage.getItem('showLoggedInOptions');
     }
     $scope.deleteProfile = function(){
         $scope.profile.name = null;
         $scope.profile.image = null;
         $scope.profile.backgroundPosition = null;
-        // delete $scope.profile;
-        // console.log(88888888);
         $rootScope.loggedIn = false;
     }
     $scope.checkLogin();
@@ -159,7 +159,6 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
     $scope.$on(AUTH_EVENTS.notAuthenticated, $scope.deleteProfile);
     
     $scope.showProfile = function(){
-      // var id = $cookieStore.get('userId');
       var id = localStorage.getItem('userId');
       id = JSON.parse(id);
       if(id.type == 'local'){
@@ -178,6 +177,28 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
         .filter(function(pos) { return $scope.toastPosition[pos]; })
         .join(' ');
     };
+    $scope.ifNotFbLoggedIn = function(){
+      if($scope.showMultiplayerOptions){
+        if($scope.showfb){
+          return false;
+        }else{
+          return true;
+        }
+      }else{
+        return false;
+      }
+    }
+    $scope.ifFbLoggedIn = function(){
+      if($scope.showMultiplayerOptions){
+        if($scope.showfb){
+          return true;
+        }else{
+          return false;
+        }
+      }else{
+        return false;
+      }
+    }
     $scope.$on(AUTH_EVENTS.loginSuccess, $scope.checkLogin);
     $scope.$on('DEVICE_OFFLINE', $scope.deactivateMultiplayer);
     $scope.$on('DEVICE_ONLINE', $scope.activateMultiplayer);

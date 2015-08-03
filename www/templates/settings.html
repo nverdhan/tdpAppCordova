@@ -1,4 +1,10 @@
 <div ng-controller="settingsCtrl">
+	<div style="position:absolute; top:20px; right:20px;z-index:1000000;" ng-click="logOut()" ng-controller="registerCtrl" >
+		<a class="nav-icon href-custom settings-tab" target="_blank" href="" style="color:white;">
+		    <i class="fa fa-sign-out fa-2x" style="color:white"></i>
+		    <span>Logout</span>
+		</a>
+	</div>
 	<div class="container center">
 	<md-button class="back-button-1" aria-label="goBack" ng-click = "backToLoginHome()">
         <img class='app-icon' src="android_asset/www/assets/img/ic_arrow_back_24px.svg" style="width: 24px; height: 24px;">

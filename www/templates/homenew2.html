@@ -16,7 +16,7 @@
       <div class="clearfix"></div> -->
     </div>
   </div>
-  <div ng-if="!showMultiplayerOptions" class='mob-opt-wrap hidemultiplayeropt'>
+  <div ng-show="!showMultiplayerOptions" class='mob-opt-wrap hidemultiplayeropt'>
     <div class="mob-opt">
       <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="startGame('bots')">
         <div flex layout="horizontal" layout-align="center center">
@@ -48,15 +48,9 @@
           <span>Settings</span>
         </a>
       </div>
-      <div class="mob-opt">
-        <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="logOut()" ng-controller="registerCtrl" style="color:white;">
-          <i class="fa fa-sign-out fa-2x" style="color:white"></i>
-          <span>Logout</span>
-        </a>
-      </div>
     </div>
   </div>
-  <div ng-if="showMultiplayerOptions" class='mob-opt-wrap showmultiplayeropt'>
+  <div ng-show="ifFbLoggedIn()" class='mob-opt-wrap showmultiplayeropt'>
     <div class="mob-opt">
       <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="startGame('multiplayer')">
         <div flex layout="horizontal" layout-align="center center">
@@ -69,7 +63,36 @@
         </div>
       </md-button>
     </div>
-    <div ng-if="!showLoggedInOptions" class="mob-opt">
+    <div class="mob-opt" style="width:400px;">
+      <md-text-float class="join-room-input" label="Enter Room ID" flex ng-model="joinGameRoomId" style="display: inline-block;
+    margin: 0; padding: 0;" ng-keyup="toggleRoomOptions()"> </md-text-float>
+      <md-button class="redcol md-raised" ng-click="joinGame()" aria-label="privateGameJoin" style="width:195px;">
+        {{roomText}}
+      </md-button>
+    </div>
+    <div class="mob-opt-horz">
+      <div class="mob-opt" style="margin-top:5px;">
+        <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="showSettings()" style="color:white;">
+          <i class="fa fa-gear fa-2x" title="Settings"></i>
+          <span>Settings</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div ng-show="ifNotFbLoggedIn()" class='mob-opt-wrap showmultiplayeropt'>
+    <div class="mob-opt">
+      <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="startGame('multiplayer')">
+        <div flex layout="horizontal" layout-align="center center">
+          <div style="margin-right:15px;">
+            <i class="fa fa-users white-label"></i>
+          </div>
+          <div>
+            <h3 class="marg-12 white-label">Random Multiplayer</h3>
+          </div>
+        </div>
+      </md-button>
+    </div>
+    <div class="mob-opt">
       <h3 style="color:white;">Create Private rooms and Invite your friends</h3>
       <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="loginWIthFB()">
       <div flex layout="horizontal" layout-align="center center">
@@ -82,24 +105,11 @@
       </div>
     </md-button>
     </div>
-    <div ng-if="showLoggedInOptions" class="mob-opt" style="width:400px;">
-      <md-text-float label="Enter Room ID" flex ng-model="joinGameRoomId" ng-enter="toggleRoomOptions()" style="display: inline-block;
-    margin: 0; padding: 0;" class="join-room-input"> </md-text-float>
-      <md-button class="redcol md-raised" ng-click="joinGame()" aria-label="privateGameJoin">
-        {{roomText}}
-      </md-button>
-    </div>
     <div class="mob-opt-horz">
       <div class="mob-opt" style="margin-top:5px;">
         <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="showSettings()" style="color:white;">
           <i class="fa fa-gear fa-2x" title="Settings"></i>
           <span>Settings</span>
-        </a>
-      </div>
-      <div class="mob-opt">
-        <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="logOut()" ng-controller="registerCtrl" style="color:white;">
-          <i class="fa fa-sign-out fa-2x" style="color:white"></i>
-          <span>Logout</span>
         </a>
       </div>
     </div>

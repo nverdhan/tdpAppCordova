@@ -230,8 +230,8 @@ game325.controller('errDialogController',['$rootScope', '$scope', '$mdDialog', '
     }
     $scope.cancelExit = function () {
       $mdDialog.hide();
-      history.go(-1);
-      navigator.app.backHistory();
+      // history.go(-1);
+      // navigator.app.backHistory();
     }
 }]);
 game325.controller('infoController', ['$rootScope', '$http', '$scope', '$state', '$stateParams', 'Session', function ($rootScope, $http, $scope, $state, $stateParams, Session) {

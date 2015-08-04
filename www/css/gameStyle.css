@@ -2967,3 +2967,12 @@ md-dialog md-content{
   height: 35px;
   opacity: 0.9;
 }  
+.trump-text{
+    position: relative;
+    top: 73px;
+    left: 0;
+    margin: 0 auto;
+    text-align: center;
+    color: wheat;
+    font-size: 0.9em;
+}

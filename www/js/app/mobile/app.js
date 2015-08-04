@@ -169,6 +169,9 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
                 escapeToClose : false,
                 controller: 'errDialogController'
             });
+        }else{
+            history.go(-1);
+            navigator.app.backHistory();
         }
     }
     document.addEventListener("backbutton", onBackKeyDown, false);
@@ -768,15 +771,13 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
             $scope.user.name = Session.name;
             $scope.loginFB = false;
             $scope.loginAnon = false;
-            if(Session.type == 'local'){
-                $scope.user.image = 'android_asset/www/assets/img/avatars.png';
-                $scope.user.backgroundPosition = 44*Session.image+'px 0px';
-            }else if(Session.type == 'fb'){
+            if(Session.type == 'fb'){
                 $scope.user.image = Session.image;
                 $scope.user.backgroundPosition = '50% 50%';
-                
+            }else if(Session.type == 'local'){
+                $scope.user.image = 'android_asset/www/assets/img/avatars.png';
+                $scope.user.backgroundPosition = 44*Session.image+'px 0px';
             }
-            // console.log(Session);
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
         }else{
             $scope.showLoggedInProfile = false;

@@ -136,7 +136,7 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
         $rootScope.loggedIn = true;
       }
       if(Session.type == 'local'){
-          $scope.profile.image = 'android_asset/www/assets/img/avatars.png';
+          $scope.profile.image = 'assets/img/avatars.png';
           $scope.profile.backgroundPosition = 45*Session.image+'px 0px';
           $scope.showfb = false;
         }else{
@@ -253,7 +253,7 @@ game325.controller('infoController', ['$rootScope', '$http', '$scope', '$state',
     $scope.loggedIn = true;
   }
   if(Session.type == 'local'){
-    $scope.profile.image = 'android_asset/www/assets/img/avatars.png';
+    $scope.profile.image = 'assets/img/avatars.png';
     $scope.profile.backgroundPosition = 45*Session.image+'px 0px';
   }else{
     $scope.profile.image = Session.image;
@@ -479,7 +479,7 @@ game325.controller('coverController', ['$rootScope', '$http', '$scope', '$state'
     $scope.loggedIn = true;
   }
   if(Session.type == 'local'){
-    $scope.profile.image = 'android_asset/www/assets/img/avatars.png';
+    $scope.profile.image = 'assets/img/avatars.png';
     $scope.profile.backgroundPosition = 45*Session.image+'px 0px';
   }else{
     $scope.profile.image = Session.image;

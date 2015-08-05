@@ -1233,7 +1233,7 @@ var PlayerInfoComponent = React.createClass({displayName: "PlayerInfoComponent",
             return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))
         }
         if(type == 'local' || type == 'bot' || type == 'you'){
-            var picurl = 'android_asset/www/assets/img/avatars.png';
+            var picurl = 'assets/img/avatars.png';
             var index = image;
             var backgroundPosition = index*45+'px 0px';
             if(type == 'you' && !isInt(image) && image.indexOf("facebook") > -1){

@@ -7,13 +7,13 @@
             </div>
             <!--div class='sidebutton-bar'>
                 <md-button class="md-fab sidebutton exitgame" aria-label="Exit" style="position:fixed;" ng-click="exitGame()">
-                    <img class='app-icon' src="android_asset/www/assets/img/ic_close_24px_teal.svg" style="width: 24px; height: 24px;">
+                    <img class='app-icon' src="assets/img/ic_close_24px_teal.svg" style="width: 24px; height: 24px;">
                 </md-button>
                 <md-button class="md-fab sidebutton showscore" aria-label="Scores" style="position:fixed;" ng-click="toggleScores()">
-                    <img class='app-icon' src="android_asset/www/assets/img/scoreicon.svg" style="width: 24px; height: 24px;">
+                    <img class='app-icon' src="assets/img/scoreicon.svg" style="width: 24px; height: 24px;">
                 </md-button>
                 <md-button ng-if="gameType == 'LIVE'" class="md-fab sidebutton chat" aria-label="Chat" style="position:fixed;" ng-click="toggleRight()">
-                    <img class='app-icon' src="android_asset/www/assets/img/ic_chat_24px.svg" style="width: 24px; height: 24px;">
+                    <img class='app-icon' src="assets/img/ic_chat_24px.svg" style="width: 24px; height: 24px;">
                 </md-button>
             </div-->
     </div>
@@ -23,7 +23,7 @@
                 <div class="md-toolbar-tools" flex layout="horizontal" layout-fill>
                     <h3 flex="90">Chat</h3>
                     <md-button class="md-fab md-fab-top-right md-primary" aria-label="Close chat" ng-click="closeRight()" style="color:#009688; fill:#009688; background-color:#009688;">
-                        <img class='app-icon' src="/android_asset/www/assets/img/ic_arrow_back_24px.svg" style="width: 24px; height: 24px;">
+                        <img class='app-icon' src="assets/img/ic_arrow_back_24px.svg" style="width: 24px; height: 24px;">
                     </md-button>
                 </div>
         </md-toolbar>
@@ -37,7 +37,7 @@
                 <md-text-float ng-model="chatMsg" ng-enter="sendChat()" style="min-width:340px; margin-bottom:0px!important; margin-left=-8px; padding-bottom=0"> 
                 </md-text-float>
                 <md-button ng-click = "sendChat()" aria-label="sendChat" class="sendchatbutton">
-                    <img class='app-icon' src="/android_asset/www/assets/img/ic_send_24px.svg" style="width: 24px; height: 24px;">
+                    <img class='app-icon' src="assets/img/ic_send_24px.svg" style="width: 24px; height: 24px;">
                 </md-button>
             </div>
         </md-content>

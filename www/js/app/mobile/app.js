@@ -68,12 +68,12 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
             "<div>"+
             "<h2 style = 'color: #383838; z-index: 2; font-family: \"Roboto Slab\", serif; font-style: normal; font-size: 1.4em;   font-weight: 400;"+
             "width: 70%; margin: 0 auto; padding-top: 80px; padding-bottom: 20px; text-align: center'>"+
-            "<img style ='margin:0 auto; width: 80px; height: 80px ' src=\"android_asset/www/assets/img/325_cardsgame80x80.png\">"+
+            "<img style ='margin:0 auto; width: 80px; height: 80px ' src=\"assets/img/325_cardsgame80x80.png\">"+
             "<br>"+
             "Hey, thanks for visiting us! <br><br>"+
             "The game best works best when viewed in landscape mode. <br> Please flip your device/resize your window to proceed."+
             "<br><br>"+
-            // "<img style ='margin:0 auto; width: 120px; height: 103px ' src=\"android_asset/www/assets/img/rotate_icon_thumb.png\">"+
+            // "<img style ='margin:0 auto; width: 120px; height: 103px ' src=\"assets/img/rotate_icon_thumb.png\">"+
             "<a class='nav-icon href-custom' target='_blank' href='https://www.facebook.com/325game' style='color: #3b5998;'>"+
             "<br><br>"+
             "<i class='fa fa-facebook-square fa-2x' title='Facebook'></i>"+
@@ -381,7 +381,7 @@ game325.directive('showScores', ['$compile', function($compile){
     var a = function(content){
         var content = content.content;
         if(content.type == 'local' || content.type == 'bot' || content.type == 'you'){
-                content.userPic = 'android_asset/www/assets/img/avatars.png';
+                content.userPic = 'assets/img/avatars.png';
                 content.backgroundPosition = 45*content.image+'px 0px';
             }else{
                 content.userPic = content.image;
@@ -431,7 +431,7 @@ game325.directive('profileInfo', ['$compile', function ($compile){
     var content = content.content;
     if(content.type == 'local'){
         content.backgroundPosition = 45*content.image+'px 0px';
-        content.image = '/android_asset/www/assets/img/avatars.png';
+        content.image = '/assets/img/avatars.png';
     }else if(content.type == 'fb'){
         content.image = content.image;
         content.backgroundPosition = '50% 50%';
@@ -545,7 +545,7 @@ game325.controller('loginController',['$rootScope', '$location', '$scope', '$htt
     };
 }]);
 game325.directive('loginDialog', ['AUTH_EVENTS', function (AUTH_EVENTS) {
-    var register = "'android_asset/www/templates/register.html'";
+    var register = "'templates/register.html'";
   return {
     restrict: 'A',
     template: '<div ng-if="registerVisible" ng-include src="'+register+'"></div>',
@@ -704,7 +704,7 @@ game325.controller('settingsCtrl',['$rootScope','$scope','AUTH_EVENTS','$state',
             var posy = '-113.44px';
         var posx = ((card.rank-1)*80*-1);
         var x = {
-                    // backgroundImage : 'url(android_asset/www/assets/img/cardpic.jpg)',
+                    // backgroundImage : 'url(assets/img/cardpic.jpg)',
                     width : gameCSSConstants.cardSize.x,
                     height : gameCSSConstants.cardSize.y,
                     backgroundSize : '1200px',
@@ -775,7 +775,7 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
                 $scope.user.image = Session.image;
                 $scope.user.backgroundPosition = '50% 50%';
             }else if(Session.type == 'local'){
-                $scope.user.image = 'android_asset/www/assets/img/avatars.png';
+                $scope.user.image = 'assets/img/avatars.png';
                 $scope.user.backgroundPosition = 44*Session.image+'px 0px';
             }
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
@@ -855,7 +855,7 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
                 })
                 // angular.bootstrap(document, ['game325']);
                 // $state.go('cover');
-                // document.location.href = 'file:///android_asset/www/index.html'
+                // document.location.href = 'file:///index.html'
                 // $scope.$apply($rootScope.$broadcast(AUTH_EVENTS.loginSuccess));
                 
             },
@@ -908,13 +908,13 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
             // $cookieStore.put('userId',user);
             localStorage.setItem('userId',user);
             Session.create($scope.user.name, $scope.user.image, 'local');
-            // document.location.href = 'file:///android_asset/www/index.html';
+            // document.location.href = 'file:///index.html';
             $scope.initLogin();
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
             
             $state.go('cover');
             // $state.go('cover');
-            // document.location.href = 'file:///android_asset/www/index.html'
+            // document.location.href = 'file:///index.html'
         }
     }
     $scope.enterName = function(){
@@ -946,14 +946,14 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
             localStorage.setItem('showLoggedInOptions', false);
             // $scope.showLoginDialog = true;
             // if($state.current.data.requiresAuth && (!$scope.currentUser.id)){
-            //     document.location.href = 'file:///android_asset/www/index.html'
+            //     document.location.href = 'file:///index.html'
             // }
         }else{
             Session.destroy();
             localStorage.setItem('userId','anon');
             localStorage.setItem('showLoggedInOptions', false);
             // $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-            // document.location.href = 'file:///android_asset/www/index.html'
+            // document.location.href = 'file:///index.html'
 
         }
         // $scope.removeLocalStorageItems();

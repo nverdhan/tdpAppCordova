@@ -6,7 +6,7 @@ game325.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', fun
         $stateProvider
         .state('mobileBrowser', {
             url: '/home',
-            templateUrl : 'android_asset/www/templates/mobileBrowser.html',
+            templateUrl : 'templates/mobileBrowser.html',
             data : {
                         requiresAuth : false
                     }
@@ -25,7 +25,7 @@ game325.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', fun
             .state('home', {
                 url : '/home', // this was / nv
                 controller : 'startController',
-                templateUrl : 'android_asset/www/templates/homenew2.html',
+                templateUrl : 'templates/homenew2.html',
                     data : {
                         requiresAuth : true
                     }
@@ -33,7 +33,7 @@ game325.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', fun
             .state('cover', {
                 url : '/', // this was / nv
                 controller : 'startController',
-                templateUrl : 'android_asset/www/templates/homenew2.html',
+                templateUrl : 'templates/homenew2.html',
                     data : {
                         requiresAuth : true
                     }
@@ -49,7 +49,7 @@ game325.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', fun
             .state('start', {
                 url : '/start',
                 controller : 'startController',
-                templateUrl : 'android_asset/www/templates/start.html',
+                templateUrl : 'templates/start.html',
                     data : {
                         requiresAuth : true
                     }
@@ -58,7 +58,7 @@ game325.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', fun
             .state('create', {
                 url : '/create',
                 controller : 'startController',
-                templateUrl : 'android_asset/www/templates/start.html',
+                templateUrl : 'templates/start.html',
                     data : {
                         requiresAuth : true
                     }
@@ -67,7 +67,7 @@ game325.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', fun
             .state('join', {
                 url : '/join',
                 controller : 'startController',
-                templateUrl : 'android_asset/www/templates/start.html',
+                templateUrl : 'templates/start.html',
                     data : {
                         requiresAuth : true
                     }
@@ -76,7 +76,7 @@ game325.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', fun
             .state('game/:id', {
                 url : '/game/:id',
                 controller : 'gameReactController',
-                templateUrl : 'android_asset/www/templates/gameReact.html',
+                templateUrl : 'templates/gameReact.html',
                     data : {
                         requiresAuth : false
                     }
@@ -84,7 +84,7 @@ game325.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', fun
             .state('game325', {
                 url : '/game325',
                 controller : 'gameReactController',
-                templateUrl : 'android_asset/www/templates/gameReact.html',
+                templateUrl : 'templates/gameReact.html',
                     data : {
                         requiresAuth : false
                     }
@@ -92,7 +92,7 @@ game325.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', fun
             .state('game/:id/:type', {
                 url : '/game/:id/:type',
                 controller : 'gameReactController',
-                templateUrl : 'android_asset/www/templates/gameReact.html',
+                templateUrl : 'templates/gameReact.html',
                     data : {
                         requiresAuth : true
                     }
@@ -100,7 +100,7 @@ game325.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', fun
             .state('info', {
                 url : '/info',
                 controller : 'infoController',
-                templateUrl  : 'android_asset/www/templates/info.html',
+                templateUrl  : 'templates/info.html',
                 data : {
                     requiresAuth : false
                 }
@@ -109,9 +109,9 @@ game325.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', fun
     }
 
     $locationProvider.html5Mode({
-        enabled: true,
+        enabled: false,
         requireBase: false
     });
-    // $locationProvider.hashPrefix("");
+    $locationProvider.hashPrefix("");
 
 }]);

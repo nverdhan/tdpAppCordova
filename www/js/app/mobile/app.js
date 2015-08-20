@@ -38,7 +38,8 @@ game325.run(['$rootScope', '$state', 'socket', '$mdDialog','$location', function
     // console.log('ng bootstrapped');
     $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
         var pageUrl = $location.path();
-        ga('send', 'pageview', pageUrl);
+        // ga('send', 'pageview', pageUrl);
+        window.analytics.trackView(pageUrl);
         if(fromState.name == 'game/:id'){
             socket.emit('leaveRoom', {'roomId' : fromParams.id});
         }
@@ -956,7 +957,8 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
             // document.location.href = 'file:///index.html'
 
         }
-        // $scope.removeLocalStorageItems();
+        $scope.removeLocalStorageItems();
+        initializeGlobalVars();
         $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
         $scope.initLogin();
         $state.go('cover');

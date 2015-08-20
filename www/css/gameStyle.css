@@ -19,7 +19,7 @@ body {
     -o-user-select: none;*/
 }
 th, td {
-   padding: 12px;
+   padding: 0px;
    border-bottom: 1px solid #eee;
 }
 .fleft{
@@ -675,11 +675,12 @@ div.clear {
   position: absolute;
   left: 0;
   right: 0;
+  top: 0;
   max-width: 600px;
   min-width: 400px;
   margin: 0 auto;
   /*background: rgba(216,212,210,0.9)*/;
-  margin-top: 5%;
+  margin-top: 10px;
   -webkit-animation : bringIn-Left 0.2s linear;
   -moz-animation : bringIn-Left 0.2s linear;
   animation : bringIn-Left 0.2s linear;

@@ -1,19 +1,23 @@
-var globalVars = {
-    colors : [
-        {name : 'poppins', color : '#f59120'},
-        {name : 'sushi', color : '#94c23d'},
-        {name : 'viking', color : '#4c9dcb'},
-        {name : 'orchid', color : '#c583ac'},
-        {name : 'flamingo', color : '#df3921'},
-        {name : 'haze', color : '#795fa1'}
-    ],
-    backClass : 'bckimg',
-    cardBack : ['cardBack1', 'cardBack2'],
-    cardFront : ['cardFront1', 'cardFront2'],
-    activeBgColor : {name : 'poppins', color : '#f59120'},
-    activeCardBack : 'cardBack1',
-    activeCardFront : 'cardFront1'
+var globalVars;
+var initializeGlobalVars = function() {
+    globalVars = {
+        colors : [
+            {name : 'poppins', color : '#f59120'},
+            {name : 'sushi', color : '#94c23d'},
+            {name : 'viking', color : '#4c9dcb'},
+            {name : 'orchid', color : '#c583ac'},
+            {name : 'flamingo', color : '#df3921'},
+            {name : 'haze', color : '#795fa1'}
+        ],
+        backClass : 'poppins',
+        cardBack : ['cardBack1', 'cardBack2'],
+        cardFront : ['cardFront1', 'cardFront2'],
+        activeBgColor : {name : 'poppins', color : '#f59120'},
+        activeCardBack : 'cardBack1',
+        activeCardFront : 'cardFront1'
+    }
 }
+initializeGlobalVars();
 var gameSettings = localStorage.getItem('gameSettings');
 if(gameSettings){
     gameSettings = JSON.parse(gameSettings);

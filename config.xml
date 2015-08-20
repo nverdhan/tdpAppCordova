@@ -22,6 +22,10 @@
     <icon src="res/icon.png" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <splash src="res/hdpi.png" density="land-hdpi"/>
+        <splash src="res/ldpi.png" density="land-ldpi"/>
+        <splash src="res/mdpi.png" density="land-mdpi"/>
+        <splash src="res/xhdpi.png" density="land-xhdpi"/>
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />

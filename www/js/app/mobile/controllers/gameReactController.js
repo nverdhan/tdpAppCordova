@@ -396,7 +396,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
         socket.removeAllListeners();
         socket.emit('JOIN_ROOM', {roomId : $scope.gameId, user : $scope.user});
         socket.on('CONNECTED', function(data){
-            console.log('connected');
+            // console.log('connected');
             $scope.playerId = data.id;
             if (data.start == 'closed') {
                 var x = {

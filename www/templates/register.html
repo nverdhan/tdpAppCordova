@@ -37,7 +37,26 @@
 <div>
 	<h1></h1>
 </div>
-	<div class="home-logo">
+	<!-- <div class="home-logo">
+		<div class="logoCards playingCards simpleCards">
+			<a class="card three" style="width:50px;height:64px;">
+				<h1>3</h1>
+			</a>
+			<a class="card two" style="width:50px;height:64px;">
+				<h1>2</h1>
+			</a>
+			<a class="card five" style="width:50px;height:64px;">
+				<h1>5</h1>
+			</a>
+		</div>
+		<div style="display:inline-block;">
+			<h1 class="color-light" style="padding-left:120px;">3.2.5.bridge</h1>
+		</div>
+	</div> -->
+	
+	<div class="login-center">
+		<div ng-if="loginFB && !showLoggedInProfile" class="center" flex ng-click ='facebookAuth()' >
+		<div class="home-logo">
 		<div class="logoCards playingCards simpleCards">
 			<a class="card three" style="width:50px;height:64px;">
 				<h1>3</h1>
@@ -53,9 +72,6 @@
 			<h1 class="color-light" style="padding-left:120px;">3.2.5.bridge</h1>
 		</div>
 	</div>
-	
-	<div class="login-center">
-		<div ng-if="loginFB && !showLoggedInProfile" class="center" flex ng-click ='facebookAuth()' >
 		<h3 class="marg-12 color-light">Create Private Room and Invite your friends</h3>
 				<md-button class="redcol home-elem md-raised" aria-label="randomGameStart">
 					<div flex layout="horizontal" layout-align="center center">
@@ -103,7 +119,7 @@
 					<md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="startGame()">
 						<div flex layout="horizontal" layout-align="center center">
 						<div style="margin-right:15px;"><i class="fa fa-random fa-2x white-label"></i> </div>
-						<div><h3 class="marg-12 white-label">Play as Anonymous</h2> </div>
+						<div><h3 class="marg-12 white-label">Play as Anonymous</h3> </div>
 			      		</div>
 			      	</md-button>
 				</div>

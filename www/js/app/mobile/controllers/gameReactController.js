@@ -6,6 +6,8 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
     if($stateParams.type == 0){
         $scope.gameRoom = 'PRIVATE';
     }
+    // console.log($scope.gameId);
+    // console.log($scope.gameRoom);
     $scope.waiting = true;
     $scope.ready = false;
     $scope.chatMsg = '';
@@ -287,6 +289,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
         var gameData = $scope.game325;
         gameData.returnCard = false;
         var fnCall;
+        // console.log(gameEvent);
         switch(gameEvent){
             case "START_GAME":
                 Game.prototype.initDeck.call(gameData);
@@ -393,6 +396,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
         socket.removeAllListeners();
         socket.emit('JOIN_ROOM', {roomId : $scope.gameId, user : $scope.user});
         socket.on('CONNECTED', function(data){
+            console.log('connected');
             $scope.playerId = data.id;
             if (data.start == 'closed') {
                 var x = {
@@ -420,7 +424,6 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
                 $timeout(function () {
                     if(document.getElementById('bottomPlayerDiabled').style.display == 'block'){
                         angular.element('.bottom-player-diabled').css('display', 'none');
-                        // console.log('302');    
                     }
                 }, 3000);
             }
@@ -618,7 +621,6 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
             $scope.exitGame();        
         }
     });
-    
 
 }])
 game325.directive('ngEnter', function() {

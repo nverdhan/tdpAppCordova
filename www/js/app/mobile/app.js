@@ -431,7 +431,7 @@ game325.directive('profileInfo', ['$compile', function ($compile){
     var content = content.content;
     if(content.type == 'local'){
         content.backgroundPosition = 45*content.image+'px 0px';
-        content.image = '/assets/img/avatars.png';
+        content.image = 'assets/img/avatars.png';
     }else if(content.type == 'fb'){
         content.image = content.image;
         content.backgroundPosition = '50% 50%';

@@ -2917,7 +2917,7 @@ Request.prototype.create = function(){
     }
 
     debug('xhr data %s', this.data);
-    // xhr.send(this.data);
+    xhr.send(this.data);
     // naisheel commented
   } catch (e) {
     // Need to defer since .create() is called directly fhrom the constructor

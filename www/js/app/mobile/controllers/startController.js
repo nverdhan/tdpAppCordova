@@ -71,6 +71,7 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
         }else{
           var req = {};
           startGameService.start(req).then(function(res){
+            // console.log(res);
             $state.go('game/:id', {id : res.data.roomId, type : res.data.type});
           });
         }

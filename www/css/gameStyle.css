@@ -2831,6 +2831,9 @@ md-dialog md-content{
     -webkit-align-items: center;
     justify-content: center;
     -webkit-justify-content: center;
+    height: 70vh;
+    position: relative;
+    top: -24px;
 }
 .mob-opt{
     /*padding: 3px;*/

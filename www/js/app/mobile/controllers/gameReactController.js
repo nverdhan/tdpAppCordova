@@ -287,6 +287,9 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
     $scope.gameEvent = function(data){
         var gameEvent = data.gameEvent;
         var gameData = $scope.game325;
+        if($scope.gameType == 'BOTS' && $scope.game325.gameState != 'WITHDRAW_CARD' && $scope.game325.gameState!= 'RETURN_CARD'){
+            localStorage.setItem('gameData', JSON.stringify($scope.game325));
+        }
         gameData.returnCard = false;
         var fnCall;
         // console.log(gameEvent);
@@ -365,9 +368,6 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
                 break;
             }
             $scope.game325 = gameData;
-            if($scope.gameType == 'BOTS'){
-                localStorage.setItem('gameData', JSON.stringify($scope.game325));
-            }
             $scope.reactRender();
             if($scope.game325.gameEvent == 'SET_TRUMP'){
                 $scope.game325.trumpsetcheck = true;

@@ -1419,14 +1419,17 @@ var PlayedCardsComponent = React.createClass({displayName: "PlayedCardsComponent
             var getCardSuit = function () {
                 var x = '';
                 if(cardSuit == 'H')
-                    return '&hearts;';
+                    return '<img height="16" width="16" src="/css/cards/images/heart.png">';
                 if(cardSuit == 'S')
-                    return '&spades;';
+                    // return '&spades;';
+                    return '<img height="18" width="18" src="/css/cards/images/spade.png" style="position:relative;right:4px;">';
                 if(cardSuit == 'D')
-                    return '&diams;';
+                    //return '&diams;';
+                    return '<img height="18" width="18" src="/css/cards/images/diams.png" style="position:relative;right:6px;">';
                 if(cardSuit == 'C')
-                    return '&clubs;';
-            }
+                    // return '&clubs;';
+                    return '<img height="18" width="18" src="/css/cards/images/club.png">';
+                }
             var cardSuitHTML = getCardSuit();
             var x = function () {
               return {__html: cardSuitHTML}
@@ -1709,13 +1712,17 @@ var CardComponent = React.createClass({displayName: "CardComponent",
         var getCardSuit = function () {
             var x = '';
             if(cardSuit == 'H')
-                return '&hearts;';
+                return '<img height="16" width="16" src="/css/cards/images/heart.png">';
             if(cardSuit == 'S')
-                return '&spades;';
+                // return '&spades;';
+                return '<img height="18" width="18" src="/css/cards/images/spade.png" style="position:relative;right:4px;">';
             if(cardSuit == 'D')
-                return '&diams;';
+                //return '&diams;';
+                return '<img height="18" width="18" src="/css/cards/images/diams.png" style="position:relative;right:6px;">';
             if(cardSuit == 'C')
-                return '&clubs;';
+                // return '&clubs;';
+                return '<img height="18" width="18" src="/css/cards/images/club.png">';
+            }
         }
         var cardSuitHTML = getCardSuit();
         var x = function () {

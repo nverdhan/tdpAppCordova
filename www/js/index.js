@@ -36,9 +36,10 @@ var app = {
         // console.log('deviceready fired');
         // angular.element(document).ready(function() {
         //     // console.log('angular bootstrapped');
-        //     //angular.bootstrap(document, ['game325']);
+            // angular.bootstrap(document, ['game325']);
         // });
         window.analytics.startTrackerWithId('UA-62694879-2');
+        angular.bootstrap(document, ['game325']);
         // window.analytics.debugMode();
         navigator.splashscreen.hide();
     },

@@ -881,7 +881,8 @@ var Game325Component = React.createClass({displayName: "Game325Component",
             var data = {
                         gameState : 'RETURN_CARD',
                         gameEvent : 'RETURN_CARD',
-                        card : cardIndex,
+                        // card : cardIndex,
+                        card : card
                     }
             sendEvent = true;
 

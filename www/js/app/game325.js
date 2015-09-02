@@ -230,6 +230,45 @@ Game.prototype.returnCard = function(){
 	}
 }
 Game.prototype.moveReturnCard = function(){
+	var activePlayerId = this.activePlayerId;
+	var otherPlayerId = this.otherPlayerId;
+	var card = this.card;
+	var cardIndex;
+	for (var i = 0; i < this.players.length; i++) {
+		if(this.players[i].id == activePlayerId){
+			for (var j = 0; j < this.players[i].cards.length; j++) {
+				if(this.players[i].cards[j].suit == card.suit && this.players[i].cards[j].rank == card.rank){
+					this.cardIndex = j;
+				}
+			};
+		}
+	};
+	var cardIndex = this.cardIndex;
+	
+	for (var i = 0; i < this.players.length; i ++) {
+		if(this.players[i].id == activePlayerId){
+			var card = this.players[i].cards[cardIndex];
+			this.returnCard = true;
+			this.players[i].cards[cardIndex].state = 'returned';
+			this.players[i].cards[cardIndex].animation = true;
+			this.players[i].cards[cardIndex].moveFrom = activePlayerId;
+			this.players[i].cards[cardIndex].moveTo = otherPlayerId;
+			this.players[i].handsMadeInLR--;
+			this.cardPlayed = card;
+			this.cardWithdrawn = card;
+			this.cardMoveFrom = activePlayerId;
+			this.cardMoveTo = otherPlayerId;
+			this.moveFrom = activePlayerId;
+			this.moveTo = otherPlayerId;
+		}
+		if(this.players[i].id == otherPlayerId){
+			this.players[i].handsMadeInLR++;
+			this.players[i].cardWillBeMovedFrom = activePlayerId; // To adjust card index while rendering -- Fake It by Seether
+		}
+	}
+}
+/*
+Game.prototype.moveReturnCard = function(){
 	// console.log('moveReturnCard Called 1');
 	// var activePlayerId = this.moveFrom;
 	// var otherPlayerId = this.moveTo;
@@ -258,6 +297,7 @@ Game.prototype.moveReturnCard = function(){
 		}
 	}
 }
+*/
 // Game.prototype.setTrump = function(trump){
 // 	this.trump = trump;
 // }

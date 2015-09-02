@@ -9,6 +9,10 @@
                 "parents": {
                     "/*": [
                         {
+                            "xml": "<feature name=\"UniversalAnalytics\"><param name=\"android-package\" value=\"com.danielcwilson.plugins.analytics.UniversalAnalyticsPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
                             "count": 1
                         },
@@ -23,10 +27,6 @@
                         {
                             "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
                             "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"UniversalAnalytics\"><param name=\"android-package\" value=\"com.danielcwilson.plugins.analytics.UniversalAnalyticsPlugin\" /></feature>",
-                            "count": 1
                         }
                     ]
                 }
@@ -35,12 +35,12 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
-                            "count": 2
-                        },
-                        {
                             "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 2
                         }
                     ]
                 }
@@ -48,6 +48,9 @@
         }
     },
     "installed_plugins": {
+        "cordova-plugin-google-analytics": {
+            "PACKAGE_NAME": "com.game.teendopaanch"
+        },
         "cordova-plugin-network-information": {
             "PACKAGE_NAME": "com.game.teendopaanch"
         },
@@ -58,9 +61,6 @@
             "PACKAGE_NAME": "com.game.teendopaanch"
         },
         "org.apache.cordova.inappbrowser": {
-            "PACKAGE_NAME": "com.game.teendopaanch"
-        },
-        "cordova-plugin-google-analytics": {
             "PACKAGE_NAME": "com.game.teendopaanch"
         }
     },

@@ -393,6 +393,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
     }
     if($scope.gameType == 'LIVE'){
         //Register Events Only When Game Mode Is Live Type
+        // console.log('jjjjjj');
         socket.removeAllListeners();
         socket.emit('JOIN_ROOM', {roomId : $scope.gameId, user : $scope.user});
         socket.on('CONNECTED', function(data){
@@ -493,7 +494,8 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
         var gameData = localStorage.getItem("gameData");
         var gameData = JSON.parse(gameData);
         var msg = "Continue last game ?";
-        if(gameData){
+        if(gameData && gameData.players[0].cards.length!=0){
+            // console.log();
             $mdDialog.show({
               template:
                 '<md-dialog>' +

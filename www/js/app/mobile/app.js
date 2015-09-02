@@ -40,6 +40,7 @@ game325.run(['$rootScope', '$state', 'socket', '$mdDialog','$location', function
         var pageUrl = $location.path();
         // ga('send', 'pageview', pageUrl);
         window.analytics.trackView(pageUrl);
+        // console.log(window.analytics);
         if(fromState.name == 'game/:id'){
             socket.emit('leaveRoom', {'roomId' : fromParams.id});
         }
@@ -849,7 +850,10 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
                         // console.log(res);
                         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                         $scope.initLogin();
+                        navigator.splashscreen.show();
+                        window.location.reload();
                         $state.go('cover');
+                        // document.location.href = 'file:///android_asset/www/index.html#/'
                     }else{
                         $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
                     }
@@ -912,10 +916,11 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
             // document.location.href = 'file:///index.html';
             $scope.initLogin();
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-            
+            navigator.splashscreen.show();
+            window.location.reload();
             $state.go('cover');
             // $state.go('cover');
-            // document.location.href = 'file:///index.html'
+            // document.location.href = 'file:///android_asset/www/index.html#/'
         }
     }
     $scope.enterName = function(){

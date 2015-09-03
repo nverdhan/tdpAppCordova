@@ -217,6 +217,7 @@ game325.controller('errDialogController',['$rootScope', '$scope', '$mdDialog', '
       $state.go('cover');
     }
     $scope.goBack = function(){
+      // console.log('Go Back Called');
       history.go(-1);
       navigator.app.backHistory();
     }

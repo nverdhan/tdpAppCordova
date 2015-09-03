@@ -597,6 +597,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
         promiseOpen = $timeout(fn, 200);
     };
     $scope.exitGame = function(){
+        // console.log('exitGame called');
         if($scope.gameType == 'LIVE'){
             var msg = 'You are about to be disconnected from other players. Other players will lose their game too.';
         }else{

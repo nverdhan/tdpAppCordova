@@ -22,6 +22,9 @@ th, td {
    padding: 0px;
    border-bottom: 1px solid #eee;
 }
+.score-table th, .score-table td {
+    padding: 6px;
+}
 .fleft{
     float: left;
 }
@@ -905,6 +908,8 @@ div.profile h1{
         border: 1px solid #ddd !important;
         /*background: transparent !important;*/
         background-color: #272727 !important;
+        text-transform: none;
+        color: #fff;
 }
 .bluecol{
 	background-color: rgba(122,206,224,1)!important;
@@ -2549,6 +2554,12 @@ h3 {
 .white-label{
     color: #ffffff;
 }
+.marg-12{
+  margin: 12px;
+}
+.marg-4{
+  margin: 4px;
+}
 .onlineselected .home-left{
     width: 0;
     transform: rotateY(-180deg);
@@ -3295,12 +3306,6 @@ md-progress-circular.game-waiting-progress.md-default-theme .md-circle .md-mask 
 md-progress-circular.game-waiting-progress.md-default-theme .md-inset{
   background-color: #ffe082;
 }
-.marg-12{
-  margin: 12px;
-}
-.marg-4{
-  margin: 4px;
-}
 .flogin-mobile{
   width: 60%;
   height: 40px;
@@ -3434,152 +3439,3 @@ md-progress-circular.game-waiting-progress.md-default-theme .md-inset{
         transform : rotate(360deg);
     }
 }
-/*************CARDS CSS****************/
-.playingCards a.card {
-    text-decoration: none;
-}
-.card {
-    
-    position: absolute !important;
-    cursor: pointer;
-}
-.card a{
-    border-radius: 4px !important;
-    border: 1px solid #ccc;
-    width: 100%;
-    height: 100%;
-}
-.card.back, .card.backRotated{
-    background-image: url("/assets/img/card-back.png");
-  /* background-position: -1120px -226.88px; */
-  background-size: 80px auto;
-}
-
-/* suit colours
-********************************************************************/
-.playingCards .card.D {
-    color: #820303 !important;
-}
-.playingCards.fourColours .card.D {
-    color: #00f !important;
-}
-[lang=de] .playingCards.fourColours .card.D {
-    color: #f60 !important;
-}
-.playingCards .card.H {
-    color: #820303 !important;
-}
-.playingCards .card.S {
-    color: #000 !important;
-}
-[lang=de] .playingCards.fourColours .card.S {
-    color: #090 !important;
-}
-.playingCards .card.C {
-    color: #000 !important;
-}
-.playingCards.fourColours .card.C {
-    color: #090 !important;
-}
-[lang=de] .playingCards.fourColours .card.C {
-    color: #000 !important;
-}
-.playingCards .card.joker {
-    color: #000 !important;
-}
-.playingCards .card.joker.big {
-    color: #f00 !important;
-}
-.playingCards .card .rank:after,
-.playingCards .card.joker .rank:before {
-    position: absolute;
-    top: .25em;
-    left: .25em;
-    background: #fff;
-}
-/* selected and hover state */
-.playingCards a.card:hover, .playingCards a.card:active, .playingCards a.card:focus,
-.playingCards label.card:hover,
-.playingCards strong .card {
-    -moz-box-shadow: .2em .2em .5em #333;
-    -webkit-box-shadow: .2em .2em .5em #333;
-    box-shadow: .2em .2em .5em #333;
-} 
-.playingCards a.D .suit, .playingCards a.S .suit{
-    padding-left : 0.2em;    
-}
-.playingCards .card .rank,
-.playingCards .card .suit {
-    display: block;
-    line-height: 1;
-    text-align: left;
-}
-.playingCards .card .rank {
-}
-.playingCards .card .suit {
-    line-height: .7;
-    font-size: 1.2em;
-}
-/* big suits in middle */
-.playingCards.simpleCards .card .suit:after,
-.playingCards .card.rank-a .suit:after {
-    font-family: Arial, sans-serif;
-    line-height: .9;
-    bottom: .35em;
-}
-.playingCards.simpleCards .card.D .suit:after,
-.playingCards .card.rank-a.D .suit:after {
-    content: url(images/diams.png);
-    bottom: 0.15em;
-    right: 0.17em;
-}
-.playingCards.simpleCards .card.H .suit:after,
-.playingCards .card.rank-a.H .suit:after {
-    content: url(images/heart.png);
-    bottom: 0.15em;
-    right: 0.17em;
-    
-}
-.playingCards.simpleCards .card.S .suit:after,
-.playingCards .card.rank-a.S .suit:after {
-    content: url(images/spade.png);
-    bottom: 0.15em;
-    right: 0.17em;
-    
-}
-.playingCards.simpleCards .card.C .suit:after,
-.playingCards .card.rank-a.C .suit:after {
-    content: url(images/club.png);
-    bottom: 0.15em;
-    right: 0.17em;
-    
-}
-/*____________ symbols in the middle (faces as dingbat symbols) ____________*/
-
-.playingCards.simpleCards .card .suit:after,
-.playingCards .card.rank-j .suit:after,
-.playingCards .card.rank-q .suit:after,
-.playingCards .card.rank-k .suit:after,
-.playingCards .card.rank-a .suit:after,
-.playingCards .card.joker .rank:after {
-    font-family: Georgia, serif;
-    position: absolute;
-    font-size: 3em;
-    right: .1em;
-    bottom: .25em;
-    word-spacing: normal;
-    letter-spacing: normal;
-    line-height: 1;
-}
-/* inner multiple suits */
-.playingCards .card .suit:after {
-    display: block;
-    margin-top: -.8em;
-    text-align: center;
-    white-space: pre;
-    line-height: .9;
-    font-size: 1.3em;
-    word-spacing: -.05em;
-}
-
-/********************************************************************/

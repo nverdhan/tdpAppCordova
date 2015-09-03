@@ -65,6 +65,9 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
     //         }
     //       }
     //     }
+    $scope.goToHelp = function(){
+      $state.go('blog');
+    }
     $scope.startGame = function(e){
         if(e == 'bots'){
           $state.go('game325');
@@ -212,6 +215,10 @@ game325.controller('errDialogController',['$rootScope', '$scope', '$mdDialog', '
     $scope.goToHome = function(){
       $mdDialog.hide();
       $state.go('cover');
+    }
+    $scope.goBack = function(){
+      history.go(-1);
+      navigator.app.backHistory();
     }
     $scope.loadGame = function(){
       $rootScope.$broadcast('LOAD_GAME');
@@ -495,3 +502,84 @@ game325.controller('coverController', ['$rootScope', '$http', '$scope', '$state'
     }
   }
 }]);
+game325.controller('blogController', ['$rootScope', '$http', '$scope', '$state', '$stateParams','AuthService', 'startGameService' ,'gameService', 'socket', '$timeout', 'delayService', '$mdSidenav', '$anchorScroll', '$location', '$mdDialog','$cookieStore','AUTH_EVENTS','Session', 'errService', '$sce', function ($rootScope, $http, $scope, $state, $stateParams, AuthService, startGameService, gameService, socket, $timeout ,delayService, $mdSidenav, $anchorScroll, $location, $mdDialog, $cookieStore, AUTH_EVENTS, Session, errService, $sce){
+  $scope.pageClass = 'page-home';
+  $scope.renderHTML = function(html_code){
+            var decoded = angular.element('<textarea />').html(html_code).text();
+            return $sce.trustAsHtml(decoded);
+    };
+  $scope.goToCover = function(){
+    $state.go('cover');
+  }  
+  $scope.suitlist = [{
+            name : 'S',
+            engname : 'Spades',
+            ranks : ' A K Q J 10 9 8 7 ',
+            htmlicon : '&spades;'
+            },{
+            name : 'H',
+            engname : 'Hearts',
+            ranks : ' A K Q J 10 9 8 7 ',
+            htmlicon : '&hearts;'
+            },{
+            name : 'C',
+            engname : 'Clubs',
+            ranks : ' A K Q J 10 9 8 ',
+            htmlicon : '&clubs;'
+            },{
+            name : 'D',
+            engname : 'Diamonds',
+            ranks : ' A K Q J 10 9 8 ',
+            htmlicon : '&diams;'
+            }];
+
+    $scope.getSampleCards = function(suit){
+      var deck = new Deck();
+      deck = deck.deck;
+      var newDeck = [];
+      for (var i = deck.length - 1; i >= 0; i--) {
+        if(deck[i].suit == suit){
+          newDeck.push(deck[i]);
+        }
+      };
+      return newDeck;
+    }
+    $scope.sampleCards = [  
+                $scope.getSampleCards('S'),
+                $scope.getSampleCards('H'),
+                $scope.getSampleCards('C'),
+                $scope.getSampleCards('D')];
+  
+    $scope.getCardCSS = function(){
+        return {
+            position : 'absolute',
+            width : gameCSSConstants.cardSize.x,
+            height : gameCSSConstants.cardSize.y
+        }
+    }
+    $scope.getCardPic = function(card){
+        if(card === null){
+            return {};
+        }else{
+        if(card.suit == 'H')
+            var posy = '-226.88px';
+        if(card.suit == 'S')
+            var posy = '-340.32px';
+        if(card.suit == 'D')
+            var posy = '0px';
+        if(card.suit == 'C')
+            var posy = '-113.44px';
+        var posx = ((card.rank-1)*80*-1);
+        var x = {
+                    backgroundImage : 'url(assets/img/cardpic.jpg)',
+                    width : gameCSSConstants.cardSize.x,
+                    height : gameCSSConstants.cardSize.y,
+                    backgroundSize : '1200px',
+                    backgroundPosition : posx+'px '+posy,
+                    left : 0,
+                    padding : 0
+                };
+    return x;
+        }
+    }                            
+}])

@@ -163,7 +163,7 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
                 '<md-dialog>' +
                 '  <md-content> <h2 class="md-title"> Exit Game? </h2> <p> '+
                  '  <div class="md-actions">' +
-                 '<md-button ng-click="exitGame()" aria-label="exitGame"> Yes. </md-button>'+
+                 '<md-button ng-click="exitGame()" aria-label="exitGame"> Yes </md-button>'+
                  '<md-button ng-click="cancelExit()" aria-label="closeDialog"> No </md-button>'+
                  '  </div>' +
                 '</md-content></md-dialog>',
@@ -171,7 +171,10 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
                 escapeToClose : false,
                 controller: 'errDialogController'
             });
-        }else{
+        }else if($state.current.name == 'game325'){
+            $rootScope.$broadcast('EXIT_CURRENTGAME');
+        }
+        else{
             history.go(-1);
             navigator.app.backHistory();
         }
@@ -439,7 +442,7 @@ game325.directive('profileInfo', ['$compile', function ($compile){
         content.backgroundPosition = '50% 50%';
     }
     var y = '<div class="ball center" style="background-image:url('+content.image+'); background-position : '+ content.backgroundPosition+'; margin: 0 auto;"></div>'+
-          '<h4>'+content.name+'</h4>';
+          '<h4 style="margin-top:0.3em;">'+content.name+'</h4>';
       return y;
   }
   var linker = function(scope, element, attrs){

@@ -46,6 +46,14 @@ game325.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', fun
             //             requiresAuth : true
             //         }
             //     })
+            .state('blog', {
+                url : '/blog', // this was / nv
+                controller : 'blogController',
+                templateUrl : 'templates/blog.html',
+                    data : {
+                        requiresAuth : true
+                    }
+                })
             .state('start', {
                 url : '/start',
                 controller : 'startController',

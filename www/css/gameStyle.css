@@ -639,10 +639,12 @@ div.clear {
   position: fixed;
   width: 100%;
   height: 100%;
-  /*background: rgba(255,255,255,0.95);*/
   opacity: 1;
   z-index: 999;
   overflow: auto;
+}
+.overlay-opaque {
+  background: rgba(255,255,255,1);
 }
 .close-overlay {
   position: relative;
@@ -1933,6 +1935,14 @@ md-backdrop{
     width: 45px;
     z-index: 12;
 }
+.help-button{
+  border-radius: 50% !important;
+    position: fixed;
+    right: 0;
+    top: 0;
+    /*width: 45px;*/
+    z-index: 12;
+}
 .selectiondone .back-button, .gameselected .back-button-game{
     left: 5px;
     visibility: visible;
@@ -2979,4 +2989,302 @@ md-dialog md-content{
     text-align: center;
     color: wheat;
     font-size: 0.9em;
+}
+  .blog-integrate{
+    cursor: pointer;
+    z-index: 2;
+    text-decoration: none;
+  }
+  .game-325-home .blog-integrate{
+    position: absolute;
+    right: 15px;
+    top: 10px;
+  }
+  .blog-container{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.blog-child{
+    
+}
+.blog-child.blog-name{
+    box-shadow: 0 8px 17px rgba(0,0,0,.44);
+    z-index: 10;
+    order: 1;
+    width: 200px;
+    background-color: #FFE082;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    backface-visibility: hidden;
+}
+.blog-name .game-png{
+    width: 100px;
+    height: 100px;
+}
+.blog-name .game-name{
+    position: relative;
+    top: 0;
+    margin: 0 0;
+    font-size: 1.3em;
+}
+.blog-child.blog-nav{
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.5);
+    left: 200px;
+    top: 0;
+    z-index: 8;
+    order: 2;
+    width: 250px;
+    background-color: #26a69a;
+    position: fixed;
+    backface-visibility: hidden;
+}
+.blog-child.blog-content{
+    position: relative;
+    width: 100%;
+    /*padding-left: 450px;*/
+    z-index: 6;
+    order: 3;
+    background-color: #f5f5f5;
+    width: 100%;
+    /*width: 100px;*/
+}
+.players-in-game{
+    position: relative;
+    width: 350px;
+    height: 200px;
+    margin: 0 auto;
+}
+.players-in-game .bottom-player{
+    
+}
+.players-in-game .bottom-player .name{
+    width: auto;
+}
+.players-in-game .right-player{
+    
+}
+.players-in-game .left-player{
+    /*left: 30%;*/
+}
+@media screen and (orientation:landscape) {
+    .blog-container{
+        /*display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: stretch;*/
+
+    }
+    .blog-child{
+        height: 100%;
+        /*display: flex;*/
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (orientation:portrait){
+
+}
+
+
+/* NAV BAR*/
+/*NAV*/
+.blog-container #nav ul{position:relative;}
+.blog-container #nav-indicator{
+    position:absolute;
+    width:5px;
+    top:0;
+    left:0;
+    height:65px;
+    background:#f36666; 
+    
+    -webkit-transition: all 0.2s ease;
+    -moz-transition:    all 0.2s ease;
+    -o-transition:      all 0.2s ease;
+    -ms-transition:     all 0.2s ease;
+    transition:         all 0.2s ease;
+}
+
+.blog-container .nav-btn{
+    width:100%;
+    /*float:left;*/
+    padding:24px 0;
+    height: 65px;
+    list-style:none;
+    color:#fff;
+    text-align:center;
+    cursor:pointer;
+    font-size:15px;
+    color:#212121;
+    
+    border-left:1px solid rgba(255,255,255,0.2);
+    box-shadow: inset 1px 1px 0 rgba(0,0,0,0.5) ;
+    
+    /*text-shadow:rgba(0,0,0,0.8) 1px 1px 0px;*/
+}
+
+
+.blog-container .nav-btn:first-child{
+    border:none;
+    box-shadow: none;
+}
+
+.blog-container .nav-btn:hover, .blog-container .nav-btn.active {
+    color:#FFF;
+    background:#444;
+    box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5) ;
+}
+
+/*CONTENT*/
+.blog-container #content-wrap{
+    width:100%;
+    /*margin:100px auto 180px;*/
+}
+/*.blog-container h1,.blog-container  h2{
+    color:#000;
+    text-align:center;  
+    margin-top: 0;
+    
+    -webkit-transition: all 0.5s ease;
+    -moz-transition:    all 0.5s ease;
+    -o-transition:      all 0.5s ease;
+    -ms-transition:     all 0.5s ease;
+    transition:         all 0.5s ease;  
+}
+
+.blog-container h1{ font-size:36px;}
+.blog-container h2{font-size:16px;  margin:15px 0 40px; }*/
+
+.blog-container #nav{
+    padding-top: 56px;
+}
+
+.blog-container .row{
+    width:100%;
+    padding:30px 3%;
+    font-size:2em;
+    color:#f36666;
+    border-bottom:1px solid rgba(255,255,255,0.2);
+    box-shadow: inset 0 1px 0 rgba(0,0,0,0.5) ;
+    background:#3c3c3c;
+    position:relative;
+    /*text-shadow:rgba(0,0,0,0.8) 1px 1px 1px;*/
+}
+
+.blog-container .row.active,.blog-container .row.active1, h2 span{color:#f36666;}
+.blog-container .row.active1, .blog-container .row.active{background:#3c3c3c;}
+/*.blog-container .row span{text-decoration:line-through;}*/
+
+.blog-container .row-text{
+    color: #fff;
+    font-size: 0.5em;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.blog-container .row.active .row-text,.blog-container .row.active1 .row-text{
+    color: #fff;
+}
+.blog-container .row-text .suitname{
+    width: 95px;
+    display: inline-block;
+    padding-left: 10px;
+}
+.blog-container .row-text .suiticon{
+    width: 10px;
+    display: inline-block;
+}
+.blog-container #row2 .row-text ul {
+    list-style: none;
+}
+/*.row-btn{
+    position:absolute;
+    top:25px;
+    right:20px;
+    background:#2b2b2b;
+    border-bottom:1px solid rgba(255,255,255,0.2);
+    box-shadow: inset 0 1px 0 rgba(0,0,0,0.5) ;
+    width:40px;
+    height:20px;
+    border-radius:20px;
+}
+
+.circle{
+    border-radius:50%;
+    background:#555;
+    border-top:1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.5) ;
+    width:20px;
+    height:20px;
+    
+    
+}
+
+.row.active .row-btn{   background:#f36666;}
+.row.active .circle{    margin-left:20px;}
+*/
+
+.blog-container #top{
+    width:40px;
+    height:200px;
+    /*background:#555;*/
+    /*border-top:1px solid rgba(255,255,255,0.2);*/
+    /*box-shadow: 0 1px 0 rgba(0,0,0,0.5) ;*/
+    margin:30px auto;
+    cursor:pointer; 
+    color:#999;
+    /*text-shadow:rgba(0,0,0,0.8) 1px 1px 1px;*/
+    text-align:center;
+    padding:15px;
+}
+
+/*.blog-container #top:active{
+    background:#333;
+    border-bottom:1px solid rgba(255,255,255,0.2);
+    box-shadow: inset 0 1px 0 rgba(0,0,0,0.5) ; 
+    border-top:none;
+}*/
+.blog-container .left-player .statistics {
+    text-align: start !important;
+    left: 52px;
+    top: 20px;
+}
+.blog-container .bottom-player .statistics {
+    top: 20px;
+    left: 55px;
+}
+.blog-container .right-player .statistics {
+    text-align: end !important;
+    left: -62px;
+    top: 20px;
+
+
+
+
+/*ANIMATION*/
+.blog-container .row-btn, .blog-container .circle, .blog-container .row{
+    -webkit-transition: all 0.1s ease;
+    -moz-transition:    all 0.1s ease;
+    -o-transition:      all 0.1s ease;
+    -ms-transition:     all 0.1s ease;
+    transition:         all 0.1s ease;  
 }

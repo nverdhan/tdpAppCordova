@@ -1,0 +1,232 @@
+<h1 class="index-title">How to play 3-2-5 Bridge</h1>
+<h2 class="index-title">How to play Teen Do Paanch</h2>
+<div class='blog-container' style="overflow:auto;">
+	<div class="blog-child blog-content">
+		<div id="content-wrap">    
+	    	<!-- <h1>3 2 5 Bridge</h1>
+	    	<h2> Teen Do Paanch </h2> -->
+	    	<div class="row row-nav active" data-height="200" id="row1">About Game <!-- <div class="row-btn"><div class="circle"></div></div> -->
+	    		<div class="row-text">
+	    			3-2-5 Bridge commonly known as Teen Do Paanch or Do Teen Paanch is one of the most basic
+	    			household games played in India.  It is a 3 player-30 standard cards-10 tricks continuous game where the winner of the previous turn gets advantage of withdrawing cards from the loser's cards in the current game.
+	    		</div>
+	    	</div>
+	        <div class="row row-nav" data-height="800" id="row2">Cards in Game 
+	        	<div class="row-text">
+					This game is played with a 52 playing cards standard deck.  Out of the 52 cards, following 30 cards are chosen.  The cards shown below are from the highest to lowest order.
+					<ul>
+						<li ng-repeat="suit in suitlist">
+							<span class="suiticon" ng-bind-html="renderHTML(suit.htmlicon)"></span><span class="suitname">{{suit.engname}} :</span> {{suit.ranks}}
+							<div style="position:relative;z-index:100; height:113.4px; margin: 10px auto;">
+								<div class="card playingCards simpleCards" ng-repeat="card in sampleCards[$index] | orderBy: '-rank'" style="left:{{$index*40}}px; padding:0;">
+									<div class="card playingCards simpleCards" ng-style="getCardCSS()" style="padding:0;">
+										<a class="card frontRotated" ng-style="getCardPic(card)"></a>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+					
+	    		</div>
+	        </div>
+	        <div class="row row-nav" data-height="440" id="row3">Players in Game 
+	        	<div class="row-text">
+	        		This is a three player game which proceeds clockwise.  The person choosing the trump has to make 5 tricks, the next person 3 and the next 2.  <br><br> Here, 'you' have to make 5 tricks, 'aNk' must make 3, and eNVy 2.
+
+	        		<div class="players-in-game">
+	        		<div class="right-player">
+	        			<div class="ball" style="background:#fff url(assets/img/avatars.png);background-position:90px 0px;"><div class="name">eNVy</div><div class="statistics">0/2</div></div>
+	        		</div>
+	        		<div class="left-player">
+	        			<div class="ball" style="background:#fff url(assets/img/avatars.png);background-position:45px 0px;"><div class="name">aNk</div><div class="statistics">0/3</div></div>
+	        		</div>
+	        		<div class="bottom-player">
+	        			<div class="ball player-active" style="background:#fff url(assets/img/avatars.png);background-position:630px 0px;position: absolute; bottom: 40px; right: 170px;"><div class="name">You</div><div class="statistics">0/5</div></div>
+	        		</div>
+	        		</div>
+	        		In the next round of the game, aNk will make 5 and choose the trump, eNVy 3 and 'you' must make at least 2 tricks.
+	        	</div>
+	        </div>
+	        <!-- <div class="row" data-height="180"><span>*Row Skip</span> <div class="row-btn"><div class="circle"></div></div></div> -->
+	        <div class="row row-nav" data-height="400" id="row4">Setting Trump 
+	        	<div class="row-text">
+	        	    At the start of every round of game, five cards are distributed.  The player who has to make 5 tricks chooses the trump out of the four suits.  Once, the trump is set the remaining five cards are distributed to each player.  The trump is then visible to everyone from the very beginning.  
+
+	        	    <div class="trumps" style="position:relative;width:320px; height:100px; margin:20px auto;"><div class="playingCards simpleCards card trump-cards" style="width:80px;height:90.72000000000001px;left:0;top:0;z-index:99;border:none;"><a class="card S" style="border:none;"><span class="suit"></span></a></div><div class="playingCards simpleCards card trump-cards" style="width:80px;height:90.72000000000001px;left:80px;top:0;z-index:99;border:none;" ><a class="card H" style="border:none;"><span class="suit"></span></a></div><div class="playingCards simpleCards card trump-cards" style="width:80px;height:90.72000000000001px;left:160px;top:0;z-index:99;border:none;"><a class="card C" style="border:none;" ><span class="suit" ></span></a></div><div class="playingCards simpleCards card trump-cards" style="width:80px;height:90.72000000000001px;left:240px;top:0;z-index:99;border:none;"><a class="card D" style="border:none;"><span class="suit"></span></a></div></div>
+
+	        	    The trump functions the usual way as in any card game.  If you do not have the required suit of a turn, you have the option to use your trump and claim the hand.  Of course, if the next player uses a bigger trump, he'll own the trick. A turn can also start by playing the trump.
+	        	</div>
+	        </div>
+	        <div class="row row-nav" data-height="480" id="row5">Game Play 
+	        	<div class="row-text">
+	        		The player setting the trump starts the game.  We'll call the suit of the first card played in a turn, the turn-suit.
+	        		<br><br>
+	        		The next two players have to play a card of the turn-suit.  If they do not have any turn-suit, they can choose either to play a trump or a card of another suit.
+	        		<br><br>
+	        		The player with the largest card of the turn-suit wins the trick, or in case a trump was played, the player with the largest trump wins. The trick winner then plays the next card.
+	        		<br><br>
+	        		The game round continues in the same manner for the next 10 hands.  When the next round starts, hands made for each player are checked against the hands each one had to make.
+	        		<br><br>
+	        		At the beginning of the next round, the player with extra hands can withdraw cards from the players with hand-deficit.
+	        	</div>
+	        </div>
+	        <div class="row row-nav" data-height="500" id="row6">Next Round: Withdraw and Return 
+	        	<div class="row-text">
+	        		After all the cards are distributed and the trump for the next round is set, the player with extra hands gets a chance to withdraw cards from the players with hand deficit.  The player who's withdrawing, picks a random card from the other player's deck and then can return the card of his choice back.  He also has an option to return back the card he had withdrawn.
+	        		<br><br>
+	        		For example, if following are the scores of each player after round one, eNVy will pick 2 random cards from your deck and 1 from aNk's.  After every card withdrawal, eNVy will also have to return a card back to the other player.
+	        		<div class="players-in-game">
+	        		<div class="right-player">
+	        			<div class="ball" style="background:#fff url(assets/img/avatars.png);background-position:90px 0px;"><div class="name">eNVy</div><div class="statistics">5/2</div></div>
+	        		</div>
+	        		<div class="left-player">
+	        			<div class="ball" style="background:#fff url(assets/img/avatars.png);background-position:45px 0px;"><div class="name">aNk</div><div class="statistics">2/3</div></div>
+	        		</div>
+	        		<div class="bottom-player">
+	        			<div class="ball" style="background:#fff url(assets/img/avatars.png);background-position:630px 0px;position: absolute; bottom: 40px; right: 170px;"><div class="name">You</div><div class="statistics">3/5</div></div>
+	        		</div>
+	        		</div>
+	        	</div>	        
+	        </div>
+	        <div class="row row-nav active" data-height="450" id="row7">3-2-5 Bridge Variations
+	           	<div class="row-text">
+	           		Like any other card game, 3-2-5 Bridge has its own variations.  We discussed the simplest gameplay above.  However, introducing variations makes it all the more enjoyable.  We'll discuss a few variations here. Well most of them are from the Wikipedia page.
+	           		
+	           		<ul style="padding-left:30px;">
+	           			<li>
+	           				Dealing the cards: If the player choosing the trump does not like his/her first 5 cards, he/she may decide to ask the next set of 3 cards to be shown to all and the suit with the highest card in those 3 becomes the trump.
+	           			</li><br>
+	           			<li>
+	           				Trumps: The 7 of spades and the 7 of hearts are sometimes not considered as trumps at all.
+	           			</li><br>
+	           			<li>
+	           				Return after withdrawal: While returning cards to other players at the start of a next round, one cannot return and thus become devoid of a suit.  The person during gameplay has to show at least one card of the suit that the returned.
+	           			</li>
+	           		</ul>
+	           		<br>
+	           		If you suggest other interesting variations, we'll be happy to include them here, and if we like them, we may also introduce them in our online gameplay.
+	           	</div>
+	        </div>
+	        <div class="row row-nav active1" data-height="200" id="row8">
+	           	<div class="row-text">
+	           		Now that you've learnt how to play 3-2-5 Bridge, you must try playing against our superbots online, or even better play against people in our multiplayer environment!
+	           		<br><br>
+	           		<md-button class="redcol md-raised" aria-label="randomGameStart" ng-click="goToCover()" style="left:38%;">
+						<div flex layout="horizontal" layout-align="center center">
+						<div><h2 class="white-label" style="margin:5px 2px">Play Now</h2> </div>
+			      		</div>
+			      	</md-button>
+	           	</div>
+	        </div>
+    	</div>
+	</div>	
+</div>
+<script type="text/javascript">
+	// $( document ).ready(function(){
+	// 	// console.log('abc');
+	// });
+	// /******************************
+	//  ADD ANIMATION TO THE TEXT 
+	// ******************************/
+	// var count = 0;
+	// var number = 10;
+	
+	// var interval = setInterval(function(){
+ //       count++;
+	//    if (count === number) { 
+	//    		clearInterval(interval);
+	// 		$('h1 ,h2').addClass('animationActive');		
+	// 	}
+	// }, 50);
+	
+	
+	
+	/*********************
+	 SET ROW'S HEIGHT
+	*********************/
+	$.each($('.row'), function() { 
+	   var h = $(this).attr("data-height");
+	   $(this).css("height",h);
+	});
+		
+	// /*************************
+	//  ON WINDOW SCROLL FUNCTION
+	// *************************/
+	// var sectionIds = {};		
+
+	// $(".row-nav").each(function(){	
+	// 	var $this = $(this);			
+	// 	sectionIds[$this.attr("id")] = $this.first().offset().top -120;	
+	// });			
+		
+	// var count2 = 0;
+	// $(window).scroll(function(event){		
+
+	// 	var scrolled = $(this).scrollTop();		
+
+	// 	//If it reaches the top of the row, add an active class to it
+	// 	$(".row-nav").each(function(){
+			
+	// 		var $this = $(this);
+			
+	// 		if(scrolled >= $this.first().offset().top -120){
+	// 			$(".row-nav").removeClass("active");
+	// 			$this.addClass("active");	
+				
+	// 			$(".animation").removeClass('animationActive');
+	// 			$this.find(".animation").addClass('animationActive');
+						
+	// 		}
+	// 	});
+		
+	// 	//when reaches the row, also add a class to the navigation
+	// 	for (key in sectionIds){
+	// 		if (scrolled >= sectionIds[key]){
+	// 			$(".nav-btn").removeClass("active");
+	// 			var c = $("[data-row-id="+key+"]");
+	// 			c.addClass("active");
+				
+	// 			var i = c.index();
+	// 			$('#nav-indicator').css('top', i*65 + 'px');							
+	// 		}
+	// 	}	
+		
+		
+	// 	//Check if we've reached the top
+	//     if (scrolled > count2){  count2++;  } 
+	// 	else { count2--; }
+	    
+	// 	count2 = scrolled;		
+		
+	// 	if(count2 == 0){
+	// 		$('h1 ,h2').addClass('animationActive');
+	// 	}else{
+	// 		$('h1 ,h2').removeClass('animationActive');
+	// 	}
+	
+	// });
+	
+	// /**************
+	//  IN-NAVIGATION
+	// **************/
+	// $(".nav-btn").click(function(){		
+	// 	$(this).addClass("active");
+	// 	$(this).siblings().removeClass("active");
+		
+	// 	var i = $(this).index();
+	// 	$('#nav-indicator').css('top', i*65 + 'px');			
+		
+	// 	var name = $(this).attr("data-row-id");
+	// 	var id = "#" + name;
+	// 	var top = $(id).first().offset().top -60;			
+	// 	$('html, body').animate({scrollTop: top+'px'}, 300);
+		
+	// });
+		
+	// /*****
+	//  TOP
+	// ******/
+	// $('#top').click(function(){
+	// 	$('html, body').animate({scrollTop: '0px'}, 300);
+ //    });
+</script>

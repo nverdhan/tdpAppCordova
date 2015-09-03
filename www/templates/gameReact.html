@@ -47,7 +47,7 @@
 <div ng-if="waiting && gameType == 'LIVE'" class="waiting">
     <div flex layout="column" layout-align="center center" style="flex-direction: column;">
     <div>
-        <profile-info ng-repeat="player in connectedPlayers" class="center" content="player" style="float:left; padding-top:5px;"></profile-info>
+        <profile-info ng-repeat="player in connectedPlayers" class="center" content="player" style="float:left; padding-top:28px;"></profile-info>
     </div>
         <h2>
         {{PlayersToJoinMsg}}
@@ -55,7 +55,8 @@
         <div ng-if="gameRoom == 'PRIVATE'" style="z-index:9;">
             <h2>share roomID "{{ gameId }}" with your friends you want to join</h2>
         </div>
-        <div class="waiting-loader">
+        <div class="waiting-loader" style="transform: scale(0.5);
+    left: 35%;">
             <div class="cardDiv anime1"></div>
             <div class="cardDiv anime2"></div>
             <div class="cardDiv anime3"></div>

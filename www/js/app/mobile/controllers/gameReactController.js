@@ -607,7 +607,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
                 '<md-dialog>' +
                 '  <md-content> <h2 class="md-title"> Exit Game? </h2> <p> ' +msg+
                  '  <div class="md-actions">' +
-                 '<md-button ng-click="goToHome()" aria-label="goToHome"> Yes exit game. </md-button>'+
+                 '<md-button ng-click="goBack()" aria-label="goBack"> Yes exit game. </md-button>'+
                  '<md-button ng-click="closeDialog()" aria-label="closeDialog"> Continue playing </md-button>'+
                  '  </div>' +
                 '</md-content></md-dialog>',
@@ -623,6 +623,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
             $scope.exitGame();        
         }
     });
+    $scope.$on('EXIT_CURRENTGAME', $scope.exitGame);
 
 }])
 game325.directive('ngEnter', function() {

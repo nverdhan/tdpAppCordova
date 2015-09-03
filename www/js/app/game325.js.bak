@@ -198,7 +198,7 @@ Game.prototype.returnCard = function(){
 	var cardIndex = this.cardIndex;
 	// console.log(this.cardMoveFrom + '-------->' + this.cardMoveTo);
 	for (var i = 0; i < this.players.length; i++) {
-		if(this.players[i].id == this.cardMoveFrom){
+		if(this.players[i].id == this.cardMoveTo){
 			this.players[i].cards[cardIndex].state = 'deck';
 			this.players[i].cards[cardIndex].animation = false;
 			var card = this.players[i].cards.splice(cardIndex, 1);
@@ -210,7 +210,7 @@ Game.prototype.returnCard = function(){
 		}
 	}
 	for (var i = 0; i < this.players.length; i ++){
-		if(this.players[i].id == this.cardMoveTo){
+		if(this.players[i].id == this.cardMoveFrom){
 			// console.log('Push done');
 			if(i==2){
 				this.players[i].cards.unshift(this.cardPlayed);

@@ -763,11 +763,13 @@ var Game325Component = React.createClass({displayName: "Game325Component",
                     };
                     var selectedCardIndex = smallestIndex;
                 }
+                var cardToReturn = deck[selectedCardIndex];
                 var self = this;
                 var data = {
                         gameState : 'RETURN_CARD',
                         gameEvent : 'RETURN_CARD',
-                        card : selectedCardIndex,
+                        // card : selectedCardIndex,
+                        card : cardToReturn
                     }
                 var fn = function () {
                     self.clickHandler(data);

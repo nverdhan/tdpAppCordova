@@ -6,6 +6,8 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
     if($stateParams.type == 0){
         $scope.gameRoom = 'PRIVATE';
     }
+    // console.log($scope.gameId);
+    // console.log($scope.gameRoom);
     $scope.waiting = true;
     $scope.ready = false;
     $scope.chatMsg = '';
@@ -258,7 +260,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
         });
     }
     $scope.startNewGame = function(){
-        var gameData = new Game();
+        gameData = new Game();
         $scope.playerId = 0;
         $scope.waiting = false;
         $scope.ready = true;
@@ -285,8 +287,12 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
     $scope.gameEvent = function(data){
         var gameEvent = data.gameEvent;
         var gameData = $scope.game325;
+        if($scope.gameType == 'BOTS' && $scope.game325.gameState != 'WITHDRAW_CARD' && $scope.game325.gameState!= 'RETURN_CARD'){
+            localStorage.setItem('gameData', JSON.stringify($scope.game325));
+        }
         gameData.returnCard = false;
         var fnCall;
+        // console.log(gameEvent);
         switch(gameEvent){
             case "START_GAME":
                 Game.prototype.initDeck.call(gameData);
@@ -326,7 +332,6 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
             case "RETURN_CARD":
                 fnCall = 'RETURN_CARD';
                 gameData.cardIndex = data.card;
-                gameData.card = data.card;
                 Game.prototype.moveReturnCard.call(gameData);
                 gameData.returnCard = true;
                 var self = this;
@@ -363,9 +368,6 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
                 break;
             }
             $scope.game325 = gameData;
-            if($scope.gameType == 'BOTS' && $scope.gameState != 'WITHDRAW_CARD' && $scope.gameState != 'RETURN_CARD'){
-                // localStorage.setItem('gameData', JSON.stringify($scope.game325));
-            }
             $scope.reactRender();
             if($scope.game325.gameEvent == 'SET_TRUMP'){
                 $scope.game325.trumpsetcheck = true;
@@ -391,9 +393,11 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
     }
     if($scope.gameType == 'LIVE'){
         //Register Events Only When Game Mode Is Live Type
+        // console.log('jjjjjj');
         socket.removeAllListeners();
         socket.emit('JOIN_ROOM', {roomId : $scope.gameId, user : $scope.user});
         socket.on('CONNECTED', function(data){
+            // console.log('connected');
             $scope.playerId = data.id;
             if (data.start == 'closed') {
                 var x = {

@@ -16,10 +16,6 @@ var Game325Component = React.createClass({displayName: "Game325Component",
         this.props.scope.updateScores(this.players);
         this.next(this.props.game);
     },
-    componentWillUnmount: function(){
-        delete this.props.game;
-        this.props = {};
-    },
     componentWillReceiveProps : function(nextProps){
         // // console.log('props received');
         this.game = nextProps.game;
@@ -79,7 +75,7 @@ var Game325Component = React.createClass({displayName: "Game325Component",
     },
     setTrump : function(trump){
         var index = this.getPlayerIndexFromId(this.props.game.activePlayerId);
-        if(this.playerId == this.props.game.activePlayerId || this.props.game.players[index].type == 'bot'){
+        if((this.playerId == this.props.game.activePlayerId || this.props.game.players[index].type == 'bot') && this.props.game.gameState == 'SET_TRUMP'){
             var data = {
                 gameState : 'SET_TRUMP',
                 gameEvent : 'SET_TRUMP',
@@ -773,7 +769,7 @@ var Game325Component = React.createClass({displayName: "Game325Component",
                         gameState : 'RETURN_CARD',
                         gameEvent : 'RETURN_CARD',
                         // card : selectedCardIndex,
-                        card : cardToReturn,
+                        card : cardToReturn
                     }
                 var fn = function () {
                     self.clickHandler(data);
@@ -1009,7 +1005,7 @@ var TrumpComponent = React.createClass({displayName: "TrumpComponent",
         }
     },
     handleClick : function (trump){
-        if(this.props.playerId == this.props.activePlayerId){
+        if(this.props.playerId == this.props.activePlayerId && this.props.gameState == 'SET_TRUMP'){
             angular.element('.bottom-player-diabled').css('display', 'block');
             this.props.setTrump(trump);    
         }
@@ -1538,6 +1534,8 @@ var CardComponent = React.createClass({displayName: "CardComponent",
                 fn();
             } 
         }
+        
+        
     },
     componentWillLeave : function(){
         this.state.style.transform = 'translateX(0px) translateY(0px)';
@@ -1715,6 +1713,7 @@ var CardComponent = React.createClass({displayName: "CardComponent",
         var cardRank = this.props.card.rank;
         var cardSuit = this.props.card.suit;
         var getCardSuit = function () {
+            var x = '';
             if(cardSuit == 'H')
                 return '<img height="16" width="16" src="css/cards/images/heart.png">';
             if(cardSuit == 'S')

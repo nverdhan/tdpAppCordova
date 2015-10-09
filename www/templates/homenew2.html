@@ -8,25 +8,19 @@
       
       <div class="ball center" style="display:inline-block; background-image:url({{profile.image}}); background-position : {{profile.backgroundPosition}}; margin: 0 auto;"></div>
       <h3 style="position:relative; top:-14px; left:0;">{{profile.name}}</h3>
-      <!-- <profile-info-horz content="profile"></profile-info-horz> -->
     </div>
     <div class="profile-info" ng-if="!loggedIn" ng-controller="registerCtrl" ng-click="showLogin()">
-      <!-- <i class="fa fa-user fa-2x fleft"></i>
-      <div class="fleft" style="width: -moz-max-content;">Log in</div>
-      <div class="clearfix"></div> -->
     </div>
-    <!-- <div class="game-help"> -->
       <md-button class="help-button md-default-theme" aria-label="goToHelp" ng-click="goToHelp()" tabindex="-1" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><button class="md-button-inner">
                 <img class="app-icon" src="assets/img/questions1.svg" style="width: 30px; height: 30px;">
     </button></md-button>
-    <!-- </div> -->
   </div>
   <div ng-show="!showMultiplayerOptions" class='mob-opt-wrap hidemultiplayeropt'>
     <div class="mob-opt">
       <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="startGame('bots')">
         <div flex layout="horizontal" layout-align="center center">
           <div style="margin-right:15px;">
-            <i class="fa fa-caret-right fa-2x white-label"></i>
+            <img class='app-icon' src="assets/img/right9.svg" style="width: 24px; height: 24px;">
           </div>
           <div>
             <h3 class="marg-12 white-label">Play with Bots</h3>
@@ -38,7 +32,7 @@
       <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="toggleMultiplayerOptions()">
         <div flex layout="horizontal" layout-align="center center">
           <div style="margin-right:15px;">
-            <i class="fa fa-users white-label"></i>
+            <img class='app-icon' src="assets/img/multiple25.svg" style="width: 24px; height: 24px;">
           </div>
           <div>
             <h3 class="marg-12 white-label">{{multiplayerBtnMsg}}</h3>
@@ -49,7 +43,7 @@
     <div class="mob-opt-horz">
       <div class="mob-opt">
         <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="showSettings()" style="color:white;">
-          <i class="fa fa-gear fa-2x" title="Settings"></i>
+          <img class='app-icon' src="assets/img/cogwheel25.svg" style="width: 24px; height: 24px;">
           <span>Settings</span>
         </a>
       </div>
@@ -60,7 +54,7 @@
       <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="startGame('multiplayer')">
         <div flex layout="horizontal" layout-align="center center">
           <div style="margin-right:15px;">
-            <i class="fa fa-users white-label"></i>
+            <img class='app-icon' src="assets/img/multiple25.svg" style="width: 24px; height: 24px;">
           </div>
           <div>
             <h3 class="marg-12 white-label">Random Multiplayer</h3>
@@ -78,7 +72,7 @@
     <div class="mob-opt-horz">
       <div class="mob-opt" style="margin-top:5px;">
         <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="showSettings()" style="color:white;">
-          <i class="fa fa-gear fa-2x" title="Settings"></i>
+          <img class='app-icon' src="assets/img/cogwheel25.svg" style="width: 24px; height: 24px;">
           <span>Settings</span>
         </a>
       </div>
@@ -89,7 +83,7 @@
       <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="startGame('multiplayer')">
         <div flex layout="horizontal" layout-align="center center">
           <div style="margin-right:15px;">
-            <i class="fa fa-users white-label"></i>
+            <img class='app-icon' src="assets/img/multiple25.svg" style="width: 24px; height: 24px;">
           </div>
           <div>
             <h3 class="marg-12 white-label">Random Multiplayer</h3>
@@ -102,7 +96,7 @@
       <md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="facebookAuth()" ng-controller="registerCtrl">
       <div flex layout="horizontal" layout-align="center center">
         <div style="margin-right:15px;">
-          <i class="fa fa-facebook white-label"></i>
+          <img class='app-icon' src="assets/img/facebook55.svg" style="width: 24px; height: 24px;">
         </div>
         <div>
           <h3 class="marg-12 white-label">Login with Facebook</h3>
@@ -113,7 +107,7 @@
     <div class="mob-opt-horz">
       <div class="mob-opt" style="margin-top:5px;">
         <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="showSettings()" style="color:white;">
-          <i class="fa fa-gear fa-2x" title="Settings"></i>
+          <img class='app-icon' src="assets/img/cogwheel25.svg" style="width: 24px; height: 24px;">
           <span>Settings</span>
         </a>
       </div>

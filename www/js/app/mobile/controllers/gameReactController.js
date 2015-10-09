@@ -66,69 +66,6 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
         return globalVars.backClass;
     }
     $scope.totalGames = 9;
-    // $scope.sendEvent = function(data){
-    //     angular.element('.bottom-player-diabled').css('display', 'block');
-    //     if($scope.gameType == 'LIVE'){
-    //         socket.emit('GAME', {data : data});  
-    //     }else{
-    //         if(data.gameEvent == 'NEXT_ROUND'){
-    //             $scope.gameRound++;
-    //             if($scope.gameRound == $scope.totalGames){
-    //                 $mdDialog.show({
-    //                   template:
-    //                     '<md-dialog>' +
-    //                     '  <md-content> <h2 class="md-title"> End of round '+$scope.gameRound+' </h2>'+
-    //                      '  <div class="md-actions">' +
-    //                      '<md-button ng-click="newGame()"> New Game</md-button>'+
-    //                      '  </div>' +
-    //                     '</md-content></md-dialog>',
-    //                     clickOutsideToClose : false,
-    //                     escapeToClose : false,
-    //                     controller: 'errDialogController'
-    //                 });
-    //             }else{
-    //                 var t = '';
-    //                 t+='<table class="score-table"><thead>';
-    //                 t+='<th>Round</th>';
-    //                 // console.log($scope.game325.players[0].scores)
-    //                 for (var i = 0; i < $scope.game325.players[0].scores.length; i++) {
-    //                     var k = i+1;
-    //                     $scope.gameRound = k;
-    //                     t+='<th>'+k+'</th>';
-    //                 };
-    //                 t+='</thead>';
-    //                 for (var i = 0;i < $scope.game325.players.length; i++) {
-    //                     if(i==0){
-    //                         t+='<tr><td>You</td>';
-    //                     }else{
-    //                         t+='<tr><td>'+$scope.game325.players[i].name+'</td>';
-    //                     }
-    //                     for (var j = 0; j < $scope.game325.players[i].scores.length; j++) {
-    //                         t+='<td>'+$scope.game325.players[i].scores[j].handsToMake+'/'+$scope.game325.players[i].scores[j].handsMade+'</td>';
-    //                     }
-    //                     t+='</tr>';
-    //                 };
-    //                 t+='</table>';
-    //                 setTimeout(function () {
-    //                     $mdDialog.show({
-    //                       template:
-    //                         '<md-dialog>' +
-    //                         '  <md-content> <h2 class="md-title"> End of round '+$scope.gameRound+' </h2>'+t+
-    //                          '  <div class="md-actions">' +
-    //                          '<md-button ng-click="nextRound()" aria-label="nextRound"> Continue </md-button>'+
-    //                          '  </div>' +
-    //                         '</md-content></md-dialog>',
-    //                         clickOutsideToClose : false,
-    //                         escapeToClose : false,
-    //                         controller: 'errDialogController'
-    //                     });    
-    //                 }, 1200)
-    //             }
-    //         }else{
-    //             $scope.gameEvent(data);
-    //         }
-    //     }
-    // }
     $scope.sendEvent = function(data){
         angular.element('.bottom-player-diabled').css('display', 'block');
         if($scope.gameType == 'LIVE'){
@@ -371,16 +308,16 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
                 $scope.game325.trumpsetcheck = true;
             }
             if($scope.playerId == $scope.game325.activePlayerId && $scope.game325.gameEvent != 'RETURN' && ($scope.game325.gameEvent != 'WITHDRAW' || $scope.game325.trumpsetcheck)){
-                var delay = 1200;
+                var delay = 900;
                 if($scope.game325.gameEvent == 'DECLARE_WINNER'){
-                    delay = 3400;
+                    delay = 1800;
                 }
                 if($scope.game325.gameEvent == 'SET_TRUMP'){
-                    delay = 1200;
+                    delay = 900;
                     $scope.game325.trumpsetcheck = true;
                 }
                 if(($scope.game325.gameEvent == 'PLAY_CARD' || $scope.game325.gameEvent == 'WITHDRAW')  && $scope.game325.trumpsetcheck){
-                    delay = 1800;
+                    delay = 1200;
                     $scope.game325.trumpsetcheck = false;   
                 }
                 setTimeout(function (){
@@ -534,16 +471,16 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
             angular.element('.loading').css('display','none');
         },4000)
         if($scope.playerId == $scope.game325.activePlayerId){
-            var delay = 1200;
+            var delay = 900;
             if($scope.game325.gameEvent == 'DECLARE_WINNER'){
-                delay = 3400;
+                delay = 1800;
             }
             if($scope.game325.gameEvent == 'SET_TRUMP'){
-                delay = 1200;
+                delay = 900;
                 $scope.game325.trumpsetcheck = true;
             }
             if($scope.game325.gameEvent == 'PLAY_CARD' && $scope.trumpsetcheck){
-                delay = 1800;
+                delay = 1200;
                 $scope.game325.trumpsetcheck = false;   
             }
             setTimeout(function (){

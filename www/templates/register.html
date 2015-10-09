@@ -76,7 +76,7 @@
 				<md-button class="redcol home-elem md-raised" aria-label="randomGameStart">
 					<div flex layout="horizontal" layout-align="center center">
 						<div style="margin-right:15px;">
-							<i class="fa fa-facebook fa-2x white-label"></i>
+							<img class='app-icon' src="assets/img/facebook55.svg" style="width: 24px; height: 24px;">
 						</div>
 						<div>
 							<h3 class="marg-12 white-label">{{fbLoginBtnMsg}}</h3>
@@ -94,7 +94,7 @@
 					</md-content>
 					<div>
 					<div class="sliding-arrows"  ng-click="shiftLeft()" style="display:inline-block">
-						<i class="fa fa-angle-double-left fa-2x" ng-if="selectedImageRowIndex != 3"></i>
+						<img class='app-icon' src="assets/img/fast37.svg" style="width: 24px; height: 24px;" ng-if="selectedImageRowIndex != 3">
 					</div>
 					<div style="display:inline-block">
 					<div style="max-width:289px; overflow:hidden; padding-top:12px; padding-bottom:12px;">
@@ -105,7 +105,7 @@
 						
 					</div>
 					<div class="sliding-arrows"  ng-click="shiftRight()" style="display:inline-block">
-						<i class="fa fa-angle-double-right fa-2x" ng-if="selectedImageRowIndex != 0"></i>
+						<img class='app-icon' src="assets/img/right86.svg" style="width: 24px; height: 24px;" ng-if="selectedImageRowIndex != 0">
 					</div>
 					</div>
 			   
@@ -118,7 +118,9 @@
 			  	<div  class="center" ng-if="loginFB">
 					<md-button class="redcol home-elem md-raised" aria-label="randomGameStart" ng-click="startGame()">
 						<div flex layout="horizontal" layout-align="center center">
-						<div style="margin-right:15px;"><i class="fa fa-random fa-2x white-label"></i> </div>
+						<div style="margin-right:15px;">
+							<img class='app-icon' src="assets/img/shuffle26.svg" style="width: 24px; height: 24px;">
+						</div>
 						<div><h3 class="marg-12 white-label">Play as Anonymous</h3> </div>
 			      		</div>
 			      	</md-button>
@@ -129,7 +131,7 @@
 			<md-button class="redcol home-elem md-raised" aria-label="randomGameStart"  ng-click="register()">
 				<div flex layout="horizontal" layout-align="center center">
 					<div style="margin-right:15px;">
-						<i class="fa fa-caret-right fa-2x white-label"></i>
+						<img class='app-icon' src="assets/img/right9.svg" style="width: 24px; height: 24px;">
 					</div>
 					<div>
 						<h4 class="marg-12 white-label">Next</h4>
@@ -145,7 +147,9 @@
 			<div ng-click="logOut()" class="center">
 				<md-button class="redcol home-elem md-raised" aria-label="randomGameStart">
 					<div flex layout="horizontal" layout-align="center center">
-					<div style="margin-right:15px;"><i class="fa fa-random fa-2x"></i> </div>
+					<div style="margin-right:15px;">
+						<img class='app-icon' src="assets/img/shuffle26.svg" style="width: 24px; height: 24px;">
+					</div>
 					<div><h3>Log Out</h3> </div>
 		      		</div>
 		      	</md-button>

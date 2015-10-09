@@ -136,7 +136,11 @@ var Game325Component = React.createClass({displayName: "Game325Component",
                         self.arrangeCards();
                     }, 5000);
                 }else{
-                    this.arrangeCards();
+                    var self = this;
+                    setTimeout(function() {
+                        self.arrangeCards();
+                    }, 200);
+                    // this.arrangeCards();
                 }
                 break;
             case 'CARD_PLAYED':
@@ -193,7 +197,7 @@ var Game325Component = React.createClass({displayName: "Game325Component",
         var fn = function(){
             self.players =  self.props.game.players;
         }
-        delayService.asyncTask(600, fn);
+        delayService.asyncTask(300, fn);
     },
     withdrawCard : function (){
         var self = this;
@@ -203,7 +207,7 @@ var Game325Component = React.createClass({displayName: "Game325Component",
                 gameState : 'withdrawMoved'
             })
         }
-        delayService.asyncTask(1200, fn);
+        delayService.asyncTask(700, fn);
     },
     returnCard : function() {
         var self = this;
@@ -214,7 +218,7 @@ var Game325Component = React.createClass({displayName: "Game325Component",
                 gameState : 'returnMoved'
             })
         }
-        delayService.asyncTask(1200, fn);
+        delayService.asyncTask(700, fn);
     },
     placeCardOnBoard : function(){
         var self = this;
@@ -241,7 +245,7 @@ var Game325Component = React.createClass({displayName: "Game325Component",
                     gameState : 'CARD_PLACED_ON_BOARD'
                 });
                 }
-            delayService.asyncTask(1200, fn);
+            delayService.asyncTask(700, fn);
     },
     moveHand : function (){
         var self = this;
@@ -258,9 +262,9 @@ var Game325Component = React.createClass({displayName: "Game325Component",
                 gameState : 'HAND_MOVED'
             });
         }
-        delayService.asyncTask(2000, fn);
-        delayService.asyncTask(2000, this.refreshPlayedCards);
-        delayService.asyncTask(1600, this.updateScores);
+        delayService.asyncTask(1200, fn);
+        delayService.asyncTask(1200, this.refreshPlayedCards);
+        delayService.asyncTask(900, this.updateScores);
 
     },
     refreshPlayedCards : function () {
@@ -299,7 +303,7 @@ var Game325Component = React.createClass({displayName: "Game325Component",
             });
             // self.updateScores();
         }
-        delayService.asyncTask(1200, fn);
+        delayService.asyncTask(700, fn);
     },
     refreshRemainingCards : function(){
         var playedindex = Array();
@@ -366,7 +370,7 @@ var Game325Component = React.createClass({displayName: "Game325Component",
                     }
                     this.clickHandler(data);
                 }else{
-                    delayService.asyncTask(1000, this.checkBotPlay);      
+                    delayService.asyncTask(600, this.checkBotPlay);      
                 }
             }    
         }
@@ -379,7 +383,7 @@ var Game325Component = React.createClass({displayName: "Game325Component",
             var fn = function(){
                 self.playBot();
             }
-            var fn = delayService.asyncTask(2000, fn);
+            var fn = delayService.asyncTask(800, fn);
         }
     },
     playBot : function(){
@@ -698,7 +702,7 @@ var Game325Component = React.createClass({displayName: "Game325Component",
                 var fn = function () {
                     self.clickHandler(data);
                 }
-                delayService.asyncTask(2000, fn);
+                delayService.asyncTask(1300, fn);
                     // socket.emit('GAME', {data : data});
                 break;
             case 'RETURN_CARD':
@@ -778,7 +782,7 @@ var Game325Component = React.createClass({displayName: "Game325Component",
                 var fn = function () {
                     self.clickHandler(data);
                 }
-                delayService.asyncTask(2000, fn);
+                delayService.asyncTask(1300, fn);
                 break;
             default: 
                 break;
@@ -931,16 +935,85 @@ var BlockComponent = React.createClass({displayName: "BlockComponent",
         }
 });
 var GameStateInfo = React.createClass({displayName: "GameStateInfo",
-    render : function (){
-        var gameState = this.props.gameState;
-        var players = this.props.players;
-        var activePlayerId = this.props.activePlayerId;
-        var otherPlayerId = this.props.otherPlayerId;
+    getInitialState : function () {
+        // console.log('hide initial');
+        return {
+            statusString: '',
+            delay: 0,
+            textStyle: {
+                bottom : '12px',
+                position : 'relative',
+                display: 'none'
+            }
+        }
+    },
+    // shouldComponentUpdate : function(nextProps){
+    //     var gameState = nextProps.gameState;
+    //     switch(gameState){
+    //         case 'PLAY_CARD':
+    //             if(this.props.activePlayerId == nextProps.activePlayerId){
+    //                 return false;
+    //             }else{
+    //                 this.hideStatus();
+    //                 return true;
+    //             }
+    //             break;
+    //         case 'SET_TRUMP':
+    //            return true;
+    //             break;
+    //         case 'WITHDRAW_CARD':
+    //             return true;
+    //             break;
+    //         case 'RETURN_CARD':
+    //             return true;
+    //             break;
+    //     }
+    // },
+    repositionGameStatus : function () {
+        this.setState({
+                    textStyle: {
+                        bottom : '12px',
+                        position : 'relative',
+                        display: 'block'
+                    }
+                });
+    },
+    hideStatus : function (){
+        this.setState({
+            textStyle: {
+                bottom : '12px',
+                position : 'relative',
+                display: 'block'
+            }
+        })
+    },
+    // showStatus : function() {
+    //     this.setState({
+    //         textStyle: {
+    //             bottom : '12px',
+    //             position : 'relative',
+    //             display: 'block'
+    //         }
+    //     })
+    // },
+    // componentWillUpdate: function(nextProps, nextState){
+    //     console.log('update');
+    //     var self = this;
+    //     var delay = this.state.delay;
+    //     setTimeout(function() {
+    //                     self.showStatus();
+    //                 }, delay);
+    // },
+    componentWillReceiveProps: function(nextProps, nextState) {
+        var gameState = nextProps.gameState;
+        var players = nextProps.players;
+        var activePlayerId = nextProps.activePlayerId;
+        var otherPlayerId = nextProps.otherPlayerId;
         for (var i = players.length - 1; i >= 0; i--) {
-            if(players[i].id == this.props.activePlayerId){
+            if(players[i].id == nextProps.activePlayerId){
                 activePlayerId = i;
             }
-            if(players[i].id == this.props.otherPlayerId){
+            if(players[i].id == nextProps.otherPlayerId){
                 otherPlayerId = i;
             }
         };
@@ -948,10 +1021,13 @@ var GameStateInfo = React.createClass({displayName: "GameStateInfo",
             case 'PLAY_CARD':
                 if(activePlayerId == 0){
                     var statusString = 'Your';
+                    this.setState({delay: 10000});
                 }else{
                     var statusString = players[activePlayerId].name+"'s";   
+                    this.setState({delay: 0});
                 }
                 statusString+= ' turn. Play Card.';
+                this.repositionGameStatus();
                 break;
             case 'SET_TRUMP':
                 if(activePlayerId == 0){
@@ -960,6 +1036,13 @@ var GameStateInfo = React.createClass({displayName: "GameStateInfo",
                     var statusString = players[activePlayerId].name+"'s";   
                 }
                 statusString+= ' turn. Set Trump.';
+                this.setState({
+                    textStyle: {
+                        bottom: '130px',
+                        position : 'relative',
+                        display: 'block'
+                    }
+                });
                 break;
             case 'WITHDRAW_CARD':
                 if(activePlayerId == 0){
@@ -972,7 +1055,7 @@ var GameStateInfo = React.createClass({displayName: "GameStateInfo",
                 }else{
                     statusString+= " turn. "+players[activePlayerId].name+" withdrawing card from "+players[otherPlayerId].name;
                 }
-                
+                this.repositionGameStatus();
                 break;
             case 'RETURN_CARD':
                 if(activePlayerId == 0){
@@ -983,21 +1066,27 @@ var GameStateInfo = React.createClass({displayName: "GameStateInfo",
                 // statusString+= ' turn. Return card to '+players[otherPlayerId].name;
                 if(activePlayerId == 0){
                     statusString+= " turn. Select a card from your deck to return card to "+players[otherPlayerId].name;
+                    this.setState({delay: 1200});
                 }else{
                     statusString+= " turn. "+players[activePlayerId].name+" returning card to "+players[otherPlayerId].name;
                 }
+                // this.repositionGameStatus();
+
                 break;
         }
-        var textStyle = {
-            bottom : '12px',
-            position : 'relative'
-        }
+        this.setState({
+            statusString: statusString,
+        });
+    },
+    render : function (){
+        var statusString = this.state.statusString;
+        var textStyle = this.state.textStyle;
         var divStyle = {
-            top : 260
+            top: 260
         }
         return (
-                React.createElement("div", {className: "game-status", style : divStyle}, 
-                React.createElement("h2", {style : textStyle}, statusString)
+                React.createElement("div", {className: "game-status", style: divStyle}, 
+                React.createElement("h3", {style : textStyle}, statusString)
                 )
         );
     }

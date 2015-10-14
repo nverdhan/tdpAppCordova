@@ -2,20 +2,21 @@
 <div class="bgColor"> </div>
 <div class="push-wrap" id="homepage" ng-show="ready">
     <div ng-show="ready" class="bcktrans" flex layout-fill>
-            <div ng-show="ready">
+            <div ng-show="ready" style="position:relative; top:0; left:0;">
             	<div id="gameRender" ng-style="gameBodyStyle()" game-body game="game325" data="data" playerId="playerId" type="gameType"></div>
-            </div>
-            <!--div class='sidebutton-bar'>
-                <md-button class="md-fab sidebutton exitgame" aria-label="Exit" style="position:fixed;" ng-click="exitGame()">
-                    <img class='app-icon' src="assets/img/ic_close_24px_teal.svg" style="width: 24px; height: 24px;">
-                </md-button>
-                <md-button class="md-fab sidebutton showscore" aria-label="Scores" style="position:fixed;" ng-click="toggleScores()">
+                <md-button class="md-fab sidebutton showscore" aria-label="Scores" style="position:fixed!important; bottom:10px; right:10px;" ng-click="toggleScores()">
                     <img class='app-icon' src="assets/img/scoreicon.svg" style="width: 24px; height: 24px;">
                 </md-button>
-                <md-button ng-if="gameType == 'LIVE'" class="md-fab sidebutton chat" aria-label="Chat" style="position:fixed;" ng-click="toggleRight()">
+            </div>
+            <!-- <div class='sidebutton-bar'> -->
+             <!--    <md-button class="md-fab sidebutton exitgame" aria-label="Exit" style="position:fixed;" ng-click="exitGame()">
+                    <img class='app-icon' src="assets/img/ic_close_24px_teal.svg" style="width: 24px; height: 24px;">
+                </md-button> -->
+                
+                <!-- <md-button ng-if="gameType == 'LIVE'" class="md-fab sidebutton chat" aria-label="Chat" style="position:fixed;" ng-click="toggleRight()">
                     <img class='app-icon' src="assets/img/ic_chat_24px.svg" style="width: 24px; height: 24px;">
-                </md-button>
-            </div-->
+                </md-button> -->
+            <!-- </div> -->
     </div>
     <div ng-show="gameType == 'LIVE'">
         <md-sidenav class="md-sidenav-right md-whiteframe-z2" component-id="right"  flex ng-show="ready" layout="vertical" layout-fill style="max-height:100%!important; background-color: #f6f6f6;">

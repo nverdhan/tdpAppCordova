@@ -359,6 +359,7 @@ var Game325Component = React.createClass({displayName: "Game325Component",
                     var data = {
                         gameEvent : 'NEXT_ROUND'
                     }
+                    this.props.scope.calculateXP();
                     this.clickHandler(data);
                     // console.log('NEXT');
         }else{
@@ -368,6 +369,7 @@ var Game325Component = React.createClass({displayName: "Game325Component",
                     var data = {
                         gameEvent : 'NEXT_ROUND'
                     }
+                    this.props.scope.calculateXP();
                     this.clickHandler(data);
                 }else{
                     delayService.asyncTask(600, this.checkBotPlay);      

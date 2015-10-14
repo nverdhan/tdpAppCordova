@@ -1,0 +1,18 @@
+<md-dialog aria-label="scoredialog" class="scoredialog">
+  <md-toolbar class="score-head" style="background-color:#424242; color:#fff;"  ng-click="updateXP()">
+    <h2 class="md-toolbar-tools">
+      <span class="md-flex"> Game Scores </span>
+      <span class="md-flex"> {{xp}} XP </span>
+    </h2>
+    <md-button aria-label="Scores" ng-click="closeDialog()" style="position:absolute; top:0px; right:0px;">
+      <img class='app-icon' src="assets/img/ic_close_24px.svg" style="width: 24px; height: 24px;">
+    </md-button>
+  </md-toolbar>
+  <md-content class='player-container-score'>
+    <md-list>
+      <show-scores ng-if="arrPlayers[0]" content="arrPlayers[0]"></show-scores>
+      <show-scores ng-if="arrPlayers[1]" content="arrPlayers[1]"></show-scores>
+      <show-scores ng-if="arrPlayers[2]" content="arrPlayers[2]"></show-scores>
+    </md-list>
+  </md-content>
+</md-dialog>

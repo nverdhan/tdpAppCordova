@@ -38,6 +38,9 @@ var app = {
         //     // console.log('angular bootstrapped');
             // angular.bootstrap(document, ['game325']);
         // });
+        document.addEventListener("resume", function(){
+            location.reload();
+        }, false);
         window.analytics.startTrackerWithId('UA-62694879-2');
         angular.bootstrap(document, ['game325']);
         // window.analytics.debugMode();

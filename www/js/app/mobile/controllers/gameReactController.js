@@ -74,10 +74,13 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
             if(data.gameEvent == 'NEXT_ROUND'){
                 $scope.gameRound++;
                 if($scope.gameRound == $scope.totalGames && $scope.gameType == 'BOTS'){
+                    var points = localStorage.getItem('points');
+                    points = JSON.parse(points);
                     $mdDialog.show({
                       template:
                         '<md-dialog>' +
                         '  <md-content> <h3 class="md-title marg-4"> End of round '+$scope.gameRound+' </h3>'+
+                        '<h4 style="margin:1px; padding:1px; text-align:center; color:green; font-size:0.8em; "> Your Total XP = ' + points.xp + '</h4>' + 
                          '  <div class="md-actions">' +
                          '<md-button ng-click="newGame()"> New Game</md-button>'+
                          '  </div>' +
@@ -139,10 +142,13 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
                     };
                     t+='</table>';
                     setTimeout(function () {
+                        var points = localStorage.getItem('points');
+                        points = JSON.parse(points);
                         $mdDialog.show({
                           template:
                             '<md-dialog>' +
-                            '  <md-content> <h3 class="md-title marg-4"> End of round '+$scope.gameRound+' </h3>'+t+
+                            '  <md-content> <h3 class="md-title marg-4"> End of round '+$scope.gameRound+' </h3>'+
+                            '<h4 style="margin:1px; padding:1px; text-align:center; color:green; font-size:0.8em; "> Your Total XP = ' + points.xp + '</h4>'  + t+
                              '  <div class="md-actions">' +
                              '<md-button ng-click="nextRound()" aria-label="nextRound"> Continue </md-button>'+
                              '  </div>' +
@@ -175,7 +181,6 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
         localStorage.setItem('points', JSON.stringify(points));
     }
     $scope.calculateXP = function(){
-        // console.log(2);
         points = localStorage.getItem('points');
         if(points == null){
             var points = {
@@ -188,6 +193,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
         }else{
             points = JSON.parse(points);
         }
+        console.log($scope.game325.players[0].score);
         var lastRound = $scope.game325.players[0].scores.length - 1;
         var handsMade = $scope.game325.players[0].scores[lastRound].handsMade;
         var handsToMake = $scope.game325.players[0].scores[lastRound].handsToMake;
@@ -238,7 +244,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
     $scope.toggleScores = function(ev){
         // // console.log(ev);
          $mdDialog.show({
-            templateUrl: 'app/templates/scoredialog.html',
+            templateUrl: 'templates/scoredialog.html',
             controller: 'scoreDialogController'
         });
          $('.fracscore').each(function(key, value) {
@@ -509,7 +515,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
         $scope.reactRender();
       });
     $scope.$on('NEXT_ROUND', function () {
-        $scope.calculateXP();
+        // $scope.calculateXP();
         // $scope.loadGame();
         var data = {
             gameEvent : 'NEXT_ROUND'
@@ -632,10 +638,19 @@ game325.directive('ngEnter', function() {
         };
     });
 game325.controller('scoreDialogController',['$scope', '$mdDialog', '$rootScope', function ($scope, $mdDialog, $rootScope){
+
+    $scope.updateXP = function(){
+        var points = localStorage.getItem('points');
+        points = JSON.parse(points);
+        $scope.xp = points.xp;
+    }
+
     $scope.closeDialog = function(){
             $mdDialog.hide();
         };
     $scope.arrPlayers = $rootScope.arrPlayers;
+    $scope.updateXP();
+
     // // console.log($rootScope.arrPlayers);
 }]);
 /*game325.directive('gameBody', function (){

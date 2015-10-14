@@ -22,6 +22,17 @@ th, td {
    padding: 0px;
    border-bottom: 1px solid #eee;
 }
+md-dialog .md-actions{
+    padding: 5px;
+    min-height: 20px;
+}
+md-dialog md-content {
+    padding: 15px;
+    box-shadow: 4px 4px 10px #3A3A3A;
+}
+md-dialog.md-default-theme{
+    border-radius: 8px;
+}
 .score-table th, .score-table td {
     padding: 6px;
 }
@@ -1067,13 +1078,14 @@ md-content.md-padding{
   overflow-x: auto;
 }
 .score-head{
-	background: linear-gradient(
+	/*background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0),
       rgba(0, 0, 0, 0.6)
     ),
 	url('../assets/img/coverimg.jpg');	
-	background-size: cover;	
+	background-size: cover;*/
+    background-color: #424242;	
 }
 .imgholder{
 	width: 50px;
@@ -1390,7 +1402,7 @@ md-content.md-padding{
     height: 113.44px;
     width: 80px;
 }
-.sidebutton-bar{
+/*.sidebutton-bar{
   width: 61px;
   padding: 8px;
   right: 10px;
@@ -1398,6 +1410,15 @@ md-content.md-padding{
   position: absolute;
   height: 100%;
   margin-left: 10px;
+}*/
+.sidebutton-bar {
+    width: 50px;
+    padding: 2px;
+    right: 0;
+    top: 0;
+    position: absolute;
+    height: 100%;
+    margin-left: 0;
 }
 /*@media (min-width: 960px){
   .sidebutton-bar{
@@ -1420,9 +1441,9 @@ md-button.md-fab.sidebutton{
 .sidebutton.exitgame{
   top: 20px;
 }
-.sidebutton.showscore{
+/*.sidebutton.showscore{
   top: 85px;
-}
+}*/
 .sidebutton.chat{
   top: 150px;
 }

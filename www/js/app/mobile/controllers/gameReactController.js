@@ -193,7 +193,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
         }else{
             points = JSON.parse(points);
         }
-        console.log($scope.game325.players[0].score);
+        console.log($scope.game325.players[0].scores);
         var lastRound = $scope.game325.players[0].scores.length - 1;
         var handsMade = $scope.game325.players[0].scores[lastRound].handsMade;
         var handsToMake = $scope.game325.players[0].scores[lastRound].handsToMake;

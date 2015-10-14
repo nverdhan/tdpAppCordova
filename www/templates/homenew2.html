@@ -4,10 +4,10 @@
   </button></md-button>
   <div>
     <div class="profile-info" ng-if="loggedIn" style="color:white;">
-      <h3 style="position:relative; top:-14px; left:0;">Welcome</h3>
-      
-      <div class="ball center" style="display:inline-block; background-image:url({{profile.image}}); background-position : {{profile.backgroundPosition}}; margin: 0 auto;"></div>
+      <!-- <h3 style="position:relative; top:-14px; left:0;">Welcome</h3> -->
       <h3 style="position:relative; top:-14px; left:0;">{{profile.name}}</h3>
+      <div class="ball center" style="display:inline-block; background-image:url({{profile.image}}); background-position : {{profile.backgroundPosition}}; margin: 0 auto;"></div>
+      <div class="xpbox" style="color:{{xpColor}}; background-color:{{xpBGColor}}" ng-click="getXPFromDB()">{{xp}} XP</div>
     </div>
     <div class="profile-info" ng-if="!loggedIn" ng-controller="registerCtrl" ng-click="showLogin()">
     </div>

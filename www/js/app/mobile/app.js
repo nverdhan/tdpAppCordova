@@ -119,7 +119,7 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
     $scope.showOrientationMsg();
 
     //Internet Connectivity Cordova
-    if(navigator.connection.type == 'Connection.NONE'){
+    if(navigator.connection.type == "none"){
         $rootScope.currentConnStatus = 'offline';    
     }else{
         $rootScope.currentConnStatus = 'online';
@@ -192,33 +192,20 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
     var authUserInfo = AuthService.getUserInfo();
     if(credentials.id && credentials.id != 'anon'){
         var user = JSON.parse(credentials.id);
-        Session.create(user.name, user.image, user.type);
+        Session.create(user.id, user.name, user.image, user.type);
     }else if(authUserInfo){
         var user = {
+                id: authUserInfo.id,
                 name : authUserInfo.name,
                 image : authUserInfo.image,
                 type : 'fb'
             }
-        Session.create(user.name, user.image, user.type);
+        Session.create(user.id, user.name, user.image, user.type);
         $scope.currentUser = user;
     }else{
         $scope.currentUser = null
         Session.destroy();
     }
-    // AuthService.get(credentials).then(function(res){
-    //     if(res.status == 200 && res.data.user){
-    //         var user = {
-    //             name : res.data.user.name,
-    //             image : res.data.user.image,
-    //             type : res.data.user.type
-    //         }
-    //         Session.create(user.name, user.image, user.type);
-    //         $scope.currentUser = res.user;
-    //     }else if(res.status == 'error'){
-    //         $scope.currentUser = null
-    //         Session.destroy();
-    //     }
-    // });
     $scope.setCurrentUser = function (user){
         $scope.currentUser = user;
         // if($cookieStore.get('userId') == 'anon'){
@@ -249,6 +236,7 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
         //     $state.go('home');
         // }
         // console.log('exit login called');
+        $rootScope.loggedIn = true;
         $scope.OverlayVisible = false;
     }
     // $scope.showLogin = function(){
@@ -495,6 +483,48 @@ game325.service('joinPrivateRoomService', ['$http', function ($http){
         create : function (req) {
             return $http.post(apiPrefix+'create', {data : req});
         }
+    }
+}]);
+game325.service('XPService', ['$http', '$rootScope', 'Session', function ($http, $rootScope, Session){
+    return{
+        update: function (req, callback) {
+            if($rootScope.currentConnStatus == "online"){
+                $http.post(apiPrefix + 'getXP', {data: req})
+                        .then(function(data){
+                            var points = data.data.points;
+                            localStorage.setItem('points', JSON.stringify(points));
+                            if(callback){
+                                callback();
+                            }
+                        }) 
+            }else{
+                if(callback){
+                    callback();
+                }
+            }
+        },
+        getXP: function(callback){
+            if(Session.name && Session.type == "fb"){
+                var id = Session.id;
+                var points = localStorage.getItem('points');
+                if(points == null){
+                    var points = {
+                        roundsPlayed: 0,
+                        updateStatus: 'outdated',
+                        xparray: [0],
+                        xp: 0
+                    }
+                    localStorage.setItem('points', JSON.stringify(points));
+                }else{
+                    points = JSON.parse(points);
+                }
+                data = {
+                    id: id,
+                    points: points
+                }
+                this.update(data, callback);
+            }
+        }       
     }
 }]);
 $(function() {
@@ -748,7 +778,7 @@ game325.controller('settingsCtrl',['$rootScope','$scope','AUTH_EVENTS','$state',
         return className;
     }
 }])
-game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$window', 'AUTH_EVENTS','Session', 'errService', '$timeout', '$state', 'AuthService','$swipe', function ($rootScope, $scope, $cookieStore, $window, AUTH_EVENTS, Session, errService, $timeout, $state, AuthService, $swipe){
+game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$window', 'AUTH_EVENTS','Session', 'errService', '$timeout', '$state', 'AuthService','$swipe', 'XPService', function ($rootScope, $scope, $cookieStore, $window, AUTH_EVENTS, Session, errService, $timeout, $state, AuthService, $swipe, XPService){
     // var id = $cookieStore.get('userId');
     $scope.pageClass = 'page-login';
     $scope.showLoggedInProfile = false;
@@ -768,7 +798,8 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
     $scope.user = {
         type : 'local',
         name : '',
-        image : null
+        image : null,
+        id: null
     }
     $scope.initLogin = function(){
         if(Session.name){
@@ -777,9 +808,12 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
             $scope.loginFB = false;
             $scope.loginAnon = false;
             if(Session.type == 'fb'){
+                $scope.user.id = Session.id;
                 $scope.user.image = Session.image;
                 $scope.user.backgroundPosition = '50% 50%';
+                XPService.getXP();
             }else if(Session.type == 'local'){
+                $scope.user.id = Session.id;
                 $scope.user.image = 'assets/img/avatars.png';
                 $scope.user.backgroundPosition = 44*Session.image+'px 0px';
             }
@@ -915,7 +949,7 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
             var user = JSON.stringify($scope.user);
             // $cookieStore.put('userId',user);
             localStorage.setItem('userId',user);
-            Session.create($scope.user.name, $scope.user.image, 'local');
+            Session.create($scope.user.id, $scope.user.name, $scope.user.image, 'local');
             // document.location.href = 'file:///index.html';
             $scope.initLogin();
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
@@ -932,7 +966,7 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
         }
     }
     $scope.removeLocalStorageItems = function(){
-        var items = ['gameSettings','gameData','userInfo','showLoggedInOptions'];
+        var items = ['gameSettings','gameData','userInfo','showLoggedInOptions','points'];
         for (var i = 0; i < items.length; i++) {
             localStorage.removeItem(items[i]);
         }

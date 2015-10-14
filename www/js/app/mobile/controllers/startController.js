@@ -1,6 +1,9 @@
-game325.controller('startController', ['$rootScope', '$http', '$scope', '$state', '$stateParams','AuthService', 'startGameService' ,'gameService', 'socket', '$timeout', 'delayService', '$mdSidenav', '$anchorScroll', '$location', '$mdDialog','$cookieStore','AUTH_EVENTS','Session', 'errService', function ($rootScope, $http, $scope, $state, $stateParams, AuthService, startGameService, gameService, socket, $timeout ,delayService, $mdSidenav, $anchorScroll, $location, $mdDialog, $cookieStore, AUTH_EVENTS, Session, errService){
+game325.controller('startController', ['$rootScope', '$http', '$scope', '$state', '$stateParams','AuthService', 'startGameService' ,'gameService', 'socket', '$timeout', 'delayService', '$mdSidenav', '$anchorScroll', '$location', '$mdDialog','$cookieStore','AUTH_EVENTS','Session', 'errService', 'XPService', function ($rootScope, $http, $scope, $state, $stateParams, AuthService, startGameService, gameService, socket, $timeout ,delayService, $mdSidenav, $anchorScroll, $location, $mdDialog, $cookieStore, AUTH_EVENTS, Session, errService, XPService){
     $scope.pageClass = 'page-home';
     $scope.joinGameRoomId = '';
+    $scope.xp = 0;
+    $scope.xpColor = '#009688';
+    $scope.xpBGColor = '#FFE082';
     $scope.deactivateMultiplayer = function(){
       $scope.multiplayerBtnMsg = 'Internet required to Play Multiplayer';
       $scope.showMultiplayerOptions = false;
@@ -52,6 +55,60 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
            // socket.emit('joinRoom', {roomId : $scope.gameId});        
        }
     });
+    $scope.updateXP = function(){
+      points = localStorage.getItem('points');
+      if(points == null){
+          var points = {
+              roundsPlayed: 0,
+              lastRound: 0,
+              xparray: [0],
+              xp: 0
+          }
+          localStorage.setItem('points', JSON.stringify(points));
+      }else{
+          points = JSON.parse(points);
+      }
+      $scope.xp = points.xp;
+      if($scope.xp > 5000){
+        $scope.xpColor = '#B71C1C';
+        $scope.xpBGColor = '#FFC107';
+      }else if($scope.xp > 1000){
+        $scope.xpColor = 'white';
+        $scope.xpBGColor = '#3F51B5';
+      }else if($scope.xp > 500){
+        $scope.xpColor = 'white';
+        $scope.xpBGColor = '#673AB7';
+      }else if($scope.xp > 100){
+        $scope.xpColor = 'white';
+        $scope.xpBGColor = '#F44336';
+      }else{
+        $scope.xpColor = '#009688';
+        $scope.xpBGColor = '#FFE082'; 
+      }
+      if($rootScope.loggedIn  && points.xp>99 && points.xparray.length<3){
+        $scope.getXPFromDB();
+      }
+    }
+    $scope.getXPFromDB = function(){
+      $mdDialog.show({
+                          template:
+                            '<md-dialog>' +
+                            '  <md-content> <h3 class="md-title marg-4"> Experience Points (XP)</h3>'+
+                            '<div class="xptext"><p>XP are gained for every hand made, lost for hand-deficits, and bonus points for every extra hands made. </p>'+
+                            '<p>Login with Facebook to sync XP and appear in the Leaderboard (which is coming with the next update)</p>'+
+                            '<p>Till then, continue giving us feedbacks and enjoy playing TeenDoPaanch!</p>'+
+                            '</div>'+
+                             '  <div class="md-actions">' +
+                             '<md-button ng-click="closeDialog()" aria-label="closeXPDialog"> Close </md-button>'+
+                             '  </div>' +
+                            '</md-content></md-dialog>',
+                            clickOutsideToClose : false,
+                            escapeToClose : false,
+                            controller: 'errDialogController'
+                        });
+      XPService.getXP($scope.updateXP);
+    }
+    XPService.getXP($scope.updateXP);
     // $scope.changeClass = function(a){
     //       if(a == 'game-325'){
     //         var req = {};
@@ -203,6 +260,7 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
         return false;
       }
     }
+    $scope.updateXP();
     $scope.$on(AUTH_EVENTS.loginSuccess, $scope.checkLogin);
     $scope.$on('DEVICE_OFFLINE', $scope.deactivateMultiplayer);
     $scope.$on('DEVICE_ONLINE', $scope.activateMultiplayer);
@@ -516,23 +574,31 @@ game325.controller('blogController', ['$rootScope', '$http', '$scope', '$state',
             name : 'S',
             engname : 'Spades',
             ranks : ' A K Q J 10 9 8 7 ',
+            rnks: [13,12,11,10,9,8,7,6],
+            suitimg: '<img height="16" width="16" src="css/cards/images/heart.png">',
             htmlicon : '&spades;'
             },{
             name : 'H',
             engname : 'Hearts',
             ranks : ' A K Q J 10 9 8 7 ',
+            rnks: [13,12,11,10,9,8,7,6],
+            suitimg: '<img height="18" width="18" src="css/cards/images/spade.png" style="position:relative;right:4px;">',
             htmlicon : '&hearts;'
             },{
             name : 'C',
             engname : 'Clubs',
             ranks : ' A K Q J 10 9 8 ',
+            rnks: [13,12,11,10,9,8,7],
+            suitimg:'<img height="18" width="18" src="css/cards/images/diams.png" style="position:relative;right:6px;">',
             htmlicon : '&clubs;'
             },{
             name : 'D',
             engname : 'Diamonds',
             ranks : ' A K Q J 10 9 8 ',
+            rnks: [13,12,11,10,9,8,7],
+            suitimg: '<img height="18" width="18" src="css/cards/images/club.png">',
             htmlicon : '&diams;'
-            }];
+            }];           
 
     $scope.getSampleCards = function(suit){
       var deck = new Deck();
@@ -550,7 +616,32 @@ game325.controller('blogController', ['$rootScope', '$http', '$scope', '$state',
                 $scope.getSampleCards('H'),
                 $scope.getSampleCards('C'),
                 $scope.getSampleCards('D')];
-  
+    $scope.getRankForHTML = function(rank){
+            if(rank == 13){
+                return 'A';
+            }else if(rank == 12){
+                return 'K';
+            }else if(rank == 11){
+                return 'Q';
+            }else if(rank == 10){
+                return 'J';
+            }else{
+                return rank+1;
+            }
+        }
+    $scope.getCardSuitForHTML = function (cardSuit) {
+            if(cardSuit == 'H')
+                return '<img height="16" width="16" src="css/cards/images/heart.png">';
+            if(cardSuit == 'S')
+                // return '&spades;';
+                return '<img height="18" width="18" src="css/cards/images/spade.png" style="position:relative;right:4px;">';
+            if(cardSuit == 'D')
+                //return '&diams;';
+                return '<img height="18" width="18" src="css/cards/images/diams.png" style="position:relative;right:6px;">';
+            if(cardSuit == 'C')
+                // return '&clubs;';
+                return '<img height="18" width="18" src="css/cards/images/club.png">';
+            }
     $scope.getCardCSS = function(){
         return {
             position : 'absolute',

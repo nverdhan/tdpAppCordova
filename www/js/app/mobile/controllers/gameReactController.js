@@ -1,5 +1,5 @@
 var temp;
-game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$state', '$stateParams','AuthService', 'gameService', 'socket', '$timeout', 'delayService', '$mdSidenav', '$anchorScroll', '$location', '$mdDialog','Session','errService', function ($rootScope, $http, $scope, $state, $stateParams, AuthService, gameService, socket, $timeout ,delayService, $mdSidenav, $anchorScroll, $location, $mdDialog, Session, errService){
+game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$state', '$stateParams','AuthService', 'gameService', 'socket', '$timeout', 'delayService', '$mdSidenav', '$anchorScroll', '$location', '$mdDialog','Session','errService','XPService', function ($rootScope, $http, $scope, $state, $stateParams, AuthService, gameService, socket, $timeout ,delayService, $mdSidenav, $anchorScroll, $location, $mdDialog, Session, errService, XPService){
     $scope.pageClass = 'page-game';
     $scope.gameId = $stateParams.id;
     $scope.gameRoom = 'PUBLIC';
@@ -144,7 +144,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
                             '<md-dialog>' +
                             '  <md-content> <h3 class="md-title marg-4"> End of round '+$scope.gameRound+' </h3>'+t+
                              '  <div class="md-actions">' +
-                             '<md-button ng-click="nextRound()"> Continue </md-button>'+
+                             '<md-button ng-click="nextRound()" aria-label="nextRound"> Continue </md-button>'+
                              '  </div>' +
                             '</md-content></md-dialog>',
                             clickOutsideToClose : false,
@@ -157,6 +157,62 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
                 $scope.gameEvent(data);
             }
         }
+    }
+    $scope.outdateXP = function(){
+        points = localStorage.getItem('points');
+        if(points == null){
+            var points = {
+                roundsPlayed: 0,
+                updateStatus: 'outdated',
+                xparray: [0],
+                xp: 0
+            }
+            localStorage.setItem('points', JSON.stringify(points));
+        }else{
+            points = JSON.parse(points);
+        }
+        points.updateStatus = 'outdated';
+        localStorage.setItem('points', JSON.stringify(points));
+    }
+    $scope.calculateXP = function(){
+        // console.log(2);
+        points = localStorage.getItem('points');
+        if(points == null){
+            var points = {
+                roundsPlayed: 0,
+                updateStatus: 'outdated',
+                xparray: [0],
+                xp: 0
+            }
+            localStorage.setItem('points', JSON.stringify(points));
+        }else{
+            points = JSON.parse(points);
+        }
+        var lastRound = $scope.game325.players[0].scores.length - 1;
+        var handsMade = $scope.game325.players[0].scores[lastRound].handsMade;
+        var handsToMake = $scope.game325.players[0].scores[lastRound].handsToMake;
+        var diff = handsMade - handsToMake;
+        var xp = 0;
+        xp+= handsMade*10;
+        if(diff == 0){
+            xp+=20;
+        }else if(diff < 0){
+            xp+= diff*5;
+        }else if(diff > 0){
+            xp+= 40;
+            xp+= Math.pow(5,diff);
+        }
+        if(xp < 0){
+            xp = 0;
+        }
+        if(points.updateStatus != 'updated'){
+            points.xp += xp;
+            points.xparray.push(points.xp);
+            points.roundsPlayed ++;
+            points.updateStatus = 'updated';
+            localStorage.setItem('points', JSON.stringify(points));
+        }
+        XPService.getXP();
     }
     $scope.initPlayers = function(){
         $scope.players =  Array();
@@ -229,6 +285,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
                 Game.prototype.initDeck.call(gameData);
                 Game.prototype.distributeCards.call(gameData);
                 Game.prototype.updateHandsToMake.call(gameData);
+                $scope.outdateXP();
                 gameData.gameTurn = 1;
                 gameData.gameState  ='SET_TRUMP';
                 gameData.gameEvent  ='SET_TRUMP';
@@ -242,6 +299,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
                 gameData.gameEvent  ='SET_TRUMP';
                 break;
             case "SET_TRUMP":
+                $scope.outdateXP();
                 gameData.trump = data.trump;
                 Game.prototype.distributeCards.call(gameData);
                 gameData.gameState  ='PLAY_CARD';
@@ -301,23 +359,23 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
             }
             $scope.game325 = gameData;
             if($scope.gameType == 'BOTS' && $scope.gameState != 'WITHDRAW_CARD' && $scope.gameState != 'RETURN_CARD'){
-                // localStorage.setItem('gameData', JSON.stringify($scope.game325));
+                localStorage.setItem('gameData', JSON.stringify($scope.game325));
             }
             $scope.reactRender();
             if($scope.game325.gameEvent == 'SET_TRUMP'){
                 $scope.game325.trumpsetcheck = true;
             }
             if($scope.playerId == $scope.game325.activePlayerId && $scope.game325.gameEvent != 'RETURN' && ($scope.game325.gameEvent != 'WITHDRAW' || $scope.game325.trumpsetcheck)){
-                var delay = 900;
+                var delay = 1000;
                 if($scope.game325.gameEvent == 'DECLARE_WINNER'){
-                    delay = 1800;
+                    delay = 2600;
                 }
                 if($scope.game325.gameEvent == 'SET_TRUMP'){
-                    delay = 900;
+                    delay = 1100;
                     $scope.game325.trumpsetcheck = true;
                 }
                 if(($scope.game325.gameEvent == 'PLAY_CARD' || $scope.game325.gameEvent == 'WITHDRAW')  && $scope.game325.trumpsetcheck){
-                    delay = 1200;
+                    delay = 1500;
                     $scope.game325.trumpsetcheck = false;   
                 }
                 setTimeout(function (){
@@ -451,6 +509,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
         $scope.reactRender();
       });
     $scope.$on('NEXT_ROUND', function () {
+        $scope.calculateXP();
         // $scope.loadGame();
         var data = {
             gameEvent : 'NEXT_ROUND'
@@ -471,16 +530,16 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
             angular.element('.loading').css('display','none');
         },4000)
         if($scope.playerId == $scope.game325.activePlayerId){
-            var delay = 900;
+            var delay = 1000;
             if($scope.game325.gameEvent == 'DECLARE_WINNER'){
-                delay = 1800;
+                delay = 2600;
             }
             if($scope.game325.gameEvent == 'SET_TRUMP'){
-                delay = 900;
+                delay = 1100;
                 $scope.game325.trumpsetcheck = true;
             }
-            if($scope.game325.gameEvent == 'PLAY_CARD' && $scope.trumpsetcheck){
-                delay = 1200;
+            if(($scope.game325.gameEvent == 'PLAY_CARD' || $scope.game325.gameEvent == 'WITHDRAW') && $scope.trumpsetcheck){
+                delay = 1500;
                 $scope.game325.trumpsetcheck = false;   
             }
             setTimeout(function (){

@@ -732,6 +732,36 @@ div.clear {
   background: url('../assets/img/avatars.png');
   cursor: pointer;
 }
+.xpbox {
+    display: inline-block;
+    top: -14px;
+    position: relative;
+    left: 13px;
+    padding: 5px;
+    border-radius: 6px;
+}
+.game-xp {
+    font-size: 1em;
+    padding: 5px;
+    border-radius: 6px;
+}
+.xptext p{
+    font-size: 0.8em;
+    text-align: justify;
+}
+div.xptext{
+    padding: 0 5px;
+}
+.disabled-text {
+    font-size: 2em;
+    top: 50%;
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    color: #eee;
+    text-align: center;
+}
 .selected-avatar{ box-shadow: 0 0 0 4px #f66; opacity: 1; }
 .bckimg{
 /*

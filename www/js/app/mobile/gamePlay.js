@@ -910,6 +910,7 @@ var Game325Component = React.createClass({displayName: "Game325Component",
         return (
             React.createElement("div", {id: "war_game_component", style: gameBodyStyle, className: "game-body"}, 
             React.createElement(BlockComponent),
+            React.createElement(XPComponent, {gameState: this.props.game.gameState}),
             React.createElement(TrumpComponent, {trump: this.props.game.trump, setTrump: this.setTrump, gameState: this.props.game.gameState, playerId : this.props.playerId, activePlayerId: this.props.game.activePlayerId}), 
             React.createElement(PlayedCardsComponent, {playedCards: this.playedCards}), 
             React.createElement(GameStateInfo, {gameState: this.props.game.gameState, players: this.props.game.players, activePlayerId: this.props.game.activePlayerId, otherPlayerId: this.props.game.otherPlayerId, lastPlayerId: this.props.game.lastPlayerId}), 
@@ -920,17 +921,105 @@ var Game325Component = React.createClass({displayName: "Game325Component",
         );
     }
 });
+var XPComponent = React.createClass({displayName: "XPComponent",
+    getInitialState: function (){
+        var points = localStorage.getItem('points');
+            if(points == null){
+                var points = {
+                    roundsPlayed: 0,
+                    updateStatus: 'outdated',
+                    xparray: [0],
+                    xp: 0
+                }
+                localStorage.setItem('points', JSON.stringify(points));
+            }else{
+                points = JSON.parse(points);
+            }
+        return{
+            xp: points.xp
+        }
+    },
+    shouldComponentUpdate: function(nextProps, nextState){
+        return nextProps.gameState == "SET_TRUMP";
+    },
+    updateSelf: function(){
+        var points = localStorage.getItem('points');
+            points = JSON.parse(points);
+            this.setState({
+                xp: points.xp
+            })
+    },
+    componentWillReceiveProps: function(nextProps){
+        if(nextProps.gameState == "SET_TRUMP"){
+            this.updateSelf();
+        }
+    },
+    render: function(){
+        var xpText = this.state.xp+" XP";
+        var xpColor = '#009688';
+        var bgColor = '#FFE082';
+        var xp = this.state.xp;
+        if(xp > 5000){
+            xpColor = '#B71C1C';
+            xpBGColor = '#FFC107';
+          }else if(xp > 1000){
+            xpColor = 'white';
+            xpBGColor = '#3F51B5';
+          }else if(xp > 500){
+            xpColor = 'white';
+            xpBGColor = '#673AB7';
+          }else if(xp > 100){
+            xpColor = 'white';
+            xpBGColor = '#F44336';
+          }else{
+            xpColor = '#009688';
+            xpBGColor = '#FFE082'; 
+          }
+        var style = {
+                position : 'absolute',
+                bottom : '31%',
+                left: '4%',
+                backgroundColor: xpBGColor,
+                color: xpColor
+            };
+        return(
+            React.createElement("div",{className: "game-xp", style: style, onClick: this.updateSelf}, {xpText:xpText})
+            );
+    }
+
+});
 var BlockComponent = React.createClass({displayName: "BlockComponent",
-    handleEventProp : function(e){
+    getInitialState: function (){
+        return{
+            disabledText: ''
+        }
+    },
+    handleEventPropStart : function(e){
         // // console.log(e.type);
+        this.setState({
+                   disabledText: 'Please Wait ...'
+                });
+
         e.stopPropagation();
         e.preventDefault();
         e.bubbles = false;
     },
+    handleEventPropEnd : function(e){
+        this.setState({
+                   disabledText: ''
+                });
+
+        e.stopPropagation();
+        e.preventDefault();
+        e.bubbles = false;        
+    },
     render : function(){
+        var disabledText = this.state.disabledText;
         var disableBlockStyle = disableBlockCSS();
         return (
-            React.createElement("div", {'data-display': "none", id: "bottomPlayerDiabled", style: disableBlockStyle, className: "bottom-player-diabled", onTouchEnd: this.handleEventProp, onClick: this.handleEventProp, onTouchStart: this.handleEventProp})
+            React.createElement("div", {'data-display': "none", id: "bottomPlayerDiabled", style: disableBlockStyle, className: "bottom-player-diabled", onTouchEnd: this.handleEventPropEnd, onClick: this.handleEventPropStart, onTouchStart: this.handleEventPropStart},
+                React.createElement("div", {id:"disabled-text", className: "disabled-text"}, {disabledText: disabledText})
+                )
             );
         }
 });
@@ -1166,7 +1255,8 @@ var PlayerComponent = React.createClass({displayName: "PlayerComponent",
                     height : 50,
                     left : 0,
                     top : 0,
-                    'transform' : 'translateX(0px) translateY(0px)'
+                    transform : 'translateX(0px) translateY(0px)',
+                    WebkitTransform : 'translateX(0px) translateY(0px)'
                 }
         }
     },
@@ -1502,6 +1592,7 @@ var PlayedCardsComponent = React.createClass({displayName: "PlayedCardsComponent
                 left : 0,
                 top : (gameCSSConstants.gameBody.y - (gameCSSConstants.cardSize.y)),
                 transform : 'translateX('+posX+'px) translateY('+posY+'px)',
+                WebkitTransform : 'translateX('+posX+'px) translateY('+posY+'px)',
                 display : 'none'
             }
             if(card.display){
@@ -1630,6 +1721,7 @@ var CardComponent = React.createClass({displayName: "CardComponent",
     },
     componentWillLeave : function(){
         this.state.style.transform = 'translateX(0px) translateY(0px)';
+        this.state.style.WebkitTransform = 'translateX(0px) translateY(0px)';
     },
     handleClick : function(card, player, e){
         if(!card.isPlayable){
@@ -1785,6 +1877,7 @@ var CardComponent = React.createClass({displayName: "CardComponent",
                 }
             }
             style.transform = 'translateX('+posX+'px) translateY('+posY+'px)';
+            style.WebkitTransform = 'translateX('+posX+'px) translateY('+posY+'px)';
         }
         
         var frontClassName = 'card front';

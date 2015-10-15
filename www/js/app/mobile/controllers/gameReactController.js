@@ -72,6 +72,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
             socket.emit('GAME', {data : data});  
         }else{
             if(data.gameEvent == 'NEXT_ROUND'){
+                console.log('xp display');
                 $scope.gameRound++;
                 if($scope.gameRound == $scope.totalGames && $scope.gameType == 'BOTS'){
                     var points = localStorage.getItem('points');
@@ -82,7 +83,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
                         '  <md-content> <h3 class="md-title marg-4"> End of round '+$scope.gameRound+' </h3>'+
                         '<h4 style="margin:1px; padding:1px; text-align:center; color:green; font-size:0.8em; "> Your Total XP = ' + points.xp + '</h4>' + 
                          '  <div class="md-actions">' +
-                         '<md-button ng-click="newGame()"> New Game</md-button>'+
+                         '<md-button ng-click="newGame()" aria-label="newGame"> New Game</md-button>'+
                          '  </div>' +
                         '</md-content></md-dialog>',
                         clickOutsideToClose : false,
@@ -146,11 +147,11 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
                         points = JSON.parse(points);
                         $mdDialog.show({
                           template:
-                            '<md-dialog>' +
-                            '  <md-content> <h3 class="md-title marg-4"> End of round '+$scope.gameRound+' </h3>'+
+                            '<md-dialog style="border-radius:15px;">' +
+                            '  <md-content style="font-size:0.7em; border-radius:15px;"> <h3 class="md-title marg-4"> End of round '+$scope.gameRound+' </h3>'+
                             '<h4 style="margin:1px; padding:1px; text-align:center; color:green; font-size:0.8em; "> Your Total XP = ' + points.xp + '</h4>'  + t+
                              '  <div class="md-actions">' +
-                             '<md-button ng-click="nextRound()" aria-label="nextRound"> Continue </md-button>'+
+                             '<md-button ng-click="nextRound()" aria-label="nextRound" style="background-color:#ccc;"> Continue </md-button>'+
                              '  </div>' +
                             '</md-content></md-dialog>',
                             clickOutsideToClose : false,
@@ -193,7 +194,6 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
         }else{
             points = JSON.parse(points);
         }
-        console.log($scope.game325.players[0].scores);
         var lastRound = $scope.game325.players[0].scores.length - 1;
         var handsMade = $scope.game325.players[0].scores[lastRound].handsMade;
         var handsToMake = $scope.game325.players[0].scores[lastRound].handsToMake;
@@ -291,7 +291,6 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
                 Game.prototype.initDeck.call(gameData);
                 Game.prototype.distributeCards.call(gameData);
                 Game.prototype.updateHandsToMake.call(gameData);
-                $scope.outdateXP();
                 gameData.gameTurn = 1;
                 gameData.gameState  ='SET_TRUMP';
                 gameData.gameEvent  ='SET_TRUMP';
@@ -305,7 +304,6 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
                 gameData.gameEvent  ='SET_TRUMP';
                 break;
             case "SET_TRUMP":
-                $scope.outdateXP();
                 gameData.trump = data.trump;
                 Game.prototype.distributeCards.call(gameData);
                 gameData.gameState  ='PLAY_CARD';
@@ -515,7 +513,6 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
         $scope.reactRender();
       });
     $scope.$on('NEXT_ROUND', function () {
-        // $scope.calculateXP();
         // $scope.loadGame();
         var data = {
             gameEvent : 'NEXT_ROUND'

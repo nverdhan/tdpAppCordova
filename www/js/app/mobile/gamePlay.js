@@ -31,6 +31,17 @@ var Game325Component = React.createClass({displayName: "Game325Component",
         // this.playedCards = this.props.game.playedCards;
         if(nextProps.game.gameTurn == 1){
           this.playedCards = nextProps.game.playedCards;  
+          this.props.scope.outdateXP();
+        }
+        if((nextProps.game.gameTurn + 1)%30 == 0){
+           this.props.scope.outdateXP(); 
+        }
+        if((nextProps.game.gameTurn - 1)%30 == 0){
+            if(nextProps.game.gameEvent == "DECLARE_WINNER"){
+                this.props.scope.calculateXP();         
+            }else if(nextProps.game.gameEvent == "SET_TRUMP"){
+                this.props.scope.outdateXP();         
+            }
         }
         // this.props.game.returnCard = false;
         this.playerIds = [];
@@ -368,7 +379,6 @@ var Game325Component = React.createClass({displayName: "Game325Component",
                     var data = {
                         gameEvent : 'NEXT_ROUND'
                     }
-                    this.props.scope.calculateXP();
                     this.clickHandler(data);
                 }else{
                     delayService.asyncTask(600, this.checkBotPlay);      
@@ -597,6 +607,11 @@ var Game325Component = React.createClass({displayName: "Game325Component",
                                 this.cardPlayed(cardToPlay);
                                 // console.log('Guess what, I have a bigger trump, bitch! xD');
                                 break;     
+                            }else{
+                                var card = this.getSmallestCard(deck);
+                                this.cardPlayed(card);
+                                // console.log('This was my smallest card, no options with me ;( TRUMP_NOT_PLAYED');
+                                break;
                             }
                         }
                         var cardToPlay = trumpCards[trumpCards.length - 1];
@@ -1184,7 +1199,7 @@ var GameStateInfo = React.createClass({displayName: "GameStateInfo",
 var TrumpComponent = React.createClass({displayName: "TrumpComponent",
     getInitialState : function (){
         return {
-            trumps : ['S', 'H', 'C', 'D'],
+            trumps : ['S', 'H', 'C', 'D']
         }
     },
     handleClick : function (trump){
@@ -1196,6 +1211,7 @@ var TrumpComponent = React.createClass({displayName: "TrumpComponent",
     render : function(){
             var self = this;
             var gameState = self.props.gameState;
+            var textStyle = getTrumpTextStyle(gameState);
             var trumpNodes = this.state.trumps.map(function (trump, index){
                 var style = getTrumpStyle(trump, self.props.trump, index, gameState);
                 style.border = 'none';
@@ -1213,7 +1229,8 @@ var TrumpComponent = React.createClass({displayName: "TrumpComponent",
                 bottom : '25%'
             }
             return (
-                React.createElement("div", {className: "trumps", style : style}, 
+                React.createElement("div", {className: "trumps", style : style},
+                    React.createElement("div",{style: textStyle},'TRUMP'), 
                     trumpNodes
                 )
             )

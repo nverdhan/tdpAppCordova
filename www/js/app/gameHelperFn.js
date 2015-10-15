@@ -195,6 +195,28 @@ var getTrumpStyle = function (trump, trumpSet,  index, state){
             };
     return x;
 }
+var getTrumpTextStyle = function(state){
+    var left = gameCSSConstants.gameBody.x - gameCSSConstants.cardSize.x - gameCSSConstants.gameBody.padding + 10;
+    var top = gameCSSConstants.gameBody.y - gameCSSConstants.cardSize.y - gameCSSConstants.gameBody.padding + 57;
+    var zIndex = 2;
+    if(state == 'SET_TRUMP'){
+        var display = 'none';
+    }else{
+        var display = 'block';
+    }
+    var x = {
+        position: 'absolute',
+        color : '#fff',
+        padding : '2px',
+        backgroundColor : '#111',
+        opacity: 0.5,
+        left : left,
+        top : top,
+        zIndex : zIndex,
+        display: display
+    }
+    return x;
+}
 var getCardPic = function(card){
     // console.log('getCardPic called');
 	if(!card){

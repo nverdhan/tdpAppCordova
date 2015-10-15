@@ -778,15 +778,15 @@
     animation:slideOutLeft 0.5s both ease-in 0s;  
 }
 .page-home.ng-enter         {  
-    -webkit-animation:slideInRight 0.5s both ease-in 0.2s;
-    -moz-animation:slideInRight 0.5s both ease-in 0.2s;
-    animation:slideInRight 0.5s both ease-in 0.2s;  
+    -webkit-animation:slideInRight 0.5s both ease-in;
+    -moz-animation:slideInRight 0.5s both ease-in;
+    animation:slideInRight 0.5s both ease-in;  
 }
-.page-game.ng-leave {
+/*.page-game.ng-leave {
     -webkit-animation:scaleDown 0.2s both ease-in;
     -moz-animation:scaleDown 0.2s both ease-in;
     animation:scaleDown 0.2s both ease-in;
-}
+}*/
 .page-game.ng-enter         {  
     -webkit-animation:scaleUp 0.2s both ease-in;
     -moz-animation:scaleUp 0.2s both ease-in;

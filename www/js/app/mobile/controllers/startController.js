@@ -616,17 +616,44 @@ game325.controller('blogController', ['$rootScope', '$http', '$scope', '$state',
                 $scope.getSampleCards('H'),
                 $scope.getSampleCards('C'),
                 $scope.getSampleCards('D')];
-    $scope.getRankForHTML = function(rank){
-            if(rank == 13){
+    
+    $scope.getCardCSS = function(){
+        return {
+            position : 'absolute',
+            width : gameCSSConstants.cardSize.x,
+            height : gameCSSConstants.cardSize.y
+        }
+    }
+    $scope.getCardSuit = function (cardSuit) {
+            if(cardSuit == 'H')
+                return '<img height="16" width="16" src="css/cards/images/heart.png">';
+            if(cardSuit == 'S')
+                // return '&spades;';
+                return '<img height="18" width="18" src="css/cards/images/spade.png" style="position:relative;right:4px;">';
+            if(cardSuit == 'D')
+                //return '&diams;';
+                return '<img height="18" width="18" src="css/cards/images/diams.png" style="position:relative;right:6px;">';
+            if(cardSuit == 'C')
+                // return '&clubs;';
+                return '<img height="18" width="18" src="css/cards/images/club.png">';
+        }      
+    $scope.getHTML = function(card){
+        return $sce.trustAsHtml($scope.getRankForHTML(card));
+    }     
+    $scope.getImageForHTML = function(card){
+
+    }     
+    $scope.getRankForHTML = function(card){
+            if(card.rank == 13){
                 return 'A';
-            }else if(rank == 12){
+            }else if(card.rank == 12){
                 return 'K';
-            }else if(rank == 11){
+            }else if(card.rank == 11){
                 return 'Q';
-            }else if(rank == 10){
+            }else if(card.rank == 10){
                 return 'J';
             }else{
-                return rank+1;
+                return card.rank+1;
             }
         }
     $scope.getCardSuitForHTML = function (cardSuit) {

@@ -39,6 +39,7 @@ var app = {
             // angular.bootstrap(document, ['game325']);
         // });
         document.addEventListener("resume", function(){
+            navigator.splashscreen.show();
             location.reload();
         }, false);
         window.analytics.startTrackerWithId('UA-62694879-2');

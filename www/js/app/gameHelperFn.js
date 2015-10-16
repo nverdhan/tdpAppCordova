@@ -51,7 +51,7 @@ var Player = function(id){
 }
 var gameVars = {
 	noOfPlayers : 3,
-	botsName : ['dUmMy', 'aNk', 'eNVy']
+	botsName : ['dUmMy', 'Pappu', 'Guddu']
 }
 var gameCSSConstants = {
 	gameWindow : { x : ww, y :wh, padding : 10},

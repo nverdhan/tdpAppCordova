@@ -1156,11 +1156,17 @@ var GameStateInfo = React.createClass({displayName: "GameStateInfo",
                     var statusString = players[activePlayerId].name+"'s";   
                 }
                 if(activePlayerId == 0){
-                    statusString+= " turn. Select a card from "+players[otherPlayerId].name+"'s cards to withdraw card";
+                    statusString+= " turn. Select a card from "+players[otherPlayerId].name+"'s cards to withdraw";
                 }else{
                     statusString+= " turn. "+players[activePlayerId].name+" withdrawing card from "+players[otherPlayerId].name;
                 }
-                this.repositionGameStatus();
+                this.setState({
+                    textStyle: {
+                        bottom: '60px',
+                        position : 'relative',
+                        display: 'block'
+                    }
+                });
                 break;
             case 'RETURN_CARD':
                 if(activePlayerId == 0){
@@ -1175,6 +1181,13 @@ var GameStateInfo = React.createClass({displayName: "GameStateInfo",
                 }else{
                     statusString+= " turn. "+players[activePlayerId].name+" returning card to "+players[otherPlayerId].name;
                 }
+                this.setState({
+                    textStyle: {
+                        bottom: '60px',
+                        position : 'relative',
+                        display: 'block'
+                    }
+                });
                 // this.repositionGameStatus();
 
                 break;

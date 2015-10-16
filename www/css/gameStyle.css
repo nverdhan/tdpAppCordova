@@ -422,6 +422,7 @@ bottom: 0px;
     -moz-backface-visibility : hidden;
     -ms-backface-visibility : hidden;
     transform : perspective(400px) rotateY(0deg);
+    -webkit-transform : perspective(400px) rotateY(0deg);
     -webkit-transition: 300ms all ease-in-out 0.2s;
     transition: 300ms all ease-in-out 0.2s;
 }
@@ -431,6 +432,7 @@ bottom: 0px;
     -moz-backface-visibility : hidden;
     -ms-backface-visibility : hidden;
     transform : perspective(400px) rotateY(179.9deg);
+    -webkit-transform : perspective(400px) rotateY(179.9deg);
     -webkit-transition: 300ms all ease-in-out 0.2s;
     transition: 300ms all ease-in-out 0.2s;
 }
@@ -440,6 +442,7 @@ bottom: 0px;
     -moz-backface-visibility : hidden;
     -ms-backface-visibility : hidden;
     transform : perspective(400px) rotateY(179.9deg);
+    -webkit-transform : perspective(400px) rotateY(179.9deg);
     -webkit-transition: 300ms all ease-in-out;
     transition: 300ms all ease-in-out 0.2s;
 }
@@ -449,6 +452,7 @@ bottom: 0px;
     -moz-backface-visibility : hidden;
     -ms-backface-visibility : hidden;
     transform : perspective(400px) rotateY(0deg);
+    -webkit-transform : perspective(400px) rotateY(0deg);
     -webkit-transition: 300ms all ease-in-out;
     transition: 300ms all ease-in-out 0.2s;
 }
@@ -826,9 +830,11 @@ div.xptext{
 
 	backface-visibility: hidden;
   display: inline-block;
+  -webkit-transform: translateZ(0px);
   transform: translateZ(0px);
   transition-duration: 0.3s;
   transition-property: transform;
+  -webkit-transition-property: transform;
   vertical-align: middle;
   cursor: pointer;
 }
@@ -863,11 +869,13 @@ div.xptext{
 }
 .flogin:hover{
 	transform: translateY(-5px);
+    -webkit-transform: translateY(-5px);
 }
 
 .flogin:hover:before{
 	opacity: 1;
     transform: translateY(5px);
+    -webkit-transform: translateY(5px);
 }
 .flogin:before{
 	background: radial-gradient(ellipse at center center , rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%) repeat scroll 0 0 rgba(0, 0, 0, 0);
@@ -879,7 +887,9 @@ div.xptext{
     position: absolute;
     top: 100%;
     transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
     transition-property: transform, opacity;
+    -webkit-transition-property: transform, opacity;
     width: 90%;
     z-index: -1;
 }
@@ -1207,7 +1217,9 @@ md-content.md-padding{
   font-size: 12px;
   opacity: 0;
   transform: scale(0);
+  -webkit-transform: scale(0);
   transition-timing-function: cubic-bezier(0.005, 0.95, 0.135, 1.205);
+  -webkit-transition-timing-function: cubic-bezier(0.005, 0.95, 0.135, 1.205);
 }
 .halo {
   position: absolute;
@@ -1218,6 +1230,7 @@ md-content.md-padding{
   border-radius: 1000px;
   background: rgba(255, 255, 255, 0.6);
   transform: scale(0);
+  -webkit-transform: scale(0);
 }
 .ball .name{
 	position: absolute;
@@ -1297,7 +1310,9 @@ md-content.md-padding{
   width: 0;
   margin: 0 auto;
   transform-origin: top;
+  -webkit-transform-origin: top;
   transform: scale(0);
+  -webkit-transform: scale(0);
 }
 
 /*.anim-start .ball {
@@ -1318,37 +1333,50 @@ md-content.md-padding{
 }
 .anim-start  .notif .arrow {
   transform: none;
+  -webkit-transform: none;
   transition-delay: 0.6s;
+  -webkit-transition-delay: 0.6s;
   /*transition-duration: .3s;*/
 }
 .anim-start .halo {
   opacity: 0;
   transform: none;
+  -webkit-transform: none;
   transition-duration: .6s;
+  -webkit-transition-duration: .6s;
   /*transition-delay: 0.2s;*/
 }
 .anim-start .msg-count {
   opacity: 1;
   transform: none;
+  -webkit-transform: none;
   transition-duration: .3s;
+  -webkit-transition-duration: .3s;
   /*transition-delay: .6s;*/
 }
 
 .anim-end .notif {
   opacity: 0;
   transition-duration: .2s;
+  -webkit-transition-duration: .2s;
   transition-delay: 0.1s;
+  -webkit-transition-delay: 0.1s;
 }
 .anim-end .notif .bar {
   width: 0%;
   transition-duration: .6s;
+  -webkit-transition-duration: .6s;
   transition-delay: 0.1s;
+  -webkit-transition-delay: 0.1s;
 }
 .anim-end .msg-count {
   opacity: 0;
   transform: none;
+  -webkit-transform: none;
   transition-duration: .3s;
+  -webkit-transition-duration: .3s;
   transition-delay: .1s;
+  -webkit-transition-delay: .1s;
 }
 
 /*Game State Notif*/
@@ -1477,6 +1505,7 @@ md-progress-circular.game-waiting-progress.md-default-theme .md-inset{
 }
 .username >label{
     transform-origin: center center 0;
+    -webkit-transform-origin: center center 0;
 }
 .username >input{
     width: 100%;
@@ -2448,6 +2477,9 @@ h3 {
     transform: translateZ(0px);
     transition-duration: 0.3s;
     transition-property: transform;
+    -webkit-transform: translateZ(0px);
+    -webkit-transition-duration: 0.3s;
+    -webkit-transition-property: transform;
     cursor: pointer;
     -moz-perspective: 1000px;
     -webkit-perspective: 1000px;
@@ -2466,19 +2498,23 @@ h3 {
 }
 .home-panel:hover{
   transform: translateY(-5px);
+  -webkit-transform: translateY(-5px);
 }
 
 .home-panel:hover:before{
   opacity: 1;
     transform: translateY(5px);
+    -webkit-transform: translateY(5px);
 }
 .onlineselected .home-panel:hover{
   transform: translateY(0px);
+  -webkit-transform: translateY(0px);
 }
 
 .onlineselected .home-panel:hover:before{
   opacity: 1;
     transform: translateY(0px);
+    -webkit-transform: translateY(0px);
 }
 .onlineselected .home-panel:before{
   background: none;
@@ -2499,7 +2535,9 @@ h3 {
     position: absolute;
     top: 100%;
     transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
     transition-property: transform, opacity;
+    -webkit-transition-property: transform, opacity;
     width: 90%;
     z-index: -1;
 }
@@ -2695,17 +2733,21 @@ md-input-group.join-room-input.md-default-theme.md-input-focused input{
 @keyframes rotate {
     0%, 60% {
         transform : rotate(0deg);
+        -webkit-transform : rotate(0deg);
     }
     60%, 100% {
         transform : rotate(360deg);
+        -webkit-transform : rotate(360deg);
     }
 }
 @-webkit-keyframes rotate {
     0%, 60% {
         transform : rotate(0deg);
+        -webkit-transform : rotate(0deg);
     }
     60%, 100% {
         transform : rotate(360deg);
+        -webkit-transform : rotate(360deg);
     }
 }
 /*override angular material css*/
@@ -2917,10 +2959,14 @@ md-dialog md-content{
 .mob-opt-horz{
   margin-top: 15px;
   display: flex;
+  display: -webkit-flex;
   flex-flow: row nowrap;
+  -webkit-flex-flow: row nowrap;
   width: 400px;
   align-items: center;
+  -webkit-align-items: center;
   justify-content: space-around;
+  -webkit-justify-content: space-around;
 }
 .sliding-arrows{
     color : #eee;

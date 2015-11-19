@@ -72,7 +72,7 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
             socket.emit('GAME', {data : data});  
         }else{
             if(data.gameEvent == 'NEXT_ROUND'){
-                console.log('xp display');
+                // console.log('xp display');
                 $scope.gameRound++;
                 if($scope.gameRound == $scope.totalGames && $scope.gameType == 'BOTS'){
                     var points = localStorage.getItem('points');
@@ -199,21 +199,20 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
         var handsToMake = $scope.game325.players[0].scores[lastRound].handsToMake;
         var diff = handsMade - handsToMake;
         var xp = 0;
-        xp+= handsMade*10;
+        xp+= handsMade*15;
         if(diff == 0){
-            xp+=20;
+            xp+=10;
         }else if(diff < 0){
-            xp+= diff*5;
+            xp+= diff*10;
         }else if(diff > 0){
             xp+= 40;
-            xp+= Math.pow(5,diff);
+            xp+= Math.pow(3,diff);
         }
         if(xp < 0){
             xp = 0;
         }
         if(points.updateStatus != 'updated'){
             points.xp += xp;
-            points.xparray.push(points.xp);
             points.roundsPlayed ++;
             points.updateStatus = 'updated';
             localStorage.setItem('points', JSON.stringify(points));
@@ -370,16 +369,16 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
                 $scope.game325.trumpsetcheck = true;
             }
             if($scope.playerId == $scope.game325.activePlayerId && $scope.game325.gameEvent != 'RETURN' && ($scope.game325.gameEvent != 'WITHDRAW' || $scope.game325.trumpsetcheck)){
-                var delay = 1000;
+                var delay = 1100;
                 if($scope.game325.gameEvent == 'DECLARE_WINNER'){
                     delay = 2600;
                 }
                 if($scope.game325.gameEvent == 'SET_TRUMP'){
-                    delay = 1100;
+                    delay = 1300;
                     $scope.game325.trumpsetcheck = true;
                 }
                 if(($scope.game325.gameEvent == 'PLAY_CARD' || $scope.game325.gameEvent == 'WITHDRAW')  && $scope.game325.trumpsetcheck){
-                    delay = 1500;
+                    delay = 1700;
                     $scope.game325.trumpsetcheck = false;   
                 }
                 setTimeout(function (){
@@ -533,16 +532,16 @@ game325.controller('gameReactController', ['$rootScope', '$http', '$scope', '$st
             angular.element('.loading').css('display','none');
         },4000)
         if($scope.playerId == $scope.game325.activePlayerId){
-            var delay = 1000;
+            var delay = 1100;
             if($scope.game325.gameEvent == 'DECLARE_WINNER'){
                 delay = 2600;
             }
             if($scope.game325.gameEvent == 'SET_TRUMP'){
-                delay = 1100;
+                delay = 1300;
                 $scope.game325.trumpsetcheck = true;
             }
             if(($scope.game325.gameEvent == 'PLAY_CARD' || $scope.game325.gameEvent == 'WITHDRAW') && $scope.trumpsetcheck){
-                delay = 1500;
+                delay = 1700;
                 $scope.game325.trumpsetcheck = false;   
             }
             setTimeout(function (){

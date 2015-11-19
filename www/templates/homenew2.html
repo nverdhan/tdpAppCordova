@@ -14,6 +14,9 @@
       <md-button class="help-button md-default-theme" aria-label="goToHelp" ng-click="goToHelp()" tabindex="-1" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><button class="md-button-inner">
                 <img class="app-icon" src="assets/img/questions1.svg" style="width: 30px; height: 30px;">
     </button></md-button>
+    <md-button class="help-button md-default-theme" aria-label="goToHelp" ng-controller="errDialogController" ng-click="likeUsOnFacebook()" tabindex="-1" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); top:45px;"><button class="md-button-inner">
+                <img class="app-icon" src="assets/img/flike.svg" style="width: 30px; height: 30px;">
+    </button></md-button>
   </div>
   <div ng-show="!showMultiplayerOptions" class='mob-opt-wrap hidemultiplayeropt'>
     <div class="mob-opt">
@@ -47,6 +50,18 @@
           <span>Settings</span>
         </a>
       </div>
+      <div class="mob-opt" style="margin-top:5px;">
+        <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="goToLeaderBoard()" style="color:white;">
+          <img class='app-icon' src="assets/img/leaderboard.svg" style="width: 24px; height: 24px;">
+          <span>LeaderBoard</span>
+        </a>
+      </div>
+      <div class="mob-opt" style="margin-top:5px;">
+        <a class="nav-icon href-custom settings-tab" target="_blank" href="market://details?id=com.game.teendopaanch" style="color:white;">
+          <img class='app-icon' src="assets/img/star.svg" style="width: 24px; height: 24px;">
+          <span>Rate Us!</span>
+        </a>
+      </div>
     </div>
   </div>
   <div ng-show="ifFbLoggedIn()" class='mob-opt-wrap showmultiplayeropt'>
@@ -76,6 +91,18 @@
           <span>Settings</span>
         </a>
       </div>
+      <div class="mob-opt" style="margin-top:5px;">
+        <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="goToLeaderBoard()" style="color:white;">
+          <img class='app-icon' src="assets/img/leaderboard.svg" style="width: 24px; height: 24px;">
+          <span>LeaderBoard</span>
+        </a>
+      </div>
+      <div class="mob-opt" style="margin-top:5px;">
+        <a class="nav-icon href-custom settings-tab" target="_blank" href="market://details?id=com.game.teendopaanch" style="color:white;">
+          <img class='app-icon' src="assets/img/star.svg" style="width: 24px; height: 24px;">
+          <span>Rate Us!</span>
+        </a>
+    </div>
     </div>
   </div>
   <div ng-show="ifNotFbLoggedIn()" class='mob-opt-wrap showmultiplayeropt'>
@@ -111,6 +138,18 @@
           <span>Settings</span>
         </a>
       </div>
+      <div class="mob-opt" style="margin-top:5px;">
+        <a class="nav-icon href-custom settings-tab" target="_blank" href="javascript:void(0);" ng-click="goToLeaderBoard()" style="color:white;">
+          <img class='app-icon' src="assets/img/leaderboard.svg" style="width: 24px; height: 24px;">
+          <span>LeaderBoard</span>
+        </a>
+      </div>
+      <div class="mob-opt" style="margin-top:5px;">
+        <a class="nav-icon href-custom settings-tab" target="_blank" href="market://details?id=com.game.teendopaanch" style="color:white;">
+          <img class='app-icon' src="assets/img/star.svg" style="width: 24px; height: 24px;">
+          <span>Rate Us!</span>
+        </a>
+      </div>
     </div>
   </div>
   <div>
@@ -137,10 +176,10 @@ profile-info-horz{
   clear: both;
 }
 .settings-tab span{
-  padding-left: 8px;
+  padding-left: 1px;
   bottom: 5px;
   position: relative;
-  font-size: 1.2em;
-  font-weight: 600;
+  font-size: 1.1em;
+  font-weight: 400;
 }
 </style>

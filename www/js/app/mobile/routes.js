@@ -54,6 +54,14 @@ game325.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', fun
                         requiresAuth : true
                     }
                 })
+            .state('leaderboard', {
+                url: '/leaderboard',
+                controller: 'leaderBoardController',
+                templateUrl : 'templates/leaderboard.html',
+                    data : {
+                        requiresAuth : false
+                    }
+            })
             .state('start', {
                 url : '/start',
                 controller : 'startController',

@@ -161,10 +161,11 @@ game325.controller('gameCtrl', ['$rootScope', '$scope', '$http', '$state', 'Auth
         $mdDialog.show({
               template:
                 '<md-dialog>' +
-                '  <md-content> <h2 class="md-title"> Exit Game? </h2> <p> '+
+                '  <md-content> <h2 class="md-title" style="font-size:1.2em; margin-bottom: 5px;"> Do you want to exit? </h2> <p style="margin:0;"> '+
+                '<md-button ng-controller="registerCtrl" ng-click="rateUsOnGooglePlay()" aria-label="exitGame" style=" background-color: #4CAF50; padding: 4px; font-size: 0.8em; text-transform: none; width: 100%; color: white;"> Rate Us on Google Play! </md-button> </p>'+
                  '  <div class="md-actions">' +
-                 '<md-button ng-click="exitGame()" aria-label="exitGame"> Yes </md-button>'+
-                 '<md-button ng-click="cancelExit()" aria-label="closeDialog"> No </md-button>'+
+                 '<md-button ng-click="exitGame()" aria-label="exitGame"> Exit </md-button>'+
+                 '<md-button ng-click="cancelExit()" aria-label="closeDialog"> No! </md-button>'+
                  '  </div>' +
                 '</md-content></md-dialog>',
                 clickOutsideToClose : false,
@@ -524,6 +525,13 @@ game325.service('XPService', ['$http', '$rootScope', 'Session', function ($http,
                 }
                 this.update(data, callback);
             }
+        },
+        getLeaders: function (limit, callback) {
+            $http.post(apiPrefix + 'getleaders', {limit: limit})
+                .then(function(response){
+                    var users = response.data.users;
+                    callback(users);
+                }) 
         }       
     }
 }]);
@@ -860,6 +868,7 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
         $window.location.href = "http://teendopaanch.in/auth/twitter"
     }
     $scope.facebookAuth = function(){
+        $scope.removeLocalStorageItems();
         openFB.login(
             function(response) {
                 if(response.status === 'connected') {
@@ -966,10 +975,11 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
         }
     }
     $scope.removeLocalStorageItems = function(){
-        var items = ['gameSettings','gameData','userInfo','showLoggedInOptions','points'];
+        var items = ['gameSettings','gameData','userInfo','showLoggedInOptions', 'userId'];
         for (var i = 0; i < items.length; i++) {
             localStorage.removeItem(items[i]);
         }
+        localStorage.setItem('userId','anon');
     }
     $scope.logOut = function(){
         $rootScope.$broadcast('HIDE_SETTINGS');
@@ -987,6 +997,8 @@ game325.controller('registerCtrl', ['$rootScope', '$scope','$cookieStore','$wind
             Session.destroy();
             localStorage.setItem('userId','anon');
             localStorage.setItem('showLoggedInOptions', false);
+            localStorage.removeItem('points');
+            localStorage.removeItem('welcome');
             // $scope.showLoginDialog = true;
             // if($state.current.data.requiresAuth && (!$scope.currentUser.id)){
             //     document.location.href = 'file:///index.html'

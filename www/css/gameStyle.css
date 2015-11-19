@@ -42,6 +42,56 @@ md-dialog.md-default-theme{
 .clearfix{
     clear: both;
 }
+.leader-container{
+    width: 80%;
+    background-color: #4a4a4a;
+    box-shadow: 0px 0px 5px #111;
+    margin:  0 auto;
+    height: 100%;
+    overflow: auto;
+}
+.leader{
+    width: 100%;
+    height: 40px;
+    /*background-color: #bbb;*/
+    font-size: 0.8em;
+}
+.leader-list, .leader-text{
+    width: 80%;
+    margin: 10px auto;
+    text-align: center;
+}
+.leader-list tr:nth-child(1) {
+    background-color: #004D40!important;
+    color: #fff;
+}
+.leader-list tr:nth-child(2) {
+    background-color: #009688!important;
+    color: #fff;
+}
+.leader-list tr:nth-child(3) {
+    background-color: #80CBC4!important;
+    color: #000;
+}
+.leader-list tr:nth-child(4) {
+    background-color: #B2DFDB!important;
+    color: #000;
+}
+.leader-text h1{
+    font-size: 1.2em;
+    margin: 0 auto;
+    padding: 10px;
+}
+.leader-img{
+    display: inline-block;
+    margin: 0 2px;
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
+
 .h4{
     position: relative;
     font-size: 14px;
@@ -1616,10 +1666,10 @@ md-backdrop{
     text-align: center;
     vertical-align: center;
 }
-.leaderboard .bottombar-name, .cover-app{
+/*.leaderboard .bottombar-name, .cover-app{
     color: #f5f5f5;
     text-shadow: 1px 1px #424242;
-  }
+  }*/
 .game-msg{
     font-family: "Roboto Slab", serif;
     font-style: normal;
@@ -1813,15 +1863,15 @@ md-backdrop{
 .preload .game-325 .game-logo{
     opacity: 0;
 }
-.wide .leaderboard{
+/*.wide .leaderboard{
     position: absolute;
     left: 0;
     top: 0;
     width: 33.333333%;
-}
-.preload .leaderboard{
+}*/
+/*.preload .leaderboard{
     margin-top: 100%;
-}
+}*/
 .wide .game-on-demand{
     position: absolute;
     left: 33.333333%;
@@ -1859,12 +1909,12 @@ md-backdrop{
     background-color: #ffeb3b;
     color: #424242;
 }
-.leaderboard, .game-29{
+/*.leaderboard, .game-29{
     background-color: #9575cd;
 }
 .leaderboard .item-bar, .game-29 .item-bar, .game-29 .coming-soon{
     background-color: #999999;
-}
+}*/
 .game-c, .aboutus{
     background-color: #64b5f6;
 }
@@ -2095,11 +2145,11 @@ md-backdrop{
     font-size: inherit!important;
     background-color: #f5f5f5;
 }
-.leaderboard.expanded .internal-slider-1 {
+/*.leaderboard.expanded .internal-slider-1 {
     background-color: #E0E0E0;
     font-size: 25pt;
     padding: 12px;
-}
+}*/
 .internal-buttons{
     width: 40%;
     min-width: 550px;
@@ -2957,7 +3007,7 @@ md-dialog md-content{
     /*padding: 3px;*/
 }
 .mob-opt-horz{
-  margin-top: 15px;
+  margin-top: 5px;
   display: flex;
   display: -webkit-flex;
   flex-flow: row nowrap;

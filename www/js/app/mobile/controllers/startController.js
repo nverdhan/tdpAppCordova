@@ -4,6 +4,70 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
     $scope.xp = 0;
     $scope.xpColor = '#009688';
     $scope.xpBGColor = '#FFE082';
+    $scope.checkWelcomeMsgs = function(){
+      if($rootScope.loggedIn){
+        welcome = localStorage.getItem('welcome');
+        if(welcome){
+          welcome = JSON.parse(welcome);
+          if(welcome.msg1 != 'SHOWN'){
+            welcome.msg1 = 'SHOWN';
+            localStorage.setItem("welcome", JSON.stringify(welcome));
+            $scope.showWelcomeMsg1();
+          }
+          if(welcome.msg2 < 3){
+            welcome.msg2++;
+            localStorage.setItem("welcome", JSON.stringify(welcome));
+          }else if(welcome.msg2 == 3 || welcome.msg2 == 50 || welcome.msg2 == 250){
+            welcome.msg2++;
+            localStorage.setItem("welcome", JSON.stringify(welcome));
+            $scope.showWelcomeMsg2();
+          }else{
+            welcome.msg2++;
+            localStorage.setItem("welcome", JSON.stringify(welcome));
+          }
+        }else{
+          welcome = {
+            msg1 : 'SHOWN',
+            msg2 : 1
+          }
+          localStorage.setItem("welcome", JSON.stringify(welcome));
+          $scope.showWelcomeMsg1();
+        }
+      }
+    }
+    $scope.showWelcomeMsg1 = function(){
+      $mdDialog.show({
+                          template:
+                            '<md-dialog>' +
+                            '  <md-content> <h3 class="md-title marg-4"> Thanks for updating! </h3>'+
+                            '<div class="xptext"><p> With this update, apart from a few bug fixes, we have included the much awaited Leaderboard. </p>'+
+                             '  <div class="md-actions">' +
+                             '<md-button ng-click="closeDialog()" aria-label="closeXPDialog"> Close </md-button>'+
+                             '<md-button ng-click="goToLeaderBoard()" aria-label="goToLeaderBoard"> Visit Leaderboard </md-button>'+
+                             '  </div>' +
+                            '</md-content></md-dialog>',
+                            clickOutsideToClose : false,
+                            escapeToClose : false,
+                            controller: 'errDialogController'
+                        });
+    }
+    $scope.showWelcomeMsg2 = function(){
+      $mdDialog.show({
+                          template:
+                            '<md-dialog>' +
+                            '  <md-content> <h3 class="md-title marg-4" style="margin-bottom: 10px;"> <img src="assets/img/heart.png" style="width:30px; position: relative; top: 7px; left: -5px;"/>Do you love this game? </h3>'+
+                            '<div class="xptext"><p style="line-height:1.5;"> Please rate us and give your reviews on Google Play. This keeps our motivation high, allows us to constantly improve and continue building new games! </p>'+
+                             '  <div class="md-actions">' +
+                             '<md-button ng-click="rateUsOnGooglePlay()" aria-label="goToLeaderBoard" style="background-color: #FF5722;color: #fff;"> Rate Us Now! </md-button>'+
+                             '<md-button ng-click="closeDialog()" aria-label="closeXPDialog"> Later </md-button>'+
+                             '  </div>' +
+                            '</md-content></md-dialog>',
+                            clickOutsideToClose : false,
+                            escapeToClose : false,
+                            controller: 'errDialogController'
+                        });
+    }
+    $scope.checkWelcomeMsgs();
     $scope.deactivateMultiplayer = function(){
       $scope.multiplayerBtnMsg = 'Internet required to Play Multiplayer';
       $scope.showMultiplayerOptions = false;
@@ -34,6 +98,9 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
     $scope.loading = false;
     $scope.showMultiplayerOptions = false;
     // console.log($scope.showLoggedInOptions);
+    $scope.goToLeaderBoard = function (){
+      $state.go('leaderboard');
+    }
     $scope.toggleMultiplayerOptions = function (){   
       $scope.checkLogin();
       if($rootScope.currentConnStatus == 'online'){
@@ -85,9 +152,9 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
         $scope.xpColor = '#009688';
         $scope.xpBGColor = '#FFE082'; 
       }
-      if($rootScope.loggedIn  && points.xp>99 && points.xparray.length<3){
-        $scope.getXPFromDB();
-      }
+      // if($rootScope.loggedIn  && points.xp>99 && points.xparray.length<3){
+      //   $scope.getXPFromDB();
+      // }
     }
     $scope.getXPFromDB = function(){
       $mdDialog.show({
@@ -95,11 +162,10 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
                             '<md-dialog>' +
                             '  <md-content> <h3 class="md-title marg-4"> Experience Points (XP)</h3>'+
                             '<div class="xptext"><p>XP are gained for every hand made, lost for hand-deficits, and bonus points for every extra hands made. </p>'+
-                            '<p>Login with Facebook to sync XP and appear in the Leaderboard (which is coming with the next update)</p>'+
-                            '<p>Till then, continue giving us feedbacks and enjoy playing TeenDoPaanch!</p>'+
-                            '</div>'+
+                            '<p>Login with Facebook to sync XP and appear on the Leaderboard.</p>'+
                              '  <div class="md-actions">' +
                              '<md-button ng-click="closeDialog()" aria-label="closeXPDialog"> Close </md-button>'+
+                             '<md-button ng-click="gotToLeaderBoard()" aria-label="goToLeaderBoard"> Leaderboard </md-button>'+
                              '  </div>' +
                             '</md-content></md-dialog>',
                             clickOutsideToClose : false,
@@ -267,6 +333,18 @@ game325.controller('startController', ['$rootScope', '$http', '$scope', '$state'
 }]);
 
 game325.controller('errDialogController',['$rootScope', '$scope', '$mdDialog', '$state', '$mdToast', function($rootScope, $scope, $mdDialog, $state, $mdToast){
+    $scope.rateUsOnGooglePlay = function(){
+        $mdDialog.hide();
+        window.location.href = 'market://details?id=com.game.teendopaanch';
+    }
+    $scope.goToLeaderBoard = function(){
+        $mdDialog.hide();
+        $state.go('leaderboard');
+    }
+    $scope.likeUsOnFacebook = function(){
+      $mdDialog.hide();
+      window.location.href = 'http://www.facebook.com/325game/';
+    }
     $scope.closeDialog = function(){
         $mdDialog.hide();
     };
@@ -701,4 +779,42 @@ game325.controller('blogController', ['$rootScope', '$http', '$scope', '$state',
     return x;
         }
     }                            
+}])
+game325.controller('leaderBoardController', ['$rootScope', '$http', '$scope', '$state', '$stateParams','AuthService', 'startGameService' ,'gameService', 'socket', '$timeout', 'delayService', '$mdSidenav', '$anchorScroll', '$location', '$mdDialog','$cookieStore','AUTH_EVENTS','Session', 'errService', '$sce', 'XPService', function ($rootScope, $http, $scope, $state, $stateParams, AuthService, startGameService, gameService, socket, $timeout ,delayService, $mdSidenav, $anchorScroll, $location, $mdDialog, $cookieStore, AUTH_EVENTS, Session, errService, $sce, XPService){
+  $scope.pageClass = 'page-leader';
+  $scope.ifFbLoggedIn = false;
+  $scope.showMyScore = true;
+  $scope.showWaitingMsg = true;
+  var points = localStorage.getItem('points');
+  points = JSON.parse(points);
+  $scope.myXP = points.xp;
+
+  $scope.checkFBLogin = function(){
+    if(Session.name && Session.type == "fb"){
+      $scope.ifFbLoggedIn = true;
+      $scope.myImg = Session.image;
+      $scope.myImgPos = '50% 50%';
+    }else{
+      $scope.ifFbLoggedIn = false;
+      $scope.myImg = 'assets/img/avatars.png';
+      $scope.myImgPos = 45*Session.image+'px 0px';
+    }
+  }
+  $scope.getLeaders = function(){
+    XPService.getLeaders(20, function(leaders){
+      $scope.leaders = leaders;
+      for (var i = 0; i < $scope.leaders.length; i++) {
+        if($scope.leaders[i].facebook.id == Session.id){
+          $scope.showMyScore = false;
+          $scope.leaders[i].color = '#FFEB3B';
+          $scope.leaders[i].facebook.name += ' (You)';
+        }else{
+          $scope.leaders[i].color = '#ECECEC';
+        }
+      };
+      $scope.showWaitingMsg = false;
+    });
+  }
+  $scope.getLeaders();
+  $scope.checkFBLogin();
 }])

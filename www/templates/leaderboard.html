@@ -1,0 +1,67 @@
+<div class = 'leader-container'>
+	<div class="leader-text">
+		<h1 style="color:#fff;"> <img src="assets/img/leaderboardyellow.svg" style="width: 24px;position: relative;left: -3px;top: 4px;"> Top 20 Players <img src="assets/img/leaderboardyellow.svg" style="width: 24px;position: relative;left: 1px;top: 4px;"></h1>
+		<p ng-show='showWaitingMsg' style="color:#eee; margin-bottom: 50px;"> Please wait while we fetch the leaderboard ... </p>
+	</div>
+	<div class="leader-list" ng-show="!showWaitingMsg">
+		<table cellspacing="0" style="width:100%;">
+			<tr class="leader">
+				<th> RANK </th>
+				<th> </th>
+				<th> NAME </th>
+				<th> XP </th>
+			</tr>
+			<tr ng-repeat="leader in leaders" class="leader" style="background-color:{{leader.color}};">
+				<td> {{$index + 1}}. </td>
+				<td><div class = 'leader-img' style="background-image:url({{leader.facebook.img}});background-position: 50% 50%;"></div></td>
+				<td style="text-align:left">{{leader.facebook.name}}</td>
+				<td>{{leader.points.xp}} XP</td>
+			</tr>
+			<tr ng-show="showMyScore" class="leader" style="font-size:0.8em; background-color:#FFEB3B;">
+				<td> ... </td>
+				<td> <div class = 'leader-img' style="background-image:url({{myImg}});background-position:{{myImgPos}};"></div> </td>
+				<td style="text-align:left"> You </td>
+				<td> {{myXP}} XP</td>
+			</tr>
+		</table>
+	</div>
+	<div class="leader-text" ng-if="!ifFbLoggedIn">
+		<p style="font-size:0.8em;line-height: 1.4;color:#fff;"> If you wish to save your experience points (XP) and compete with other players globally, you'll need to login via Facebook. Your current XP will not be destroyed.</p>
+		<md-button class="redcol home-elem md-raised" aria-label="faceBookAuth" ng-click="facebookAuth()" ng-controller="registerCtrl" style="width:100%;">
+	      <div flex layout="horizontal" layout-align="center center">
+	        <div style="margin-right:15px;">
+	          <img class='app-icon' src="assets/img/facebook55.svg" style="width: 24px; height: 24px;">
+	        </div>
+	        <div>
+	          <h3 class="marg-12 white-label">Login with Facebook</h3>
+	        </div>
+	      </div>
+	    </md-button>
+	</div>
+	<div class="leader-text" ng-if="!showMyScore">
+		<p style="font-size:0.8em;line-height: 1.4;color:#fff;"> Congratulations for being on the list! We'll definitely try to improve our bots to stop your progress :) . And yes! an insider's info only for top 20 players: we are rolling out a major update before December 2015 which will make your gameplay amazingly smoother and better. Why don't you review us on Google Play and spread the word!? </p>
+		<md-button class="redcol home-elem md-raised" aria-label="rateUsOnGPlay" ng-click="rateUsOnGooglePlay()" ng-controller="errDialogController" style="width:100%;">
+	      <div flex layout="horizontal" layout-align="center center">
+	        <div style="margin-right:15px;">
+	          <img class='app-icon' src="assets/img/star.svg" style="width: 24px; height: 24px;">
+	        </div>
+	        <div>
+	          <h3 class="marg-12 white-label">Rate us on Google Play!</h3>
+	        </div>
+	      </div>
+	    </md-button>
+	</div>
+	<div class="leader-text">
+		<p style="font-size:0.8em;line-height: 1.4;color:#fff;"> Like us on Facebook to participate and contribute to the next awesome games we are building! </p>
+		<md-button class="redcol home-elem md-raised" aria-label="rateUsOnGPlay" ng-click="likeUsOnFacebook()" ng-controller="errDialogController" style="width:100%;">
+	      <div flex layout="horizontal" layout-align="center center">
+	        <div style="margin-right:15px;">
+	          <img class='app-icon' src="assets/img/flike.svg" style="width: 24px; height: 24px;">
+	        </div>
+	        <div>
+	          <h3 class="marg-12 white-label">Like our FB Page </h3>
+	        </div>
+	      </div>
+	    </md-button>
+	</div>
+</div>
